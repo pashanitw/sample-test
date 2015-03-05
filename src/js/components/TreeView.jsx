@@ -33,8 +33,7 @@ var TreeView= React.createClass({
       click: this._clicked,
       axis: "y"
     });
-   // $(slides).prepend("<li>something</li><li>something</li><li>something</li>");
-  //  $(slides).append(element);
+
 
   },
   _dragStopped:function(){

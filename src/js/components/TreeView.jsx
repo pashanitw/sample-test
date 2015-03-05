@@ -1,5 +1,8 @@
 var React = require('react'),
    $=require('jquery');
+require('jquery-ui');
+require('multisortable');
+var Snapshot=require('./Snapshot.jsx');
 
 var TreeView= React.createClass({
 
@@ -8,28 +11,36 @@ var TreeView= React.createClass({
   render: function () {
     return (
       <div className="tree-view">
-
+        <Snapshot></Snapshot>
+        <Snapshot></Snapshot>
+        <Snapshot className="child"></Snapshot>
+        <Snapshot className="child"></Snapshot>
+        <Snapshot></Snapshot>
+        <Snapshot></Snapshot>
+        <Snapshot className="child"></Snapshot>
+        <Snapshot className="child-of-child"></Snapshot>
+        <Snapshot></Snapshot>
       </div>
     )
   },
   componentDidMount:function(){
-    var slides=this.getDOMNode();
-    debugger;
-    /* slides.multisortable({
-     items: "div.card-panel",
-     placeholder: "slidePlaceholder",
-     stop: this._dragStopped.bind(this),
-     mousedown: this._mousedown.bind(this),
-     click: this._clicked.bind(this),
-     axis: 'y'
-     });
-     slides.prepend()*/
+    var slides = this.getDOMNode();
+    $(slides).multisortable({
+      items: "div.chapter-frame",
+      placeholder: "slidePlaceholder",
+      stop: this._dragStopped,
+      mousedown: this._mousedown,
+      click: this._clicked,
+      axis: "y"
+    });
+   // $(slides).prepend("<li>something</li><li>something</li><li>something</li>");
+  //  $(slides).append(element);
 
   },
   _dragStopped:function(){
     console.log('dragging stopped');
   },
-  _mouseDown:function(){
+  _mousedown:function(){
     console.log("mousedown")
   },
   _clicked:function(){

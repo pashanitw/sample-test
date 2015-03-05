@@ -1,6 +1,11 @@
 var dest = './dist';
 var src = './src';
 
+var cssFiles=[
+'./bower_components/materialize/sass/materialize.scss',
+  src + '/styles/**/*.{sass,scss,css}'
+
+];
 module.exports = {
   server: {
     settings: {
@@ -13,7 +18,7 @@ module.exports = {
     }
   },
   sass: {
-    src: src + '/styles/**/*.{sass,scss,css}',
+    src: cssFiles,
     dest: dest + '/styles',
     settings: {
       indentedSyntax: false, // Enable .sass syntax?

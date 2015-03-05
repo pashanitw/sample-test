@@ -1,0 +1,21 @@
+.snap-shot{
+  width: 120px;
+  height: 100%;
+  margin-top: 0.3rem;
+  margin-bottom: 0;
+}
+.child .snap-shot{
+  margin-left: 31px;
+}
+.chapter-frame:hover{
+  background: rgba(0, 0, 0, 0.05);
+
+}
+.chapter-frame{
+  padding: 0 8px;
+  width: 100%;
+  height: 88px;
+}
+.child-of-child .snap-shot{
+  margin-left: 62px;
+}

@@ -75,3 +75,7 @@ var relativePath=path.relative(String(__dirname),String(file.path));
   // Additionally, you want to require the `event-stream` somewhere else.
   return require('event-stream').map(transform);
 }
+gulp.task('moveck', function(){
+  gulp.src('./src/libs/ckeditor/**/*.*',{base: 'src/'})
+    .pipe(gulp.dest('dist/'));
+});

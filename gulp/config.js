@@ -1,8 +1,9 @@
 var dest = './dist';
 var src = './src';
 
-var cssFiles=[
-'./bower_components/materialize/sass/materialize.scss',
+var cssFiles = [
+  './bower_components/materialize/sass/materialize.scss',
+  './src/libs/ckeditor/samples/sample.css',
   src + '/styles/**/*.{sass,scss,css}'
 
 ];

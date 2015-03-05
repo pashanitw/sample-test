@@ -5,6 +5,7 @@ var TaskList = require('./TaskList.jsx');
 var mui = require('material-ui'),
     RaisedButton = mui.RaisedButton;
 var TreeView=require('./TreeView.jsx');
+var EditorView=require("./EditorView.jsx")
 
 
 var App = React.createClass({
@@ -58,7 +59,8 @@ var App = React.createClass({
   render:function(){
     return (
       <div>
-        <TreeView></TreeView>
+        <TreeView/>
+        <EditorView/>
       </div>
     )
   }

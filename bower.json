@@ -6,6 +6,7 @@
     "jquery": "~2.1.3",
     "jquery-multisortable": "~0.1.3",
     "jquery-ui": "~1.11.3",
-    "materialize": "~0.95.3"
+    "materialize": "~0.95.3",
+    "ckeditor": "~4.4.7"
   }
 }

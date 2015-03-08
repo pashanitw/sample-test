@@ -5,10 +5,9 @@ module.exports = {
   CHANGE_EVENT: 'change',
 
   ActionTypes: keyMirror({
-    ADD_TASK: null,
-    ADD_PAGE: null,
-    REMOVE_PAGE:null,
-    MOVE_PAGE:null
+    PAGE_ADDED: null,
+    PAGE_REMOVED:null,
+    PAGE_MOVED:null
   }),
 
   ActionSources: keyMirror({

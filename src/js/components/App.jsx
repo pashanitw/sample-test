@@ -59,7 +59,6 @@ var App = React.createClass({
   render:function(){
     return (
       <div>
-        <TreeView/>
         <EditorView/>
       </div>
     )

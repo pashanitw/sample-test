@@ -1,29 +1,39 @@
 var React = require('react'),
-   $=require('jquery');
+  $ = require('jquery');
 require('jquery-ui');
 require('multisortable');
-var Snapshot=require('./Snapshot.jsx');
+var Snapshot = require('./Snapshot.jsx');
+var AddPageButton = require('./AddPageButton.jsx');
 
-var TreeView= React.createClass({
+var TreeView = React.createClass({
 
-  componentWillMount:function(){
+  getDefaultProps:function(){
+    return {pages:[]};
   },
+  propTypes:{
+    pages:React.PropTypes.object.isRequired
+  },
+  componentWillMount: function () {
+    console.log(this.props);
+  },
+
   render: function () {
     return (
-      <div className="tree-view">
-        <Snapshot></Snapshot>
-        <Snapshot></Snapshot>
-        <Snapshot className="child"></Snapshot>
-        <Snapshot className="child"></Snapshot>
-        <Snapshot></Snapshot>
-        <Snapshot></Snapshot>
-        <Snapshot className="child"></Snapshot>
-        <Snapshot className="child-of-child"></Snapshot>
-        <Snapshot></Snapshot>
+      <div>
+        <AddPageButton></AddPageButton>
+        <div className="tree-view">
+        {
+          this.props.pages.map(function (page) {
+            return <Snapshot page={page}></Snapshot>
+          })
+
+          }
+
+        </div>
       </div>
     )
   },
-  componentDidMount:function(){
+  componentDidMount: function () {
     var slides = this.getDOMNode();
     $(slides).multisortable({
       items: "div.chapter-frame",
@@ -36,16 +46,16 @@ var TreeView= React.createClass({
 
 
   },
-  _dragStopped:function(){
+  _dragStopped: function () {
     console.log('dragging stopped');
   },
-  _mousedown:function(){
+  _mousedown: function () {
     console.log("mousedown")
   },
-  _clicked:function(){
+  _clicked: function () {
     console.log('clicked')
   },
-  componentWillUnmount:function(){
+  componentWillUnmount: function () {
   },
   _onChange: function () {
   }

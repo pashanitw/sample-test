@@ -25,6 +25,7 @@
     "handlebars-helpers": "^0.5.8",
     "handlebars-jst": "0.0.4",
     "html-minifier": "^0.7.0",
+    "mousetrap": "^1.4.6",
     "reactify": "^1.0.0",
     "require-dir": "^0.1.0",
     "vinyl-buffer": "^1.0.0",

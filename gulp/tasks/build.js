@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var config = require('../config');
 
-gulp.task('build', ['browserify', 'styles', 'html'], function() {
+gulp.task('build', ['browserify', 'moveMaterializeFonts','styles', 'html'], function() {
   gulp.src(config.src).pipe(connect.reload());
 });
 
@@ -78,4 +78,9 @@ var relativePath=path.relative(String(__dirname),String(file.path));
 gulp.task('moveck', function(){
   gulp.src('./src/libs/ckeditor/**/*.*',{base: 'src/'})
     .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('moveMaterializeFonts', function(){
+  gulp.src('./bower_components/materialize/font/**/*.*')
+    .pipe(gulp.dest('dist/font'));
 });

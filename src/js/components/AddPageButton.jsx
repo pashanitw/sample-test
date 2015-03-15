@@ -10,7 +10,7 @@ var AddPageButton = React.createClass({
   },
   render: function() {
     return (
-      <a className="btn-floating btn-large waves-effect waves-light green"
+      <a className="add-component btn-floating btn-large waves-effect waves-light grey"
       onClick={this.addPage}>
         <i className="mdi-content-add"></i>
       </a>
@@ -20,6 +20,7 @@ var AddPageButton = React.createClass({
   },
   addPage:function(){
     alert("in add page");
+    console.log(CKEDITOR.instances);
     var model=new PageModel();
     EditorActionCreator.addPage(model);
   }

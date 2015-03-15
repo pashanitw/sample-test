@@ -1,5 +1,5 @@
-<div class="btn-group iconBtns from bar">
-    <a class="btn btn-plast">
-        <i class="icon-th-large icon-white"></i>
-    </a>
+<div class="component ui-selected">
+<div class="content-scale">
+    <div class="content"></div>
+</div>
 </div>

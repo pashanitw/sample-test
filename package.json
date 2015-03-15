@@ -64,7 +64,10 @@
   "browser": {
     "jquery": "./bower_components/jquery/dist/jquery.js",
     "multisortable": "./src/libs/jquery.multisortable.js",
-    "jquery-ui": "./bower_components/jquery-ui/jquery-ui.js"
+    "jquery-ui": "./bower_components/jquery-ui/jquery-ui.js",
+    "jquery-ui-draggable":"./bower_components/jquery-ui/ui/draggable.js",
+    "jquery-ui-droppable":"./bower_components/jquery-ui/ui/droppable.js",
+    "jquery-ui-resizable":"./bower_components/jquery-ui/ui/resizable.js"
   },
   "browserify-shim": {
     "jquery": {
@@ -80,6 +83,18 @@
     "jquery-ui": {
       "depends": "jquery",
       "jquery-ui": null
+    },
+    "jquery-ui-draggable": {
+      "depends": "jquery-ui",
+      "jquery-ui-draggable": null
+    },
+    "jquery-ui-droppable": {
+      "depends": "jquery-ui",
+      "jquery-ui-droppable": null
+    },
+    "jquery-ui-resizable": {
+      "depends": "jquery-ui",
+      "jquery-ui-resizable": null
     }
   }
 }

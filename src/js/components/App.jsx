@@ -6,6 +6,14 @@ var mui = require('material-ui'),
     RaisedButton = mui.RaisedButton;
 var TreeView=require('./TreeView.jsx');
 var EditorView=require("./EditorView.jsx")
+var Navbar=require("./Navbar.jsx");
+var $ = require('jquery');
+require('jquery-ui');
+require('multisortable');
+require('jquery-ui-draggable');
+require('jquery-ui-droppable');
+require('jquery-ui-resizable');
+
 
 
 var App = React.createClass({
@@ -16,7 +24,9 @@ var App = React.createClass({
       tasks: []
     }
   },
-
+  componentWillMount:function(){
+    JSTContext();
+  },
   _onChange: function() {
     this.setState(DataStore.getAll());
   },
@@ -26,6 +36,7 @@ var App = React.createClass({
   },
 
   componentWillUnmount: function() {
+
     DataStore.removeChangeListener(this._onChange);
   },
 
@@ -58,7 +69,8 @@ var App = React.createClass({
   }*/
   render:function(){
     return (
-      <div>
+      <div className="app-container">
+        <Navbar/>
         <EditorView/>
       </div>
     )

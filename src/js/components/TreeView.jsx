@@ -1,7 +1,4 @@
-var React = require('react'),
-  $ = require('jquery');
-require('jquery-ui');
-require('multisortable');
+var React = require('react');
 var Snapshot = require('./Snapshot.jsx');
 var AddPageButton = require('./AddPageButton.jsx');
 
@@ -19,8 +16,6 @@ var TreeView = React.createClass({
 
   render: function () {
     return (
-      <div>
-        <AddPageButton></AddPageButton>
         <div className="tree-view">
         {
           this.props.pages.map(function (page) {
@@ -30,7 +25,6 @@ var TreeView = React.createClass({
           }
 
         </div>
-      </div>
     )
   },
   componentDidMount: function () {

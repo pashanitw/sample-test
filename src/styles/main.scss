@@ -1,3 +1,4 @@
+@import "../../bower_components/sass-meyer-reset/sass-meyer-reset";
 @import "../../node_modules/material-ui-sass/material-ui";
 @import "../../node_modules/material-ui-sass/material-ui/_html";
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500);
@@ -36,4 +37,8 @@
 }
 .editor-view{
   float: left;
+}
+.add-component{
+  margin-left: 87px;
+  margin-top: 3px;
 }

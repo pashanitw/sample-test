@@ -2,10 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/materialize.css">
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/snapshot.css">
   <link rel="stylesheet" href="styles/sample.css"/>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/materialize.css">
+  <link rel="stylesheet" href="styles/snapshot.css">
+  <link rel="stylesheet" href="styles/override.css"/>
+  <link rel="stylesheet" href="styles/component.css"/>
 
   <title>Document</title>
 
@@ -14,9 +16,9 @@
   <div id="main">
     <!-- Flux goes here -->
   </div>
-  <script src="js/index.js"></script>
   <script src="js/templates.js"></script>
-<script src="libs/ckeditor/ckeditor.js"></script>
+  <script src="js/index.js"></script>
+  <script src="libs/ckeditor/ckeditor.js"></script>
   <script>
     // The "instanceCreated" event is fired for every editor instance created.
     CKEDITOR.on('instanceCreated', function (event) {

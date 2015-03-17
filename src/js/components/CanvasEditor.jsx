@@ -1,41 +1,48 @@
 var React = require('react');
 
 var CanvasEditor = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {};
   },
 
-  render: function() {
-    var template='';
+  render: function () {
+    var template = '';
     return (
       <div className="container editor-view">
 
       </div>
-        );
+    );
   },
 
-  componentDidMount: function() {
-    var template='<div>'+
-      '<h2 className="sampleTitle" contentEditable="true">'+
-      'CKEditor<br/> Goes Inline!'+
+  componentDidMount: function () {
+    var template = '<div>' +
+      '<h2 className="sampleTitle" contentEditable="true">' +
+      'CKEditor<br/> Goes Inline!' +
       '</h2>';
-    var node=this.getDOMNode();
-    var content=JST['src/handlebars/component'];
-    var element=  $(content());
+    var node = this.getDOMNode();
+    var content = JST['src/handlebars/component'];
+    var element = $(content());
     $(element).find('.content').append(template);
     $(node).append(element);
-    $( "body" ).droppable();
+    $("body").droppable();
     $(element).resizable();
-    $(element).draggable({
 
-      start: function(event, ui) {
-       // isDraggingMedia = true;
+    $(element).draggable({
+      containment: "parent",
+      start: function (event, ui) {
+        // isDraggingMedia = true;
       },
-      stop: function(event, ui) {
+      stop: function (event, ui) {
         //isDraggingMedia = false;
         // blah
       }
-    });
+    })
+      .click(function () {
+        $(this).draggable({disabled: true});
+      })
+      .mousemove(function () {
+        $(this).draggable({disabled: false});
+      });
   }
 });
 

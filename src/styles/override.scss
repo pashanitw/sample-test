@@ -7,14 +7,16 @@ body{
     height: 100%;
     .app-container{
       height: 100%;
+
       nav.tool-bar{
         height: 10%;
       }
       .editor-area{
         height: 90%;
+
         .tree-view{
           height: 100%;
-          min-width: 300px;
+          min-width: 25%;
           overflow-y: scroll;
           overflow-x: hidden;
           padding-bottom: 4px;
@@ -23,6 +25,7 @@ body{
         }
         .editor-view{
           height: 100%;
+          width:75% !important;
           overflow: hidden;
         }
       }

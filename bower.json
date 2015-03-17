@@ -9,6 +9,8 @@
     "materialize": "~0.95.3",
     "ckeditor": "~4.4.7",
     "sass-meyer-reset": "*",
-    "susy": "~2.2.2"
+    "susy": "~2.2.2",
+    "bootstrap-sass-official": "~3.3.4",
+    "breakpoint-sass": "~2.5.0"
   }
 }

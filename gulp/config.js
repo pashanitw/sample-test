@@ -26,6 +26,12 @@ module.exports = {
       imagePath: '/images' // Used by the image-url helper
     }
   },
+  sassTemplates: {
+    src: './src/templates/**/*.scss',
+    settings: {
+      indentedSyntax: false
+    }
+  },
   browserify: {
     settings: {
       transform: ['reactify', 'babelify']

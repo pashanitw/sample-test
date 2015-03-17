@@ -25,6 +25,7 @@
     "handlebars-helpers": "^0.5.8",
     "handlebars-jst": "0.0.4",
     "html-minifier": "^0.7.0",
+    "html-minify": "^0.3.1",
     "mousetrap": "^1.4.6",
     "reactify": "^1.0.0",
     "require-dir": "^0.1.0",
@@ -65,9 +66,9 @@
     "jquery": "./bower_components/jquery/dist/jquery.js",
     "multisortable": "./src/libs/jquery.multisortable.js",
     "jquery-ui": "./bower_components/jquery-ui/jquery-ui.js",
-    "jquery-ui-draggable":"./bower_components/jquery-ui/ui/draggable.js",
-    "jquery-ui-droppable":"./bower_components/jquery-ui/ui/droppable.js",
-    "jquery-ui-resizable":"./bower_components/jquery-ui/ui/resizable.js"
+    "jquery-ui-draggable": "./bower_components/jquery-ui/ui/draggable.js",
+    "jquery-ui-droppable": "./bower_components/jquery-ui/ui/droppable.js",
+    "jquery-ui-resizable": "./bower_components/jquery-ui/ui/resizable.js"
   },
   "browserify-shim": {
     "jquery": {

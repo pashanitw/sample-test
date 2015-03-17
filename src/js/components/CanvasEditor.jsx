@@ -11,18 +11,21 @@ var CanvasEditor = React.createClass({
       <div className="container editor-view">
 
       </div>
-    );
+    )
   },
 
   componentDidMount: function () {
+    var data={
+      text:"handlebars are fucking awesome",
+      customClasses:'sampleTitle'
+    };
     var template = '<div>' +
       '<h2 className="sampleTitle" contentEditable="true">' +
       'CKEditor<br/> Goes Inline!' +
       '</h2>';
     var node = this.getDOMNode();
-    var content = JST['src/handlebars/component'];
-    var element = $(content());
-    $(element).find('.content').append(template);
+    var content = JST['src/handlebars/TextComponent'];
+    var element = $(content(data));
     $(node).append(element);
     $("body").droppable();
     $(element).resizable();

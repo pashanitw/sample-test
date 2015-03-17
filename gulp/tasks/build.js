@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var config = require('../config');
 
-gulp.task('build', ['browserify', 'moveMaterializeFonts','styles', 'html'], function() {
+gulp.task('build', ['browserify', 'moveMaterializeFonts','styles','moveck','html'], function() {
   gulp.src(config.src).pipe(connect.reload());
 });
 
@@ -42,23 +42,30 @@ gulp.task('templates', function(){
     .pipe(gulp.dest('dist/js/'));*/
 });
 
-function makeChange() {
+function makeChange(something) {
+  console.log("somethng",something)
   // you're going to receive Vinyl files as chunks
   var index=0;
   function transform(file, cb) {
 var relativePath=path.relative(String(__dirname),String(file.path));
-   var fileName= relativePath.replace(/^(\.{2}\/\.{2}\/)(.+)?\.bars$/,function(total,$1,$2){return $2;})
 
-    var template=handlebars.compile(String(file.contents));
+   var fileName= relativePath.replace(/^(\.{2}[\/\\]\.{2}[\/\\])(.+)?\.bars$/,function(total,$1,$2){return $2;})
+   fileName=fileName.replace(/\\/g,function(total,$1){
+     return '/';
+   });
+    console.log("file name is",fileName);
+
+   // var template=handlebars.compile(String(file.contents));
+    console.log(minify(file.contents.toString()));
     console.log(fileName);
     var content='';
     if(index==0){
-     content+= 'window.templateCollection=window.templateCollection||{};\n';
+     content+= 'function JSTContext() { \n window.templateCollection=window.templateCollection||{};\n';
      content+= 'window.JST=window.JST||{};\n';
 
       ++index;
     }
-    content+='window.templateCollection["'+fileName+'"]=\''+minify(String(file.contents),{collapseWhitespace:true})+'\';\n';
+    content+='window.templateCollection["'+fileName+'"]=\''+String(file.contents).trim()+'\';\n';
     content+='handlebars.registerPartial("'+path.basename(file.path).slice(0, -5)+'",'+'window.templateCollection["'+fileName+'"]'+');\n';
     content+="window.JST['"+fileName+"']=handlebars.compile("+'window.templateCollection["'+fileName+'"]'+");\n";
   //  console.log(String(file.contents));

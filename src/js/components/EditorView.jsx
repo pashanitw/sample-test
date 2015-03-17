@@ -11,6 +11,7 @@ var EditorView = React.createClass({
     EditorStore.addChangeListener(this._onChange)
   },
   render: function () {
+
     return (
       <div className="editor-area">
         <TreeView pages={this.state.pages}></TreeView>

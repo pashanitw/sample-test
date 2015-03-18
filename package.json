@@ -68,11 +68,12 @@
     "jquery-ui": "./bower_components/jquery-ui/jquery-ui.js",
     "jquery-ui-draggable": "./bower_components/jquery-ui/ui/draggable.js",
     "jquery-ui-droppable": "./bower_components/jquery-ui/ui/droppable.js",
-    "jquery-ui-resizable": "./bower_components/jquery-ui/ui/resizable.js"
+    "jquery-ui-resizable": "./bower_components/jquery-ui/ui/resizable.js",
+     "materialize":"./bower_components/materialize/bin/materialize.js"
   },
   "browserify-shim": {
     "jquery": {
-      "exports": "$"
+      "exports":"jquery"
     },
     "multisortable": {
       "depends": [
@@ -96,6 +97,10 @@
     "jquery-ui-resizable": {
       "depends": "jquery-ui",
       "jquery-ui-resizable": null
+    },
+    "materialize":{
+      "depends":["jquery","jquery-ui"],
+      "materialize":null
     }
   }
 }

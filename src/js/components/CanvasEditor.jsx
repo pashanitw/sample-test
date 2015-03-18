@@ -1,31 +1,40 @@
 var React = require('react');
-
+var ComponentContainer=require('./ComponentContainer.jsx');
+var Components;
 var CanvasEditor = React.createClass({
   getInitialState: function () {
     return {};
   },
+  propTypes:{
+    components:React.PropTypes.array.isRequired
+  },
+  componentWillMount: function () {
 
+  },
   render: function () {
     var template = '';
+
     return (
       <div className="container editor-view">
+      {
+        this.props.components.map(function(component){
+          console.log(component.styles);
+          return <ComponentContainer style={component.styles}>
+            <div dangerouslySetInnerHTML={{__html:component.markup}}>
 
+            </div>
+            </ComponentContainer>
+
+        })
+        }
       </div>
     )
   },
 
   componentDidMount: function () {
-    var data={
-      text:"handlebars are fucking awesome",
-      customClasses:'sampleTitle'
-    };
-    var template = '<div>' +
-      '<h2 className="sampleTitle" contentEditable="true">' +
-      'CKEditor<br/> Goes Inline!' +
-      '</h2>';
+
     var node = this.getDOMNode();
-    var content = JST['src/handlebars/TextComponent'];
-    var element = $(content(data));
+    var element = $(node).find('.component');
     $(node).append(element);
     $("body").droppable();
     $(element).resizable();
@@ -49,31 +58,6 @@ var CanvasEditor = React.createClass({
   }
 });
 
-/*<div className="header">
- <div className="headerLeft">
- <h2 className="sampleTitle" contentEditable="true">
- CKEditor<br/> Goes Inline!
- </h2>
-
- <h3 contentEditable="true">
- Lorem ipsum dolor sit amet dolor duis blandit vestibulum faucibus a, tortor.
- </h3>
- </div>
- <div className="headerRight">
- <div contentEditable="true">
- <p>
- Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas
- malesuada elit lectus felis, malesuada ultricies.
- </p>
-
- <p>
- Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac,
- laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna.
- Vestibulum dapibus, mauris nec malesuada fames ac.
- </p>
- </div>
- </div>
- </div>*/
 
 
 module.exports = CanvasEditor;

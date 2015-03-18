@@ -15,13 +15,11 @@ var EditorView = React.createClass({
     return (
       <div className="editor-area">
         <TreeView pages={this.state.pages}></TreeView>
-        <CanvasEditor></CanvasEditor>
+        <CanvasEditor components={this.state.data}></CanvasEditor>
       </div>
     );
   },
   componentDidMount: function () {
-    JSTContext();
-    console.log(JST['src/handlebars/component']);
   },
   _onChange:function(){
     this.setState(EditorStore.getAll());

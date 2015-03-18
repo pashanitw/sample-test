@@ -4,10 +4,17 @@ var Constants = require('../constants/AppConstants');
 var assign = require('object-assign');
 var PageModel=require('../models/PageModel.js')
 var PageCollection=require('../models/PageCollection.js');
+var $ = require('jquery');
 
 // data storage
 var _data = [];
-
+function getSampleData(){
+/*  $.getJSON('templates/modern/js/Chapter.json',function(data){
+    _data=data.components;
+    EditorStore.emitChange();
+  })*/
+}
+getSampleData();
 var _pageCollection=new PageCollection();
 
 // add private functions to modify data
@@ -24,7 +31,7 @@ var EditorStore = assign({}, EventEmitter.prototype, {
   // public methods used by Controller-View to operate on data
   getAll: function() {
     return {
-      tasks: _data,
+      data: _data,
       pages:_pageCollection.pages
     };
   },

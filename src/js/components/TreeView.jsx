@@ -8,7 +8,7 @@ var TreeView = React.createClass({
     return {pages:[]};
   },
   propTypes:{
-    pages:React.PropTypes.object.isRequired
+    pages:React.PropTypes.array.isRequired
   },
   componentWillMount: function () {
     console.log(this.props);

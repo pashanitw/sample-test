@@ -7,12 +7,14 @@ var mui = require('material-ui'),
 var TreeView=require('./TreeView.jsx');
 var EditorView=require("./EditorView.jsx")
 var Navbar=require("./Navbar.jsx");
+var MaterialModal=require("./MaterialModal.jsx")
 var $ = require('jquery');
 require('jquery-ui');
 require('multisortable');
 require('jquery-ui-draggable');
 require('jquery-ui-droppable');
 require('jquery-ui-resizable');
+require('materialize');
 
 
 
@@ -21,11 +23,14 @@ var App = React.createClass({
   getInitialState: function() {
     var data = DataStore.getAll();
     return {
-      tasks: []
+      tasks: [],
+      modal:{
+        isOpen:true
+      }
     }
   },
   componentWillMount:function(){
-    JSTContext();
+    //JSTContext();
   },
   _onChange: function() {
     this.setState(DataStore.getAll());
@@ -51,27 +56,22 @@ var App = React.createClass({
     ActionCreator.clearList();
   },
 
-/*  render: function() {
-    return (
-      <div className="example-page">
-        <h1>Learning Flux</h1>
-        <p>
-          Below is a list of tasks you can implement to better grasp the patterns behind Flux.<br />
-          Most features are left unimplemented with clues to guide you on the learning process.
-        </p>
-
-        <TaskList tasks={this.state.tasks} />
-
-        <RaisedButton label="Add Task" primary={true} onClick={this.handleAddNewClick} />
-        <RaisedButton label="Clear List" secondary={true} onClick={this.handleClearListClick} />
-      </div>
-    );
-  }*/
-  render:function(){
+/*  render:function(){
     return (
       <div className="app-container">
         <Navbar/>
         <EditorView/>
+      </div>
+    )
+  }*/
+  updateState:function(){
+    alert("in update state");
+  },
+  render:function(){
+    return (
+      <div className="app-container">
+        <button onclick={this.updateState}>click</button>
+        <MaterialModal isOpen={this.state.modal.isOpen}></MaterialModal>
       </div>
     )
   }

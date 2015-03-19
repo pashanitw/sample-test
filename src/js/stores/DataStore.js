@@ -11,17 +11,37 @@ var _data = [];
 function addItem(title, completed=false) {
   _data.push({title, completed});
 }
+function loadTemplates(){
+  var deferred=$.Deferred();
+ $.when($.getJSON("config.json")).done(function(data){
+   var promises=[];
+  data.templates.forEach(function(template){
+    promises.push($.getJSON(template.template))
+  });
+   $.when(...promises).done(function(){
+        deferred.resolve(arguments);
+   })
+ });
+  return deferred.promise();
+}
+var viewData={
+  templates:[]
+}
 
 // Facebook style store creation.
 var DataStore = assign({}, EventEmitter.prototype, {
 
   // public methods used by Controller-View to operate on data
   getAll: function() {
-    return {
-      tasks: _data
-    };
+    return viewData;
   },
-
+  getTemplates:function(){
+    var that=this;
+    loadTemplates().done(function(templates){
+      viewData.templates=templates;
+      that.emitChange();
+    })
+  },
 
   // Allow Controller-View to register itself with store
   addChangeListener: function(callback) {

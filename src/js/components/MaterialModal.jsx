@@ -39,7 +39,9 @@ let MaterialModal = React.createClass({
      if(this.props.isOpen!==nextprops.isOpen){
        if(nextprops.isOpen){
          var node=this.getDOMNode();
-         $(node).openModal();
+         $(node).openModal({
+           complete: function() { alert('Closed'); }
+         });
        }else{
          var node=this.getDOMNode();
          $(node).closeModal();

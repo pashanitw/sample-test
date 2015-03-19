@@ -25,12 +25,27 @@ body{
         }
         .editor-view{
           position: relative;
-          height: 100%;
-          width:75% !important;
+          height: 600px;
+          width:1000px;
+/*          height: 100%;
+          width:75% !important;*/
           overflow: hidden;
         }
       }
     }
   }
-
+  .modal-content{
+    .chapter-frame{
+      display: inline-block;
+      width: auto;
+    }
+  }
+}
+.editor-view{
+  position: relative;
+  height: 600px;
+  width:1000px;
+  /*          height: 100%;
+            width:75% !important;*/
+  overflow: hidden;
 }

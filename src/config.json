@@ -1,14 +1,10 @@
 {
   "templates": [
     {
-      "cover": "templates/modern/layouts/cover.json",
-      "chapter": "templates/modern/layouts/chapter.json",
-      "page": "templates/modern/layouts/page.json"
+      "template": "templates/modern/layouts/layouts.json"
     },
     {
-      "cover": "templates/classic/layouts/cover.json",
-      "chapter": "templates/classic/layouts/chapter.json",
-      "page": "templates/classic/layouts/page.json"
+      "template": "templates/modern/layouts/layouts.json"
     }
   ]
 }

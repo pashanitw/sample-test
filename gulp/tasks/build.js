@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var config = require('../config');
 
-gulp.task('build', ['browserify', 'moveMaterializeFonts','styles','moveck','move-templates','html'], function() {
+gulp.task('build', ['browserify', 'moveMaterializeFonts','styles','moveck','move-templates','move-config','html'], function() {
   gulp.src(config.src).pipe(connect.reload());
 });
 
@@ -84,6 +84,10 @@ var relativePath=path.relative(String(__dirname),String(file.path));
 }
 gulp.task('moveck', function(){
   gulp.src('./src/libs/**/*.*',{base: 'src/'})
+    .pipe(gulp.dest('dist/'));
+});
+gulp.task('move-config', function(){
+  gulp.src('./src/config.json',{base: 'src/'})
     .pipe(gulp.dest('dist/'));
 });
 gulp.task('move-templates', function(){

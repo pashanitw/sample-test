@@ -1,27 +1,27 @@
 var React = require('react');
 var ComponentContainer=require('./ComponentContainer.jsx');
+var assign = require('object-assign');
 var Components;
 var CanvasEditor = React.createClass({
   getInitialState: function () {
     return {};
   },
   propTypes:{
-    components:React.PropTypes.array.isRequired
+    components:React.PropTypes.array.isRequired,
+    compstyle:React.PropTypes.object.isRequired
   },
   componentWillMount: function () {
 
   },
   render: function () {
-    var template = '';
-
+    var that=this;
     return (
-      <div className="container editor-view">
+      <div className="editor-view" style={this.props.compstyle}>
       {
+
         this.props.components.map(function(component){
-          console.log(component.styles);
           return <ComponentContainer style={component.styles}>
             <div dangerouslySetInnerHTML={{__html:component.markup}}>
-
             </div>
             </ComponentContainer>
 

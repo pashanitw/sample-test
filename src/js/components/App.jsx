@@ -14,7 +14,8 @@ require('multisortable');
 require('jquery-ui-draggable');
 require('jquery-ui-droppable');
 require('jquery-ui-resizable');
-require('materialize');
+var PageModel=require('../models/PageModel.js');
+/*require('materialize');*/
 
 
 
@@ -25,7 +26,8 @@ var App = React.createClass({
     return {
       tasks: [],
       modal:{
-        isOpen:true
+        isOpen:false,
+        templates:[]
       }
     }
   },
@@ -66,12 +68,13 @@ var App = React.createClass({
   }*/
   updateState:function(){
     alert("in update state");
+    this.setState({modal:{isOpen:true,templates:[new PageModel(),new PageModel()]}})
   },
   render:function(){
     return (
       <div className="app-container">
-        <button onclick={this.updateState}>click</button>
-        <MaterialModal isOpen={this.state.modal.isOpen}></MaterialModal>
+        <button onClick={this.updateState}>click</button>
+        <MaterialModal isOpen={this.state.modal.isOpen} templates={this.state.modal.templates}></MaterialModal>
       </div>
     )
   }

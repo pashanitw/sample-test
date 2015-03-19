@@ -22,13 +22,13 @@ let MaterialModal = React.createClass({
   },
   render() {
     return (
-      <div  class="modal modal-fixed-footer">
-        <div class="modal-content">
+      <div  className="modal modal-fixed-footer">
+        <div className="modal-content">
           <h4>{this.props.modalHeader}</h4>
           <TemplateList templates={this.props.templates}/>
         </div>
-        <div class="modal-footer">
-          <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
+        <div className="modal-footer">
+          <a href="#" className="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
         </div>
       </div>
     );
@@ -38,10 +38,10 @@ let MaterialModal = React.createClass({
   componentWillReceiveProps(nextprops){
      if(this.props.isOpen!==nextprops.isOpen){
        if(nextprops.isOpen){
-         var node=this.getDomNode();
+         var node=this.getDOMNode();
          $(node).openModal();
        }else{
-         var node=this.getDomNode();
+         var node=this.getDOMNode();
          $(node).closeModal();
        }
      }

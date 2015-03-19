@@ -83,7 +83,7 @@ var relativePath=path.relative(String(__dirname),String(file.path));
   return require('event-stream').map(transform);
 }
 gulp.task('moveck', function(){
-  gulp.src('./src/libs/ckeditor/**/*.*',{base: 'src/'})
+  gulp.src('./src/libs/**/*.*',{base: 'src/'})
     .pipe(gulp.dest('dist/'));
 });
 gulp.task('move-templates', function(){

@@ -15,8 +15,8 @@ let TemplateList = React.createClass({
     return (
      <div>
      {
-       this.props.templates.map(function(){
-         return <Snapshot></Snapshot>
+       this.props.templates.map(function(item){
+         return <Snapshot page={item}></Snapshot>
        })
        }
      </div>

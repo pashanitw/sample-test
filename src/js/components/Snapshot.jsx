@@ -8,6 +8,13 @@ var Snapshot = React.createClass({
   propTypes:{
     page:React.PropTypes.object.isRequired
   },
+  getDefaultProps(){
+    return {
+      page:{
+        components:[]
+      }
+    }
+  },
   render: function () {
     var snapStyle={
       overflow:"hidden"

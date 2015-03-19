@@ -1,8 +1,14 @@
 const React = require('react');
 var Snapshot=require('./Snapshot.jsx');
+var EditorActionCreator=require('../actions/EditorActionCreator.js');
 let TemplateList = React.createClass({
   propTypes:{
     templates:React.PropTypes.array.isRequired
+  },
+  getDefaultProps(){
+    return {
+    templates:[]
+    }
   },
   getInitialState() {
     return {};
@@ -16,7 +22,7 @@ let TemplateList = React.createClass({
      <div>
      {
        this.props.templates.map(function(item){
-         return <Snapshot page={item}></Snapshot>
+         return <Snapshot page={item.cover} onClick={EditorActionCreator.selectTemplate(item)}></Snapshot>
        })
        }
      </div>

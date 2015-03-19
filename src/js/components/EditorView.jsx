@@ -4,9 +4,7 @@ var TreeView = require('./TreeView.jsx');
 var EditorStore=require('../stores/EditorStore.js');
 
 var EditorView = React.createClass({
-  getInitialState: function () {
-   return EditorStore.getAll();
-  },
+ 
   componentWillMount:function(){
     EditorStore.addChangeListener(this._onChange)
   },
@@ -14,12 +12,12 @@ var EditorView = React.createClass({
 
     return (
       <div className="editor-area">
-        <TreeView pages={this.state.pages}></TreeView>
-        <CanvasEditor components={this.state.data}></CanvasEditor>
+        <TreeView pages={this.props.pages}></TreeView>
       </div>
     );
   },
   componentDidMount: function () {
+    return EditorStore.getAll();
   },
   _onChange:function(){
     this.setState(EditorStore.getAll());

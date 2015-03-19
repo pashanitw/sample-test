@@ -10,6 +10,12 @@ var CanvasEditor = React.createClass({
     components:React.PropTypes.array.isRequired,
     compstyle:React.PropTypes.object.isRequired
   },
+  getDefaultProps(){
+    return {
+      components:[],
+      compstyle:null
+    }
+  },
   componentWillMount: function () {
 
   },

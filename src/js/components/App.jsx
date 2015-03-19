@@ -36,19 +36,15 @@ var App = React.createClass({
   },
   _onChange: function () {
     console.log("lodash is",_);
-    var pages=[];
-  for(var i=0;i<DataStore.getAll().templates.length;i++){
-     var item=DataStore.getAll().templates[i];
-     var page=new PageModel();
-     page.components=item[0].cover.components;
-     pages.push(page);
-   }
+console.log("converted array",Array.prototype.slice.call(DataStore.getAll().templates))
+    var test=Array.prototype.slice.call(DataStore.getAll().templates);
     this.setState({
       modal: {
         isOpen: true,
-        templates: pages,
+        templates:  [test[1][0],test[0][0]],
         modalHeader: "Select the template"
-      }
+      },
+      pages:[test[1][0].cover]
     });
   },
 
@@ -82,18 +78,14 @@ var App = React.createClass({
    }*/
   updateState: function () {
     DataStore.getTemplates();
-    /*    var parsedData=jsonData;
-     var item1=new PageModel();
-     item1.components=parsedData.components;
-     var item2=new PageModel();
-     item2.components=parsedData.components;
-     this.setState({modal:{isOpen:true,templates:[item1,item2]}})*/
   },
   render: function () {
     return (
       <div className="app-container">
         <button onClick={this.updateState}>click</button>
         <MaterialModal {...this.state.modal}></MaterialModal>
+        <Navbar/>
+        <EditorView pages={this.state.pages}/>
       </div>
     )
   }
@@ -102,52 +94,3 @@ var App = React.createClass({
 
 module.exports = App;
 
-var jsonData = {
-  "components": [
-    {
-      "_id": "0",
-      "type": "text",
-      "styles": {
-        "width": 430,
-        "height": 200,
-        "left": 600,
-        "top": 88
-      },
-      "markup": "<h1>This is chapter Json</h2>"
-    },
-
-    {
-      "_id": "0",
-      "type": "text",
-      "styles": {
-        "width": 430,
-        "height": 200,
-        "left": 600,
-        "top": 285
-      },
-      "markup": "<h1>This is chapter something</h2>"
-    },
-    {
-      "_id": "0",
-      "type": "text",
-      "styles": {
-        "width": 500,
-        "height": 200,
-        "left": 10,
-        "top": 200
-      },
-      "markup": "<h1>This is chapter Json</h2>"
-    },
-    {
-      "_id": "0",
-      "type": "text",
-      "styles": {
-        "width": 500,
-        "height": 200,
-        "left": 10,
-        "top": 20
-      },
-      "markup": "<h1>Amazing Space Secrets</h2>"
-    }
-  ]
-}

@@ -15,7 +15,12 @@ addPage:function(page){
     page:page
   })
 },
-
+  selectTemplate:function(template){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.TEMPLATE_SELECTED,
+      template:template
+    })
+  },
   clearList: function() {
     console.warn('clearList action not yet implemented...');
   },

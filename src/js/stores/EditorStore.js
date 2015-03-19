@@ -14,6 +14,10 @@ function getSampleData(){
     EditorStore.emitChange();
   })*/
 }
+var editorModel={
+  currentTemplate:'',
+  pages:[]
+};
 getSampleData();
 var _pageCollection=new PageCollection();
 
@@ -25,15 +29,25 @@ function addPage(page){
   _pageCollection.pages.push(page);
 }
 
+function changeTemplateSelection(template){
+  var cover=new PageModel();
+      cover.components=template.cover;
+  var chapter=new PageModel();
+      chapter.components=template.cover;
+  var page=new PageModel();
+  page.components=template.page;
+
+  editorModel.pages.push(cover);
+  editorModel.pages.push(chapter);
+  editorModel.pages.push(page);
+}
+
 // Facebook style store creation.
 var EditorStore = assign({}, EventEmitter.prototype, {
 
   // public methods used by Controller-View to operate on data
   getAll: function() {
-    return {
-      data: _data,
-      pages:_pageCollection.pages
-    };
+    return editorModel;
   },
 
 
@@ -71,6 +85,11 @@ var EditorStore = assign({}, EventEmitter.prototype, {
               addPage(page);
               EditorStore.emitChange();
             }
+            break;
+      case Constants.ActionTypes.TEMPLATE_SELECTED:
+            var template=action.template;
+            changeTemplateSelection(template);
+            EditorStore.emitChange()
             break;
       // add more cases for other actionTypes...
     }

@@ -25,13 +25,18 @@ let MaterialModal = React.createClass({
       <div  className="modal modal-fixed-footer">
         <div className="modal-content">
           <h4>{this.props.modalHeader}</h4>
-          <TemplateList templates={this.props.templates}/>
+          <TemplateList templates={this.props.templates} onSelect={this.doneSelection}/>
         </div>
         <div className="modal-footer">
           <a href="#" className="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
         </div>
       </div>
     );
+  },
+  doneSelection:function(){
+    var node=this.getDOMNode();
+    $(node).closeModal();
+
   },
   componentDidMount() {
   },
@@ -40,7 +45,7 @@ let MaterialModal = React.createClass({
        if(nextprops.isOpen){
          var node=this.getDOMNode();
          $(node).openModal({
-           complete: function() { alert('Closed'); }
+           complete: function() {  }
          });
        }else{
          var node=this.getDOMNode();

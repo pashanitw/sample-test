@@ -13,16 +13,22 @@ let TemplateList = React.createClass({
   getInitialState() {
     return {};
   },
-
+handleClick:function(item){
+  EditorActionCreator.selectTemplate(item);
+  if(this.props.onSelect){
+    this.props.onSelect();
+  }
+},
   componentDidMount() {
   },
 
   render() {
+    var that=this;
     return (
      <div>
      {
        this.props.templates.map(function(item){
-         return <Snapshot page={item.cover} onClick={EditorActionCreator.selectTemplate.bind(null,item)}></Snapshot>
+         return <Snapshot page={item.cover} onClick={that.handleClick.bind(null,item)}></Snapshot>
        })
        }
      </div>

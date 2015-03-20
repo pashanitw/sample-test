@@ -1,6 +1,7 @@
 var React = require('react');
 var ComponentContainer=require('./ComponentContainer.jsx');
 var assign = require('object-assign');
+var EditorStore=require('../stores/EditorStore');
 var Components;
 var CanvasEditor = React.createClass({
   getInitialState: function () {
@@ -19,15 +20,21 @@ var CanvasEditor = React.createClass({
   componentWillMount: function () {
 
   },
-  render: function () {
+  updateHtml:function(component,html){
+  debugger;
+    component.markup=html.target;
+    EditorStore.emitChange();
+  },
+  render: function (component) {
     var that=this;
+
     return (
       <div className="editor-view" style={this.props.compstyle}>
       {
 
         this.props.components.map(function(component){
-          return <ComponentContainer style={component.styles}>
-            <div dangerouslySetInnerHTML={{__html:component.markup}}>
+          return <ComponentContainer style={component.styles} onChange={that.updateHtml.bind(null,component)}>
+            <div dangerouslySetInnerHTML={{__html:component.markup}} >
             </div>
             </ComponentContainer>
 

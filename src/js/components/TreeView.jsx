@@ -1,6 +1,8 @@
 var React = require('react');
 var Snapshot = require('./Snapshot.jsx');
 var AddPageButton = require('./AddPageButton.jsx');
+var EditorActionCreator=require('../actions/EditorActionCreator.js');
+require('react/addons');
 
 var TreeView = React.createClass({
 
@@ -15,11 +17,15 @@ var TreeView = React.createClass({
   },
 
   render: function () {
+    var cx = React.addons.classSet;
     return (
         <div className="tree-view">
         {
           this.props.pages.map(function (page) {
-            return <Snapshot page={page}></Snapshot>
+            var classes = cx({
+              'child': page.type=="page"
+            });
+            return <Snapshot page={page} onClick={EditorActionCreator.pageSwitched.bind(null,page)} className={classes}></Snapshot>
           })
 
           }

@@ -17,7 +17,6 @@ require('jquery-ui-resizable');
 var PageModel = require('../models/PageModel.js');
 var _=require('lodash');
 var EditorStore=require("../stores/EditorStore.js")
-/*require('materialize');*/
 
 
 var App = React.createClass({
@@ -29,6 +28,9 @@ var App = React.createClass({
         modalHeader: "Select the template",
         isOpen: false,
         templates: []
+      },
+      editorView:{
+        pages:[]
       }
     }
   },
@@ -59,8 +61,9 @@ console.log("converted array",Array.prototype.slice.call(DataStore.getAll().temp
   },
   _updateEditorView(data){
     console.log("in updating editor view");
+    debugger;
     this.setState({
-      pages:EditorStore.getAll().pages
+      editorView:EditorStore.getAll()
     });
   },
 
@@ -75,14 +78,6 @@ console.log("converted array",Array.prototype.slice.call(DataStore.getAll().temp
     ActionCreator.clearList();
   },
 
-  /*  render:function(){
-   return (
-   <div className="app-container">
-   <Navbar/>
-   <EditorView/>
-   </div>
-   )
-   }*/
   updateState: function () {
     DataStore.getTemplates();
   },
@@ -92,7 +87,7 @@ console.log("converted array",Array.prototype.slice.call(DataStore.getAll().temp
         <button onClick={this.updateState}>click</button>
         <MaterialModal {...this.state.modal}></MaterialModal>
         <Navbar/>
-        <EditorView pages={this.state.pages}/>
+        <EditorView pages={this.state.editorView.pages} selectedPage={this.state.editorView.selectedPage}/>
       </div>
     )
   }

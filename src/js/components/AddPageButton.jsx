@@ -10,19 +10,39 @@ var AddPageButton = React.createClass({
   },
   render: function() {
     return (
-      <a className="add-component btn-floating btn-large waves-effect waves-light grey"
-      onClick={this.addPage}>
-        <i className="mdi-content-add"></i>
-      </a>
+      <div>
+        <a className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey"
+          onClick={this.addPage}
+          data-activates='dropdown1'>
+          <i className="mdi-content-add"></i>
+        </a>
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a href="#!">one</a></li>
+          <li><a href="#!">two</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">three</a></li>
+        </ul>
+      </div>
+
     );
   },
   componentDidMount: function() {
+
   },
   addPage:function(){
-    alert("in add page");
-    console.log(CKEDITOR.instances);
+    $(this.getDOMNode()).find('.add-component').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: false, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on click
+        alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
+        gutter: 0, // Spacing from edge
+        belowOrigin: false // Displays dropdown below the button
+      }
+    );
+  /*  console.log(CKEDITOR.instances);
     var model=new PageModel();
-    EditorActionCreator.addPage(model);
+    EditorActionCreator.addPage(model);*/
   }
 });
 

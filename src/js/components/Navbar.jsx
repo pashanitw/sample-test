@@ -22,9 +22,9 @@ var Navbar = React.createClass({
           <AddTextButton></AddTextButton>
           <AddWidgetButton></AddWidgetButton>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><a href="something.html">Sass</a></li>
-            <li><a href="something.html">Components</a></li>
-            <li><a href="something.html">JavaScript</a></li>
+            <li><a href="something.html">Preview</a></li>
+            <li><a href="something.html">Export</a></li>
+            <li><a href="something.html">Demo</a></li>
           </ul>
         </div>
       </nav>

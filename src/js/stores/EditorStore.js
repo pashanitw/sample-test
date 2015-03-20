@@ -16,7 +16,8 @@ function getSampleData(){
 }
 var editorModel={
   currentTemplate:'',
-  pages:[]
+  pages:[],
+  selectedPage:null
 };
 getSampleData();
 var _pageCollection=new PageCollection();
@@ -32,14 +33,26 @@ function addPage(page){
 function changeTemplateSelection(template){
   var cover=new PageModel();
       cover.components=template.cover.components;
+  cover.type=template.cover.type;
+  var tob=new PageModel();
+      tob.components=template.tob.components;
+  tob.type=template.tob.type;
   var chapter=new PageModel();
-      chapter.components=template.cover.components;
+      chapter.components=template.chapter.components;
+  chapter.type=template.tob.type;
   var page=new PageModel();
   page.components=template.page.components;
+  page.type=template.page.type;
 
   editorModel.pages.push(cover);
+  editorModel.pages.push(tob);
   editorModel.pages.push(chapter);
   editorModel.pages.push(page);
+  editorModel.selectedPage=editorModel.pages[0];
+}
+function switchPage(page){
+  console.log("page is",page);
+  editorModel.selectedPage=page;
 }
 
 // Facebook style store creation.
@@ -90,6 +103,11 @@ var EditorStore = assign({}, EventEmitter.prototype, {
             var template=action.template;
             changeTemplateSelection(template);
             EditorStore.emitChange()
+            break;
+      case Constants.ActionTypes.PAGE_SWITCHED:
+            var page=action.page;
+            switchPage(page);
+            EditorStore.emitChange();
             break;
       // add more cases for other actionTypes...
     }

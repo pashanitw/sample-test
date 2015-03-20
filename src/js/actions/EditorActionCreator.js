@@ -21,6 +21,12 @@ addPage:function(page){
       template:template
     })
   },
+  pageSwitched:function(page){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.PAGE_SWITCHED,
+      page:page
+    })
+  },
   clearList: function() {
     console.warn('clearList action not yet implemented...');
   },

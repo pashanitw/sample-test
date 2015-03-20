@@ -9,7 +9,8 @@ module.exports = {
     ADD_PAGE: null,
     REMOVE_PAGE:null,
     MOVE_PAGE:null,
-    TEMPLATE_SELECTED:null
+    TEMPLATE_SELECTED:null,
+    PAGE_SWITCHED:null
   }),
 
   ActionSources: keyMirror({

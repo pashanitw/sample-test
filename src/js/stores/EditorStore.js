@@ -31,11 +31,11 @@ function addPage(page){
 
 function changeTemplateSelection(template){
   var cover=new PageModel();
-      cover.components=template.cover;
+      cover.components=template.cover.components;
   var chapter=new PageModel();
-      chapter.components=template.cover;
+      chapter.components=template.cover.components;
   var page=new PageModel();
-  page.components=template.page;
+  page.components=template.page.components;
 
   editorModel.pages.push(cover);
   editorModel.pages.push(chapter);

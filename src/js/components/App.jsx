@@ -16,6 +16,7 @@ require('jquery-ui-droppable');
 require('jquery-ui-resizable');
 var PageModel = require('../models/PageModel.js');
 var _=require('lodash');
+var EditorStore=require("../stores/EditorStore.js")
 /*require('materialize');*/
 
 
@@ -43,18 +44,24 @@ console.log("converted array",Array.prototype.slice.call(DataStore.getAll().temp
         isOpen: true,
         templates:  [test[1][0],test[0][0]],
         modalHeader: "Select the template"
-      },
-      pages:[test[1][0].cover]
+      }
     });
   },
 
   componentDidMount: function () {
     DataStore.addChangeListener(this._onChange);
+    EditorStore.addChangeListener(this._updateEditorView)
   },
 
   componentWillUnmount: function () {
 
     DataStore.removeChangeListener(this._onChange);
+  },
+  _updateEditorView(data){
+    console.log("in updating editor view");
+    this.setState({
+      pages:EditorStore.getAll().pages
+    });
   },
 
   handleAddNewClick: function (e) {

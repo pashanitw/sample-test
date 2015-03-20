@@ -22,7 +22,7 @@ let TemplateList = React.createClass({
      <div>
      {
        this.props.templates.map(function(item){
-         return <Snapshot page={item.cover} onClick={EditorActionCreator.selectTemplate(item)}></Snapshot>
+         return <Snapshot page={item.cover} onClick={EditorActionCreator.selectTemplate.bind(null,item)}></Snapshot>
        })
        }
      </div>

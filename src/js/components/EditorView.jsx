@@ -4,9 +4,9 @@ var TreeView = require('./TreeView.jsx');
 var EditorStore=require('../stores/EditorStore.js');
 
 var EditorView = React.createClass({
- 
+
   componentWillMount:function(){
-    EditorStore.addChangeListener(this._onChange)
+   // EditorStore.addChangeListener(this._onChange)
   },
   render: function () {
 
@@ -20,7 +20,8 @@ var EditorView = React.createClass({
     return EditorStore.getAll();
   },
   _onChange:function(){
-    this.setState(EditorStore.getAll());
+    console.log("came here")
+//    this.setState(EditorStore.getAll());
   }
 });
 

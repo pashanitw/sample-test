@@ -8,7 +8,11 @@ var Navbar = React.createClass({
   getInitialState: function() {
     return {};
   },
-
+  getDefaultProps(){
+  return {
+  pages:[]
+  }
+  },
   componentDidMount: function() {
   },
 
@@ -17,7 +21,7 @@ var Navbar = React.createClass({
       <nav className="toolbar">
         <div className="nav-wrapper">
           <a href="#" className="brand-logo">Logo</a>
-          <AddPageButton></AddPageButton>
+          <AddPageButton pages={this.props.pages}></AddPageButton>
           <AddShapesButton></AddShapesButton>
           <AddTextButton></AddTextButton>
           <AddWidgetButton></AddWidgetButton>

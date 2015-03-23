@@ -11,6 +11,7 @@
     "sass-meyer-reset": "*",
     "susy": "~2.2.2",
     "bootstrap-sass-official": "~3.3.4",
-    "breakpoint-sass": "~2.5.0"
+    "breakpoint-sass": "~2.5.0",
+    "zip.js": "*"
   }
 }

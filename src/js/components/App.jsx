@@ -18,6 +18,7 @@ var PageModel = require('../models/PageModel.js');
 var _=require('lodash');
 var EditorStore=require("../stores/EditorStore.js")
 
+console.log("zip is",zip);
 
 var App = React.createClass({
   getInitialState: function () {
@@ -86,7 +87,7 @@ console.log("converted array",Array.prototype.slice.call(DataStore.getAll().temp
       <div className="app-container">
         <button onClick={this.updateState}>click</button>
         <MaterialModal {...this.state.modal}></MaterialModal>
-        <Navbar/>
+        <Navbar pages={this.state.editorView.pages}/>
         <EditorView pages={this.state.editorView.pages} selectedPage={this.state.editorView.selectedPage}/>
       </div>
     )

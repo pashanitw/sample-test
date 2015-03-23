@@ -11,7 +11,7 @@ var reactify = require('reactify');
 var rename = require('gulp-rename');
 
 
-var bundler = watchify(browserify(config.src, watchify.args));
+var bundler = watchify(browserify(config.src, {debug:true}));
 config.settings.transform.forEach(function(t) {
   bundler.transform(t);
 });
@@ -32,6 +32,7 @@ gulp.task('bundleLibs', function() {
   gulp.src(['src/js/index.jsx'])
     .pipe(gulp_browserify({
       transform: ['reactify','babelify'],
+      debug:true
       shim: {
         jquery: {
           path: 'bower_components/jquery/dist/jquery.js',

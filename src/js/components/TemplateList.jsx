@@ -28,7 +28,10 @@ handleClick:function(item){
      <div>
      {
        this.props.templates.map(function(item){
-         return <Snapshot page={item.cover} onClick={that.handleClick.bind(null,item)}></Snapshot>
+         return <div>
+           <Snapshot page={item.cover} onClick={that.handleClick.bind(null,item)}></Snapshot>
+           <span>{item.name}</span>
+         </div>
        })
        }
      </div>

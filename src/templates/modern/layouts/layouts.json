@@ -31,7 +31,7 @@
     ],
     "type":"tob"
   },
-  "chapter": {
+  "chapter-1.html": {
     "components": [
       {
         "_id": "0",
@@ -81,7 +81,8 @@
       }
     ],
     "type":"chapter"
-  }, "page": {
+  },
+  "page-1": {
   "components": [
     {
       "_id": "0",

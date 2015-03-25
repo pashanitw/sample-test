@@ -8,59 +8,59 @@ var _data = [];
 
 
 // add private functions to modify data
-function addItem(title, completed=false) {
+function addItem(title, completed = false) {
   _data.push({title, completed});
 }
-function loadTemplates(){
-  var deferred=$.Deferred();
- $.when($.getJSON("config.json")).done(function(data){
-   var promises=[];
-  data.templates.forEach(function(template){
-    promises.push($.getJSON(template.template))
+function loadTemplates() {
+  var deferred = $.Deferred();
+  $.when($.getJSON("config.json")).done(function (data) {
+    var promises = [];
+    data.templates.forEach(function (template) {
+      promises.push($.getJSON(template.template))
+    });
+    $.when(...promises).done(function () {
+      deferred.resolve(arguments);
+    })
   });
-   $.when(...promises).done(function(){
-        deferred.resolve(arguments);
-   })
- });
   return deferred.promise();
 }
-var viewData={
-  templates:[]
+var viewData = {
+  templates: []
 }
 
 // Facebook style store creation.
 var DataStore = assign({}, EventEmitter.prototype, {
 
   // public methods used by Controller-View to operate on data
-  getAll: function() {
+  getAll: function () {
     return viewData;
   },
-  getTemplates:function(){
-    var that=this;
-    loadTemplates().done(function(templates){
-      viewData.templates=templates;
+  getTemplates: function () {
+    var that = this;
+    loadTemplates().done(function (templates) {
+      viewData.templates = templates;
       that.emitChange();
     })
   },
 
   // Allow Controller-View to register itself with store
-  addChangeListener: function(callback) {
+  addChangeListener: function (callback) {
     this.on(Constants.CHANGE_EVENT, callback);
   },
-  removeChangeListener: function(callback) {
+  removeChangeListener: function (callback) {
     this.removeListener(Constants.CHANGE_EVENT, callback);
   },
   // triggers change listener above, firing controller-view callback
-  emitChange: function() {
+  emitChange: function () {
     this.emit(Constants.CHANGE_EVENT);
   },
 
 
   // register store with dispatcher, allowing actions to flow through
-  dispatcherIndex: AppDispatcher.register(function(payload) {
+  dispatcherIndex: AppDispatcher.register(function (payload) {
     var action = payload.action;
 
-    switch(action.type) {
+    switch (action.type) {
       case Constants.ActionTypes.ADD_TASK:
         var text = action.text.trim();
         // NOTE: if this action needs to wait on another store:

@@ -1,10 +1,12 @@
 {
   "templates": [
     {
-      "template": "templates/modern/layouts/layouts.json"
+      "template": "templates/modern/layouts/layouts.json",
+      "config":"templates/modern/config.json"
     },
     {
-      "template": "templates/modern/layouts/layouts.json"
+      "template": "templates/classic/layouts/layouts.json",
+      "config":"templates/classic/config.json"
     }
   ]
 }

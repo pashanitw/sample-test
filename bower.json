@@ -12,6 +12,8 @@
     "susy": "~2.2.2",
     "bootstrap-sass-official": "~3.3.4",
     "breakpoint-sass": "~2.5.0",
-    "zip.js": "*"
+    "zip.js": "*",
+    "processing": "~1.4.13",
+    "imgLiquid": "~0.9.944"
   }
 }

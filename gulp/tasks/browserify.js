@@ -32,7 +32,7 @@ gulp.task('bundleLibs', function() {
   gulp.src(['src/js/index.jsx'])
     .pipe(gulp_browserify({
       transform: ['reactify','babelify'],
-      debug:true
+      debug:true,
       shim: {
         jquery: {
           path: 'bower_components/jquery/dist/jquery.js',

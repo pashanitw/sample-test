@@ -18,7 +18,6 @@ var PageModel = require('../models/PageModel.js');
 var _=require('lodash');
 var EditorStore=require("../stores/EditorStore.js")
 
-console.log("zip is",zip);
 
 var App = React.createClass({
   getInitialState: function () {
@@ -42,6 +41,7 @@ var App = React.createClass({
     console.log("lodash is",_);
 console.log("converted array",Array.prototype.slice.call(DataStore.getAll().templates))
     var test=Array.prototype.slice.call(DataStore.getAll().templates);
+    console.log("test object is",test);
     this.setState({
       modal: {
         isOpen: true,

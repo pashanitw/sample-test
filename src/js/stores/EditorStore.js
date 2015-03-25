@@ -31,24 +31,13 @@ function addPage(page){
 }
 
 function changeTemplateSelection(template){
-  var cover=new PageModel();
-      cover.components=template.cover.components;
-  cover.type=template.cover.type;
-  var tob=new PageModel();
-      tob.components=template.tob.components;
-  tob.type=template.tob.type;
-  var chapter=new PageModel();
-      chapter.components=template.chapter.components;
-  chapter.type=template.tob.type;
-  var page=new PageModel();
-  page.components=template.page.components;
-  page.type=template.page.type;
+ for(key in template){
+   var temp=new PageModel();
+   temp.components=template[key].components;
+   temp.type=template[key].components.type;
+   editorModel.pages.push(temp);
+ }
 
-  editorModel.pages.push(cover);
-  editorModel.pages.push(tob);
-  editorModel.pages.push(chapter);
-  editorModel.pages.push(page);
-  editorModel.selectedPage=editorModel.pages[0];
 }
 function switchPage(page){
   console.log("page is",page);

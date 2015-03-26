@@ -31,7 +31,7 @@ function addPage(page){
 }
 
 function changeTemplateSelection(template){
- for(key in template){
+ for(var key in template){
    var temp=new PageModel();
    temp.components=template[key].components;
    temp.type=template[key].components.type;

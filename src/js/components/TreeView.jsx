@@ -1,36 +1,40 @@
 var React = require('react');
 var Snapshot = require('./Snapshot.jsx');
 var AddPageButton = require('./AddPageButton.jsx');
-var EditorActionCreator=require('../actions/EditorActionCreator.js');
+var EditorActionCreator = require('../actions/EditorActionCreator.js');
+var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
+var EditorStore = require('../stores/EditorStore.js');
+var Constants = require('../constants/AppConstants').Constants;
 require('react/addons');
 
 var TreeView = React.createClass({
-
-  getDefaultProps:function(){
-    return {pages:[]};
+  mixins: [FluxibleMixin],
+  statics: {
+    storeListeners: [EditorStore]
   },
-  propTypes:{
-    pages:React.PropTypes.array.isRequired
+  getInitialState: function () {
+    return EditorStore.getState();
   },
   componentWillMount: function () {
     console.log(this.props);
   },
 
   render: function () {
-    var cx = React.addons.classSet;
+    var cx = React.addons.classSet,
+      pages = this.state.pageCollection.pages;
     return (
-        <div className="tree-view">
+      <div className="tree-view">
         {
-          this.props.pages.map(function (page) {
+          pages.map(function (page) {
             var classes = cx({
-              'child': page.type=="page"
+              'child': page.type == Constants.LEVEL_2
             });
-            return <Snapshot page={page} onClick={EditorActionCreator.pageSwitched.bind(null,page)} className={classes}></Snapshot>
+            return <Snapshot key={page._id} page={page} onClick={page.switch.bind(null,page)} className={classes}></Snapshot>
           })
 
           }
 
-        </div>
+      </div>
     )
   },
   componentDidMount: function () {
@@ -57,7 +61,8 @@ var TreeView = React.createClass({
   },
   componentWillUnmount: function () {
   },
-  _onChange: function () {
+  onChange: function () {
+    this.setState(this.getStore(EditorStore).getState());
   }
 });
 

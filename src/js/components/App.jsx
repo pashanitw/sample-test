@@ -16,48 +16,21 @@ require('jquery-ui-droppable');
 require('jquery-ui-resizable');
 var PageModel = require('../models/PageModel.js');
 var _=require('lodash');
-var EditorStore=require("../stores/EditorStore.js")
+var EditorStore=require("../stores/EditorStore.js");
+var EditorStore = require('../stores/EditorStore.js');
+var ModalStore=require('../stores/ModalStore.js');
 
 
 var App = React.createClass({
-  getInitialState: function () {
-    var data = DataStore.getAll();
-    return {
-      tasks: [],
-      modal: {
-        modalHeader: "Select the template",
-        isOpen: false,
-        templates: []
-      },
-      editorView:{
-        pages:[]
-      }
-    }
-  },
-  componentWillMount: function () {
-    (this._onChange)
-  },
-  _onChange: function () {
-    console.log("lodash is",_);
-console.log("converted array",Array.prototype.slice.call(DataStore.getAll().templates))
-    var test=Array.prototype.slice.call(DataStore.getAll().templates);
-    console.log("test object is",test);
-    this.setState({
-      modal: {
-        isOpen: true,
-        templates:  [test[1][0],test[0][0]],
-        modalHeader: "Select the template"
-      }
-    });
+
+  onChange: function () {
+
   },
 
   componentDidMount: function () {
-    DataStore.addChangeListener(this._onChange);
-    EditorStore.addChangeListener(this._updateEditorView)
   },
 
   componentWillUnmount: function () {
-
     DataStore.removeChangeListener(this._onChange);
   },
   _updateEditorView(data){
@@ -79,16 +52,16 @@ console.log("converted array",Array.prototype.slice.call(DataStore.getAll().temp
     ActionCreator.clearList();
   },
 
-  updateState: function () {
-    DataStore.getTemplates();
+  openModal: function () {
+ModalStore.openModal();
   },
   render: function () {
     return (
       <div className="app-container">
-        <button onClick={this.updateState}>click</button>
-        <MaterialModal {...this.state.modal}></MaterialModal>
-        <Navbar pages={this.state.editorView.pages}/>
-        <EditorView pages={this.state.editorView.pages} selectedPage={this.state.editorView.selectedPage}/>
+        <button onClick={this.openModal}>click</button>
+        <MaterialModal></MaterialModal>
+        <Navbar/>
+        <EditorView/>
       </div>
     )
   }

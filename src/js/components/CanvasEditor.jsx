@@ -1,44 +1,50 @@
 var React = require('react');
-var ComponentContainer=require('./ComponentContainer.jsx');
+var ComponentContainer = require('./ComponentContainer.jsx');
 var assign = require('object-assign');
-var EditorStore=require('../stores/EditorStore');
+var EditorStore = require('../stores/EditorStore');
 var Components;
+var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var CanvasEditor = React.createClass({
+  mixins: [FluxibleMixin],
+  statics: {
+    storeListeners: [EditorStore]
+  },
   getInitialState: function () {
-    return {};
+    return EditorStore.getState();
   },
-  propTypes:{
-    components:React.PropTypes.array.isRequired,
-    compstyle:React.PropTypes.object.isRequired
-  },
-  getDefaultProps(){
-    return {
-      components:[],
-      compstyle:null
-    }
-  },
-  componentWillMount: function () {
-
-  },
-  updateHtml:function(component,html){
-  debugger;
-    component.markup=html.target;
+  updateHtml: function (component, html) {
+    component.markup = html.target;
     EditorStore.emitChange();
   },
-  render: function (component) {
+  onChange() {
+    this.setState(this.getStore(EditorStore).getState());
+  },
+  _renderComponents(selectedPage) {
     var that=this;
+    var components = [];
+    if (selectedPage) {
+      components = selectedPage.components.map(function (component) {
+        return <ComponentContainer style={component.styles} onChange={that.updateHtml.bind(null, component)}>
+          <div dangerouslySetInnerHTML={{__html: component.markup}} >
+          </div>
+        </ComponentContainer>
+
+      })
+    }
+    return components;
+  },
+  render: function (component) {
+    var that = this,
+      pageCollection = this.state.pageCollection,
+      selectedPage = pageCollection.getSelectedPage(),
+      components = [];
+
 
     return (
-      <div className="editor-view" style={this.props.compstyle}>
+      <div className="editor-view">
       {
+        this._renderComponents(selectedPage)
 
-        this.props.components.map(function(component){
-          return <ComponentContainer style={component.styles} onChange={that.updateHtml.bind(null,component)}>
-            <div dangerouslySetInnerHTML={{__html:component.markup}} >
-            </div>
-            </ComponentContainer>
-
-        })
         }
       </div>
     )
@@ -70,7 +76,6 @@ var CanvasEditor = React.createClass({
       });
   }
 });
-
 
 
 module.exports = CanvasEditor;

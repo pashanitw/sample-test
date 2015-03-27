@@ -31,17 +31,11 @@ function addPage(page){
 }
 
 function changeTemplateSelection(template){
- for(var key in template){
-   var temp=new PageModel();
-   temp.components=template[key].components;
-   temp.type=template[key].components.type;
-   editorModel.pages.push(temp);
- }
-
+  _pageCollection=new PageCollection(template);
+  debugger;
 }
 function switchPage(page){
-  console.log("page is",page);
-  editorModel.selectedPage=page;
+_pageCollection.switch(page);
 }
 
 // Facebook style store creation.
@@ -51,7 +45,11 @@ var EditorStore = assign({}, EventEmitter.prototype, {
   getAll: function() {
     return editorModel;
   },
-
+  getState:function(){
+    return {
+      pageCollection:_pageCollection
+    }
+  },
 
   // Allow Controller-View to register itself with store
   addChangeListener: function(callback) {

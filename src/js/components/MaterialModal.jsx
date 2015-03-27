@@ -1,21 +1,17 @@
 const React = require('react');
-let TemplateList=require("./TemplateList.jsx")
+let TemplateList = require("./TemplateList.jsx");
+let ModalStore = require('../stores/ModalStore.js');
+let FluxibleMixin=require('../mixins/FliuxibleMixin.js');
+let propTypes = React.PropTypes;
 let MaterialModal = React.createClass({
-  propTypes: {
-    isOpen: React.PropTypes.bool.isRequired,
-    modalHeader: React.PropTypes.string.isRequired,
-    templates: React.PropTypes.array.isRequired
-  },
+  mixins:[FluxibleMixin],
 
-  getInitialState() {
-    return {};
+  statics: {
+    storeListeners: [ModalStore]
   },
-  getDefaultProps() {
-    return {
-      isOpen: false,
-      modalHeader: "Please Set Header",
-      templates: []
-    }
+  getInitialState() {
+    ModalStore.getTemplates();
+  return this.getStore(ModalStore).getState();
   },
   componentWillMount() {
 
@@ -24,8 +20,8 @@ let MaterialModal = React.createClass({
     return (
       <div  className="modal modal-fixed-footer">
         <div className="modal-content">
-          <h4>{this.props.modalHeader}</h4>
-          <TemplateList templates={this.props.templates} onSelect={this.doneSelection}/>
+          <h4>{this.state.modalHeader}</h4>
+          <TemplateList templates={this.state.templates} onSelect={this.doneSelection}/>
         </div>
         <div className="modal-footer">
           <a href="#" className="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
@@ -33,29 +29,33 @@ let MaterialModal = React.createClass({
       </div>
     );
   },
-  doneSelection:function(){
-    var node=this.getDOMNode();
+  doneSelection: function () {
+    var node = this.getDOMNode();
     $(node).closeModal();
 
   },
   componentDidMount() {
   },
-  componentWillReceiveProps(nextprops){
-     if(this.props.isOpen!==nextprops.isOpen){
-       if(nextprops.isOpen){
-         var node=this.getDOMNode();
-         $(node).openModal({
-           complete: function() {  }
-         });
-       }else{
-         var node=this.getDOMNode();
-         $(node).closeModal();
-       }
-     }
+  componentWillUpdate(nextProps,nextState) {
+    if (this.state.isOpen !== nextState.isOpen) {
+      if (nextState.isOpen) {
+        var node = this.getDOMNode();
+        $(node).openModal({
+          complete: function () {
+          }
+        });
+      } else {
+        var node = this.getDOMNode();
+        $(node).closeModal();
+      }
+    }
   },
-  componentWillUnMount(){
+  componentWillUnMount() {
   },
-  _closeModal:function(){
+  onChange() {
+    this.setState(this.getStore(ModalStore).getState());
+  },
+  _closeModal: function () {
 
   }
 });

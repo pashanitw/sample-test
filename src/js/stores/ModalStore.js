@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/AppConstants');
 var assign = require('object-assign');
 
+var labels=Constants.Labels;
 // data storage
 var _data = [];
 
@@ -18,13 +19,17 @@ function loadTemplates() {
       promises.push($.getJSON(template.template))
     });
     $.when(...promises).done(function () {
-      deferred.resolve(arguments);
+      var templates=[]
+      for(var i=0,length=arguments.length;i<length;i++){
+        templates.push(arguments[i][0]);
+      }
+      deferred.resolve(templates);
     })
   });
   return deferred.promise();
 }
 /*
-* return {
+ * return {
  tasks: [],
  modal: {
  modalHeader: "Select the template",
@@ -35,25 +40,32 @@ function loadTemplates() {
  pages:[]
  }
  }*/
-var viewData = {
-  templates: []
-}
+var _modalData = {
+  header:labels.modalHeader,
+  isOpen:false,
+  templates:[]}
 
 // Facebook style store creation.
 var DataStore = assign({}, EventEmitter.prototype, {
 
   // public methods used by Controller-View to operate on data
-  getAll: function () {
-    return viewData;
+  getAll() {
+    return _modalData;
   },
-  getTemplates: function () {
+  getState(){
+          return _modalData;
+  },
+  getTemplates() {
     var that = this;
     loadTemplates().done(function (templates) {
-      viewData.templates = templates;
+      _modalData.templates = templates;
       that.emitChange();
     })
   },
-
+  openModal:function(){
+    _modalData.isOpen=true;
+    this.emitChange();
+  },
   // Allow Controller-View to register itself with store
   addChangeListener: function (callback) {
     this.on(Constants.CHANGE_EVENT, callback);
@@ -81,9 +93,7 @@ var DataStore = assign({}, EventEmitter.prototype, {
           addItem(text);
           DataStore.emitChange();
         }
-        break;
-
-      // add more cases for other actionTypes...
+        break
     }
   })
 

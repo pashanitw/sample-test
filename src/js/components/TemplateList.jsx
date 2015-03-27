@@ -5,11 +5,6 @@ let TemplateList = React.createClass({
   propTypes:{
     templates:React.PropTypes.array.isRequired
   },
-  getDefaultProps(){
-    return {
-    templates:[]
-    }
-  },
   getInitialState() {
     return {};
   },
@@ -27,10 +22,10 @@ handleClick:function(item){
     return (
      <div>
      {
-       this.props.templates.map(function(item){
+       this.props.templates.map(function(item,index){
          return <div>
-           <Snapshot page={item.cover} onClick={that.handleClick.bind(null,item)}></Snapshot>
-           <span>{item.name}</span>
+           <Snapshot key={index} page={item.pages[0]} onClick={that.handleClick.bind(null,item)}></Snapshot>
+           <span>{item.title}</span>
          </div>
        })
        }

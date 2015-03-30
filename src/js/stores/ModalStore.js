@@ -16,12 +16,19 @@ function loadTemplates() {
   $.when($.getJSON("config.json")).done(function (data) {
     var promises = [];
     data.templates.forEach(function (template) {
-      promises.push($.getJSON(template.template))
+      var def = $.Deferred();
+      promises.push(def.promise());
+      $.getJSON(template.config).then(function(config){
+        $.getJSON(template.template).then(function(template){
+          template.config=config;
+          def.resolve(template);
+        });
+      });
     });
     $.when(...promises).done(function () {
       var templates=[]
       for(var i=0,length=arguments.length;i<length;i++){
-        templates.push(arguments[i][0]);
+        templates.push(arguments[i]);
       }
       deferred.resolve(templates);
     })

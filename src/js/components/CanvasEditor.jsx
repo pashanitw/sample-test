@@ -13,21 +13,24 @@ var CanvasEditor = React.createClass({
     return EditorStore.getState();
   },
   updateHtml: function (component, html) {
-    component.markup = html.target;
+    component.markup = $(html.target).html();
     EditorStore.emitChange();
   },
   onChange() {
     this.setState(this.getStore(EditorStore).getState());
   },
   _renderComponents(selectedPage) {
-    var that=this;
+    var that = this;
     var components = [];
     if (selectedPage) {
       components = selectedPage.components.map(function (component) {
-        return <ComponentContainer style={component.styles} onChange={that.updateHtml.bind(null, component)}>
-          <div dangerouslySetInnerHTML={{__html: component.markup}} >
-          </div>
-        </ComponentContainer>
+        return <div contentEditable="true"
+          style={component.styles}
+          dangerouslySetInnerHTML={{__html: component.markup}}
+          onChange={that.updateHtml.bind(null, component)}
+          onBlur={that.updateHtml.bind(null, component)}>
+
+        </div>
 
       })
     }
@@ -38,6 +41,7 @@ var CanvasEditor = React.createClass({
       pageCollection = this.state.pageCollection,
       selectedPage = pageCollection.getSelectedPage(),
       components = [];
+
 
 
     return (
@@ -52,6 +56,8 @@ var CanvasEditor = React.createClass({
 
   componentDidMount: function () {
 
+
+/*
     var node = this.getDOMNode();
     var element = $(node).find('.component');
     $(node).append(element);
@@ -73,7 +79,29 @@ var CanvasEditor = React.createClass({
       })
       .mousemove(function () {
         $(this).draggable({disabled: false});
-      });
+      });*/
+  },
+  updateElement(evt){
+    debugger;
+  //  evt.editor.updateElement();
+  },
+  componentDidUpdate(){
+  this._destroyCk();
+    var that=this;
+    var node=this.getDOMNode();
+    var nodes=$(node).find('[contentEditable="true"]');
+    $.each(nodes,function(index,node){
+      CKEDITOR.inline(node).on('change', that.updateElement);
+    })
+
+  },
+  _configureCk() {
+  },
+  _destroyCk(){
+    for(var name in CKEDITOR.instances)
+    {
+      CKEDITOR.instances[name].destroy()
+    }
   }
 });
 

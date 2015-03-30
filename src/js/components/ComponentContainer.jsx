@@ -25,7 +25,7 @@ let ComponentContainer = React.createClass({
     };
 
     return (
-      <div contentEditable="true" className="component ui-selected" style={this.props.style} onInput={this.emitChange} >
+      <div className="component ui-selected" style={this.props.style} onInput={this.emitChange} >
       {this.props.children}
       </div>
     );

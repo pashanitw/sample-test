@@ -19,7 +19,24 @@ module.exports = {
   Labels:{
     modalHeader:"Please Select the Template"
   },
-
+  EPUB:{
+    PACKAGE:{
+      name:"package",
+      path:'EPUB/',
+      ext:'.opf'
+    },
+    CONTAINER:{
+      name:"container",
+      path:'META-INF/',
+      ext:'.xml'
+    },
+    MIME:{
+      name:"mimetype",
+      path:'',
+      ext:'',
+      data:'application/epub+zip'
+    }
+  },
   ActionSources: keyMirror({
     SERVER_ACTION: null,
     VIEW_ACTION: null

@@ -18,6 +18,7 @@ PageCollection.prototype._init = function (template) {
     var model=new PageModel(item);
     return model;
   });
+  this.config=template.config;
   this.lastSelected = this.pages[0];
   this.lastSelected.select();
 };

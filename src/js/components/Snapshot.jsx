@@ -2,7 +2,11 @@ var React = require('react');
 var CanvasEditor = require('./CanvasEditor.jsx');
 var CanvasBar = require('../../handlebars/CanvasEditor.bars');
 var HandleBars = require('Handlebars');
-
+var VirtualSnap=require('./VirtualSnap.jsx');
+var styles = {
+  transform: "scale(0.12,0.15)",
+  transformOrigin: "0% 0%"
+};
 var Snapshot = React.createClass({
   getInitialState: function () {
     return {};
@@ -21,19 +25,13 @@ var Snapshot = React.createClass({
     var snapStyle = {
       overflow: "hidden"
     };
-    var styles = {
-      transform: "scale(0.12,0.15)",
-      transformOrigin: "0% 0%"
-    };
+
     console.log("properties", this.props);
     return (
 
       this.transferPropsTo(
         <div className="chapter-frame">
           <div className="snap-shot card-panel" style={snapStyle}>
-
-            <div>
-            </div>
           </div>
         </div>
       )
@@ -41,15 +39,10 @@ var Snapshot = React.createClass({
 
   },
   componentDidMount: function () {
-    var bars = '<div class="editor-view">' +
-      '{{#each components}}' +
-      '{{{this.markup}}}' +
-      '{{/each}}' +
-      '</div>';
-var template=HandleBars.compile(bars);
-    template(this.state.page);
-    console.log("bars are", template(this.state.page));
 
+    var node= this.getDOMNode();
+    var snap=$(node).find('.snap-shot')[0];
+    React.render(<VirtualSnap styles={styles} page={this.props.page}/>, snap);
   },
   renderScreenShot(object) {
 

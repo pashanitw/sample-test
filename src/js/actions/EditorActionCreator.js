@@ -9,10 +9,10 @@ module.exports = {
       text: text
     });
   },
-addPage:function(page){
+addPage:function(template){
   AppDispatcher.handleViewAction({
     type:Constants.ActionTypes.ADD_PAGE,
-    page:page
+    template:template
   })
 },
   selectTemplate:function(template){

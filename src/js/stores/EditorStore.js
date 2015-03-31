@@ -26,8 +26,8 @@ var _pageCollection=new PageCollection();
 function addItem(title, completed=false) {
   _data.push({title, completed});
 }
-function addPage(page){
-  _pageCollection.pages.push(page);
+function addPage(template){
+  _pageCollection.addPage(template);
 }
 
 function changeTemplateSelection(template){
@@ -80,9 +80,9 @@ var EditorStore = assign({}, EventEmitter.prototype, {
         }
         break;
       case Constants.ActionTypes.ADD_PAGE:
-           var page=action.page;
-            if(page) {
-              addPage(page);
+           var template=action.template;
+            if(template) {
+              addPage(template);
               EditorStore.emitChange();
             }
             break;

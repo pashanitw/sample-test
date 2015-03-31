@@ -22,7 +22,7 @@ var Navbar = React.createClass({
       <nav className="toolbar">
         <div className="nav-wrapper">
           <a href="#" className="brand-logo">Logo</a>
-          <AddPageButton pages={this.props.pages}></AddPageButton>
+          <AddPageButton></AddPageButton>
           <AddShapesButton></AddShapesButton>
           <AddTextButton></AddTextButton>
           <AddWidgetButton></AddWidgetButton>

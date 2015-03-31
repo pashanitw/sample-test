@@ -3,12 +3,15 @@ var PageModel=require('../models/PageModel.js');
 var EditorActionCreator=require('../actions/EditorActionCreator.js');
 var Snapshot=require('./Snapshot.jsx')
 require('react/addons');
+var EditorSore=require('../stores/EditorStore.js');
+var FluxibleMixin=require('../mixins/FliuxibleMixin.js');
 var AddPageButton = React.createClass({
-  getInitialState: function() {
-    return {};
+  mixins:[FluxibleMixin],
+  statics:{
+    storeListeners:[EditorSore]
   },
-  componentWillMount:function(){
-
+  getInitialState: function() {
+  return EditorSore.getState();
   },
   render: function() {
       var style={
@@ -18,23 +21,20 @@ var AddPageButton = React.createClass({
         var cx = React.addons.classSet;
     return (
       <div style={style}>
-        <a className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey"
-          onClick={this.addPage}
-          data-activates='dropdown1'>
+        <a ref="addComponent" className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey" data-activates='dropdown1'>
           <i className="mdi-content-add"></i>
         </a>
         <ul id='dropdown1' className='dropdown-content'>
            {
-          this.props.pages.map(function (page,index) {
+          this.state.pageCollection.templates.map(function (page,index) {
             var classes = cx({
+               "something":true,
               'child': page.type=="page"
             });
-        if(index>1){
-            return <li><Snapshot page={page}  className={classes}></Snapshot></li>
-        }
-            
+            return <li>something</li>
+
           })
-          } 
+          }
        </ul>
       </div>
 
@@ -42,8 +42,9 @@ var AddPageButton = React.createClass({
   },
   componentDidMount: function() {
 var that=this;
+    var component=$(this.refs.addComponent.getDOMNode());
       setTimeout(function(){
-      $(that.getDOMNode()).find('.add-component').dropdown({
+        component.dropdown({
         inDuration: 300,
         outDuration: 225,
         constrain_width: false, // Does not change width of dropdown to that of the activator
@@ -56,10 +57,8 @@ var that=this;
 
       },2000)
   },
-  addPage:function(){
-      /*  console.log(CKEDITOR.instances);
-    var model=new PageModel();
-    EditorActionCreator.addPage(model);*/
+  onChange(){
+    this.setState(EditorSore.getState());
   }
 });
 

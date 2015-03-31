@@ -4,6 +4,7 @@
 var PageModel=require('./PageModel.js');
 var PageCollection = function (template) {
   this.pages = [];
+  this.templates=[];
   this.title = 'Default';
   this.lastSelected = null;
   if (template) {
@@ -19,6 +20,7 @@ PageCollection.prototype._init = function (template) {
     return model;
   });
   this.config=template.config;
+  this.templates=template.templates;
   this.lastSelected = this.pages[0];
   this.lastSelected.select();
 };
@@ -36,8 +38,11 @@ PageCollection.prototype.updateIndexes = function () {
 PageCollection.prototype.pagesReorganized = function () {
 
 };
-PageCollection.prototype.addPage = function (index, page) {
-  this.pages.spice(index, 1);
+PageCollection.prototype.addPage = function (item) {
+  item.index=this.pages.length;
+  item.name=item.type+"-"+item.index;
+  var model=new PageModel(item);
+  this.pages.push(model);
 };
 PageCollection.prototype.removeWithIndex = function (index) {
 

@@ -23,8 +23,8 @@ handleClick:function(item){
      <div>
      {
        this.props.templates.map(function(item,index){
-         return <div>
-           <Snapshot key={index} page={item.pages[0]} onClick={that.handleClick.bind(null,item)}></Snapshot>
+         return <div onClick={that.handleClick.bind(null,item)}>
+           <Snapshot key={index} page={item.pages[0]}></Snapshot>
            <span>{item.title}</span>
          </div>
        })

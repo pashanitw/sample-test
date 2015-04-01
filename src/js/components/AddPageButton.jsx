@@ -18,20 +18,21 @@ var AddPageButton = React.createClass({
       display:'inline-block',
       position:'relative'
       };
+    var that=this;
         var cx = React.addons.classSet;
     return (
       <div style={style}>
-        <a ref="addComponent" className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey" data-activates='dropdown1'>
+        <a ref="addComponent" className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey">
           <i className="mdi-content-add"></i>
         </a>
-        <ul id='dropdown1' className='dropdown-content'>
+        <ul  className='dropdown-content'>
            {
-          this.state.pageCollection.templates.map(function (page,index) {
+          this.state.pageCollection.templates.map((page,index) => {
             var classes = cx({
                "something":true,
               'child': page.type=="page"
             });
-            return <li>something</li>
+            return <li key={index}><a onClick={that.addPage.bind(null,page)}><Snapshot page={page}/></a></li>
 
           })
           }
@@ -41,24 +42,30 @@ var AddPageButton = React.createClass({
     );
   },
   componentDidMount: function() {
-var that=this;
-    var component=$(this.refs.addComponent.getDOMNode());
-      setTimeout(function(){
-        component.dropdown({
-        inDuration: 300,
-        outDuration: 225,
-        constrain_width: false, // Does not change width of dropdown to that of the activator
-        hover: false, // Activate on click
-        alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
-        gutter: 0, // Spacing from edge
-        belowOrigin: false // Displays dropdown below the button
-      }
-    );
 
-      },2000)
+  },
+  componentDidUpdate(){
+    var that=this;
+    var component=$(this.refs.addComponent.getDOMNode());
+    setTimeout(function(){
+      component.dropdown({
+          inDuration: 300,
+          outDuration: 225,
+          constrain_width: false, // Does not change width of dropdown to that of the activator
+          hover: false, // Activate on click
+          alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
+          gutter: 0, // Spacing from edge
+          belowOrigin: false // Displays dropdown below the button
+        }
+      );
+
+    })
   },
   onChange(){
     this.setState(EditorSore.getState());
+  },
+  addPage(template){
+    EditorActionCreator.addPage(template);
   }
 });
 

@@ -29,12 +29,11 @@ var Snapshot = React.createClass({
     console.log("properties", this.props);
     return (
 
-      this.transferPropsTo(
+
         <div className="chapter-frame">
           <div className="snap-shot card-panel" style={snapStyle}>
           </div>
         </div>
-      )
     );
 
   },

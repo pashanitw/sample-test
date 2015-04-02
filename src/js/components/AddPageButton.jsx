@@ -16,8 +16,7 @@ var AddPageButton = React.createClass({
   render: function () {
     var style = {
       display: 'inline-block',
-      position: 'relative',
-      height: 300
+      position: 'relative'
     };
     var that = this;
     var cx = React.addons.classSet;

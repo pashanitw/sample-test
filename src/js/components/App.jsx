@@ -53,13 +53,9 @@ var App = React.createClass({
     ActionCreator.clearList();
   },
 
-  openModal: function () {
-ModalStore.openModal();
-  },
   render: function () {
     return (
       <div className="app-container">
-        <button onClick={this.openModal}>click</button>
         <MaterialModal></MaterialModal>
         <Navbar/>
         <EditorView/>

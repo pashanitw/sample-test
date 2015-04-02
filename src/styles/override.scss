@@ -58,8 +58,18 @@ body{
   top: 64px;
   display: block;
   left: 83px;
-
+  z-index: 1000;
 }
 .app-container .toolbar{
   overflow:visible
+}
+.nextbook-logo {
+  .brand-logo {
+    position: relative;
+  }
+  .mui-menu{
+    position: absolute;
+    top: 64px;
+    z-index: 1000;
+  }
 }

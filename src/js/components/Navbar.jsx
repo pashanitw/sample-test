@@ -4,6 +4,8 @@ var AddShapesButton=require('./AddShapesButton.jsx');
 var AddTextButton=require('./AddTextButton.jsx');
 var AddWidgetButton=require('./AddWidgetButton.jsx');
 var ExportButton=require('./ExportButton.jsx');
+var LogoMenu=require('./LogoMenu.jsx');
+var TemplateButton=require('./TemplateButton.jsx');
 
 var Navbar = React.createClass({
   getInitialState: function() {
@@ -21,9 +23,9 @@ var Navbar = React.createClass({
     return (
       <nav className="toolbar">
         <div className="nav-wrapper">
-          <a href="#" className="brand-logo">Logo</a>
+          <LogoMenu></LogoMenu>
           <AddPageButton></AddPageButton>
-          <AddShapesButton></AddShapesButton>
+          <TemplateButton></TemplateButton>
           <AddTextButton></AddTextButton>
           <AddWidgetButton></AddWidgetButton>
           <ul id="nav-mobile" className="right hide-on-med-and-down">

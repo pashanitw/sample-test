@@ -30,8 +30,9 @@ var Snapshot = React.createClass({
     return (
 
 
-        <div className="chapter-frame">
-          <div className="snap-shot card-panel" style={snapStyle}>
+        <div className="chapter-frame" onClick={this.props.clickSnap}>
+          <div ref="snap" className="snap-shot card-panel" style={snapStyle}>
+            <VirtualSnap styles={styles} page={this.props.page}/>
           </div>
         </div>
     );
@@ -39,9 +40,6 @@ var Snapshot = React.createClass({
   },
   componentDidMount: function () {
 
-    var node= this.getDOMNode();
-    var snap=$(node).find('.snap-shot')[0];
-    React.render(<VirtualSnap styles={styles} page={this.props.page}/>, snap);
   },
   renderScreenShot(object) {
 

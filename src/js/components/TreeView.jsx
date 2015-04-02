@@ -29,7 +29,7 @@ var TreeView = React.createClass({
             var classes = cx({
               'child': page.type == Constants.LEVEL_2
             });
-            return <Snapshot key={page._id} page={page} onClick={page.switch.bind(null,page)} className={classes}></Snapshot>
+            return <Snapshot key={page._id} page={page} clickSnap={page.switch.bind(null,page)} className={classes}></Snapshot>
           })
 
           }

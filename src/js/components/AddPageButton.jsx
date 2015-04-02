@@ -1,53 +1,67 @@
 var React = require('react');
-var PageModel=require('../models/PageModel.js');
-var EditorActionCreator=require('../actions/EditorActionCreator.js');
-var Snapshot=require('./Snapshot.jsx')
+var PageModel = require('../models/PageModel.js');
+var EditorActionCreator = require('../actions/EditorActionCreator.js');
+var Snapshot = require('./Snapshot.jsx')
 require('react/addons');
-var EditorSore=require('../stores/EditorStore.js');
-var FluxibleMixin=require('../mixins/FliuxibleMixin.js');
+var EditorSore = require('../stores/EditorStore.js');
+var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var AddPageButton = React.createClass({
-  mixins:[FluxibleMixin],
-  statics:{
-    storeListeners:[EditorSore]
+  mixins: [FluxibleMixin],
+  statics: {
+    storeListeners: [EditorSore]
   },
-  getInitialState: function() {
-  return EditorSore.getState();
+  getInitialState: function () {
+    return EditorSore.getState();
   },
-  render: function() {
-      var style={
-      display:'inline-block',
-      position:'relative'
-      };
-    var that=this;
-        var cx = React.addons.classSet;
+  render: function () {
+    var style = {
+      display: 'inline-block',
+      position: 'relative',
+      height: 300
+    };
+    var that = this;
+    var cx = React.addons.classSet;
     return (
       <div style={style}>
-        <a ref="addComponent" className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey">
+        <a ref="addComponent"
+          className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey"
+          onClick={this.togglePages}>
           <i className="mdi-content-add"></i>
         </a>
-        <ul  className='dropdown-content'>
+      {
+        this.state.showPages ?
+          (<ul className='add-templates'>
            {
-          this.state.pageCollection.templates.map((page,index) => {
-            var classes = cx({
-               "something":true,
-              'child': page.type=="page"
-            });
-            return <li key={index}><a onClick={that.addPage.bind(null,page)}><Snapshot page={page}/></a></li>
+             this.state.pageCollection.templates.map((page, index) => {
+               var classes = cx({
+                 "something": true,
+                 'child': page.type == "page"
+               });
+               return <li key={index}>
+                 <Snapshot page={page} clickSnap={that.addPage.bind(null, page)}/>
+               </li>
 
-          })
-          }
-       </ul>
+             })
+             }
+          </ul>) : null
+        }
+
       </div>
 
     );
   },
-  componentDidMount: function() {
+  togglePages:function(){
+   var state=this.state;
+    state.showPages=!state.showPages;
+    this.setState(state);
+  },
+  componentDidMount: function () {
 
   },
-  componentDidUpdate(){
-    var that=this;
-    var component=$(this.refs.addComponent.getDOMNode());
-    setTimeout(function(){
+  componentDidUpdate() {
+    var that = this;
+    var component = $(this.refs.addComponent.getDOMNode());
+    setTimeout(function () {
       component.dropdown({
           inDuration: 300,
           outDuration: 225,
@@ -61,10 +75,11 @@ var AddPageButton = React.createClass({
 
     })
   },
-  onChange(){
+  onChange() {
     this.setState(EditorSore.getState());
   },
-  addPage(template){
+  addPage(template) {
+    this.togglePages();
     EditorActionCreator.addPage(template);
   }
 });

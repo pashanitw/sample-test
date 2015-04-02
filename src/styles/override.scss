@@ -49,8 +49,17 @@ body{
             width:75% !important;*/
   overflow: hidden;
 }
-#dropdown1{
-  height: 201px;
-  opacity: 1;
-  width: 195px;
+
+.add-templates{
+ position: absolute;
+  padding: 0;
+  background: lightslategrey;
+  padding-bottom: 8px;
+  top: 64px;
+  display: block;
+  left: 83px;
+
+}
+.app-container .toolbar{
+  overflow:visible
 }

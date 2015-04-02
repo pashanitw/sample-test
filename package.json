@@ -28,6 +28,7 @@
     "html-minify": "^0.3.1",
     "html2canvas": "^0.5.0-alpha2",
     "lodash": "^3.5.0",
+    "material-ui": "^0.7.3",
     "mousetrap": "^1.4.6",
     "react-intl": "^1.2.0",
     "reactify": "^1.0.0",

@@ -26,12 +26,14 @@ Handlebars.registerHelper('renderStyles', function () {
     return '';
 
   }
-
+var position="position:absolute;"
   return getStyles(this.styles.width, 'width') +
     getStyles(this.styles.height, 'height') +
     getStyles(this.styles.top, 'top') +
-    getStyles(this.styles.left, 'left');
+    getStyles(this.styles.left, 'left')+
+    position;
 });
+
 
 var AddPageButton = React.createClass({
   getInitialState: function () {

@@ -24,15 +24,7 @@ var CanvasEditor = React.createClass({
     var components = [];
     if (selectedPage) {
       components = selectedPage.components.map(function (component) {
-        return <div contentEditable="true"
-          key={component._id}
-          style={component.styles}
-          dangerouslySetInnerHTML={{__html: component.markup}}
-          onChange={that.updateHtml.bind(null, component)}
-          onBlur={that.updateHtml.bind(null, component)}
-          className={"component"}>
-
-        </div>
+        return <Component key={component._id} {...component}></Component>
 
       })
     }
@@ -54,22 +46,16 @@ var CanvasEditor = React.createClass({
   },
 
   componentDidMount: function () {
+    $("body").droppable();
 
-    var node = this.getDOMNode();
-/*
-
-      .click(function () {
-        $(this).draggable({disabled: true});
-      })
-      .mousemove(function () {
-        $(this).draggable({disabled: false});
-      });*/
   },
   updateElement(evt){
     debugger;
   //  evt.editor.updateElement();
   },
   componentDidUpdate(){
+
+/*
     var scope=this;
   this._destroyCk();
     var that=this;
@@ -108,6 +94,7 @@ var CanvasEditor = React.createClass({
       .dblclick(function () {
         $(this).draggable({disabled: true});
       })
+*/
 
   },
   _configureCk() {
@@ -121,4 +108,45 @@ var CanvasEditor = React.createClass({
 });
 
 
+var Component=React.createClass({
+  getDefaultProps(){
+    return {
+
+    }
+  },
+  render(){
+    var props=this.props;
+    var that=this;
+    return (
+      <div contentEditable="true"
+        style={props.styles}
+        dangerouslySetInnerHTML={{__html: props.markup}}
+        className={"component"}
+        onClick={this.disable}
+        onDrag={this.enable}>
+
+      </div>
+    )
+  },
+  enable(){
+    var element=this.getDOMNode();
+    $(element).draggable({disabled: false});
+  },
+  disable(){
+    var element=this.getDOMNode();
+    $(element).draggable({disabled: true});
+    element.focus();
+  },
+  componentDidMount(){
+
+    var element=this.getDOMNode();
+    CKEDITOR.inline(element);
+    $(element).draggable({
+      containment: "parent"
+    });
+    $(element).draggable({disabled: false});
+
+  }
+
+})
 module.exports = CanvasEditor;

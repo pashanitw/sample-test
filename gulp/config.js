@@ -12,10 +12,7 @@ module.exports = {
     settings: {
       root: dest,
       host: 'localhost',
-      port: 8080,
-      livereload: {
-        port: 35929
-      }
+      port: 9000
     }
   },
   sass: {

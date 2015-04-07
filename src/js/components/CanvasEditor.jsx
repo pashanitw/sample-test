@@ -25,10 +25,12 @@ var CanvasEditor = React.createClass({
     if (selectedPage) {
       components = selectedPage.components.map(function (component) {
         return <div contentEditable="true"
+          key={component._id}
           style={component.styles}
           dangerouslySetInnerHTML={{__html: component.markup}}
           onChange={that.updateHtml.bind(null, component)}
-          onBlur={that.updateHtml.bind(null, component)}>
+          onBlur={that.updateHtml.bind(null, component)}
+          className={"component"}>
 
         </div>
 
@@ -41,9 +43,6 @@ var CanvasEditor = React.createClass({
       pageCollection = this.state.pageCollection,
       selectedPage = pageCollection.getSelectedPage(),
       components = [];
-
-
-
     return (
       <div className="editor-view">
       {
@@ -56,24 +55,9 @@ var CanvasEditor = React.createClass({
 
   componentDidMount: function () {
 
-
-/*
     var node = this.getDOMNode();
-    var element = $(node).find('.component');
-    $(node).append(element);
-    $("body").droppable();
-    $(element).resizable();
+/*
 
-    $(element).draggable({
-      containment: "parent",
-      start: function (event, ui) {
-        // isDraggingMedia = true;
-      },
-      stop: function (event, ui) {
-        //isDraggingMedia = false;
-        // blah
-      }
-    })
       .click(function () {
         $(this).draggable({disabled: true});
       })
@@ -86,6 +70,7 @@ var CanvasEditor = React.createClass({
   //  evt.editor.updateElement();
   },
   componentDidUpdate(){
+    var scope=this;
   this._destroyCk();
     var that=this;
     var node=this.getDOMNode();
@@ -93,6 +78,36 @@ var CanvasEditor = React.createClass({
     $.each(nodes,function(index,node){
       CKEDITOR.inline(node).on('change', that.updateElement);
     })
+    var element = $(node).find('.component');
+    $("body").droppable();
+    element.resizable();
+
+    element.draggable({
+      containment: "parent",
+      start: function (event, ui) {
+        // isDraggingMedia = true;
+      },
+      stop: function (event, ui) {
+        var $newPosX = ui.offset.left - $(this).parent().offset().left;
+        var $newPosY = ui.offset.top - $(this).parent().offset().top;
+        var id=$(this).data('reactid');
+        scope.state.pageCollection.getSelectedPage().components.some(function(item,index){
+         if(id.indexOf(item._id)>-1){
+           var styles=item.styles;
+           styles.top=$newPosY;
+           styles.left=$newPosX;
+           item.updateStyles(styles);
+         return true;
+         }
+       })
+      }
+    })
+      .click(function () {
+        $(this).draggable({disabled: false});
+      })
+      .dblclick(function () {
+        $(this).draggable({disabled: true});
+      })
 
   },
   _configureCk() {

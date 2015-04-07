@@ -1,5 +1,5 @@
 {
-  "title": "Classic",
+  "title": "Modern",
   "pages": [
     {
       "name": "page-0",
@@ -13,7 +13,7 @@
             "height": "100%",
             "backgroundImage": "url(http://images.veerle.duoh.com/uploads/design-article-images/adaptive-web-bookcover-final-design.jpg)"
           },
-          "markup": "<div></div>",
+          "markup": "<div><h1>HOLY SHIT! THIS IS COVER PAGE</h1></div>",
           "coverUrl": "http://images.veerle.duoh.com/uploads/design-article-images/adaptive-web-bookcover-final-design.jpg"
         }
       ]
@@ -31,7 +31,7 @@
             "left": "25%",
             "top": "10%"
           },
-          "markup": "<h1>This is chapter Json</h2><ol style='font-size: 20px;'> <li> Mathematics </li><li> </li><li>Science </li><li></li></ol>"
+          "markup": "<h1>This is chapter Json</h1><ol style='font-size: 20px;'> <li> Mathematics </li><li> </li><li>Science </li><li></li></ol>"
         }
       ]
     },
@@ -48,7 +48,7 @@
             "left": 10,
             "top": 20
           },
-          "markup": "<h1>Chapter 1</h2>"
+          "markup": "<h1>Chapter 1</h1>"
         },
         {
           "_id": "0",
@@ -81,7 +81,7 @@
             "left": 10,
             "top": 200
           },
-          "markup": "<h1>This is chapter Json</h2>"
+          "markup": "<h1>This is chapter Json</h1>"
         }
       ]
     },
@@ -149,7 +149,7 @@
             "left": 10,
             "top": 20
           },
-          "markup": "<h1>Chapter 1</h2>"
+          "markup": "<h1>Chapter 1</h1>"
         },
         {
           "_id": "0",
@@ -182,7 +182,7 @@
             "left": 10,
             "top": 200
           },
-          "markup": "<h1>This is chapter Json</h2>"
+          "markup": "<h1>This is chapter Json</h1>"
         }
       ]
     },

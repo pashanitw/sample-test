@@ -7,6 +7,7 @@ var EditorSore = require('../stores/EditorStore.js');
 var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var mui = require('material-ui');
 var Menu=mui.Menu;
+var DropDownMenu=mui.DropDownMenu;
 
 var numberMenuItems = [
   { payload: '1', text: 'All', number: 'F2' },
@@ -34,7 +35,7 @@ var LogoMenu = React.createClass({
     return (
       <div style={style} className={"nextbook-logo"}>
         <a href="#" className="brand-logo">Nextbook</a>
-        <Menu menuItems={numberMenuItems} onItemClick={this._onItemClick} />
+        <DropDownMenu menuItems={numberMenuItems} onChange={this._onItemClick} />
       </div>
 
     );

@@ -37,6 +37,18 @@ module.exports = {
       data:'application/epub+zip'
     }
   },
+  CONTENT: {
+    "name":"",
+    "url":"xhtml/",
+    "properties":"scripted",
+    "spine":{
+      "properties":{
+        "layout":"layout-pre-paginated",
+        "spread":"none"
+      }
+    },
+    "type":"application/xhtml+xml"
+  },
   ActionSources: keyMirror({
     SERVER_ACTION: null,
     VIEW_ACTION: null

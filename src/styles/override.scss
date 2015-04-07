@@ -1,57 +1,59 @@
-body,html{
+body, html {
   padding: 0;
   height: 100%;
 }
-body{
-  #main{
+
+body {
+  #main {
     height: 100%;
-    .app-container{
+    .app-container {
       height: 100%;
 
-      nav.tool-bar{
+      nav.tool-bar {
         height: 10%;
       }
-      .editor-area{
+      .editor-area {
         height: 90%;
 
-        .tree-view{
+        .tree-view {
           height: 100%;
           min-width: 25%;
           overflow-y: scroll;
           overflow-x: hidden;
           padding-bottom: 4px;
           padding-top: 4px;
-          margin:0
+          margin: 0
         }
-        .editor-view{
+        .editor-view {
           position: relative;
           height: 600px;
-          width:900px;
-/*          height: 100%;
-          width:75% !important;*/
+          width: 900px;
+          /*          height: 100%;
+                    width:75% !important;*/
           overflow: hidden;
         }
       }
     }
   }
-  .modal-content{
-    .chapter-frame{
+  .modal-content {
+    .chapter-frame {
       display: inline-block;
       width: auto;
     }
   }
 }
-.editor-view{
+
+.editor-view {
   position: relative;
   height: 600px;
-  width:1000px;
+  width: 1000px;
   /*          height: 100%;
             width:75% !important;*/
   overflow: hidden;
 }
 
-.add-templates{
- position: absolute;
+.add-templates {
+  position: absolute;
   padding: 0;
   background: lightslategrey;
   padding-bottom: 8px;
@@ -60,9 +62,30 @@ body{
   left: 83px;
   z-index: 1000;
 }
-.app-container .toolbar{
-  overflow:visible
+
+.app-container .toolbar {
+  overflow: visible
 }
+
+.mui-svg-icon {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.mui-drop-down-menu {
+  height:auto !important;
+  .mui-menu-control-bg, .mui-menu-label, .mui-menu-control-underline {
+    display: none;
+  }
+}
+
+/*
 .nextbook-logo {
   .brand-logo {
     position: relative;
@@ -73,3 +96,4 @@ body{
     z-index: 1000;
   }
 }
+*/

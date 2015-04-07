@@ -47,80 +47,51 @@
         <meta property="rendition:spread">{{spread}}</meta>
       </metadata>
       <manifest>
+        <item href="toc.xhtml" id="toc" media-type="application/xhtml+xml" properties="nav"/>
         {{#each fonts}}
-        <item id='font-{{@index}}'
-              {{#if url}} href='{{url}}' {{/if}}
-        {{#if properties}} media-type='{{type}}'{{/if}}
-        {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="font-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each images}}
-        <item id='image-{{@index}}'
-              {{#if url}} href='{{url}}' {{/if}}
-        {{#if properties}} media-type='{{type}}'{{/if}}
-        {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="image-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each videos}}
-        <item id='video-{{@index}}'
-              {{#if url}} href='{{url}}' {{/if}}
-        {{#if properties}} media-type='{{type}}'{{/if}}
-        {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="video-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each audios}}
-        <item id='audio-{{@index}}'
-              {{#if url}} href='{{url}}' {{/if}}
-        {{#if properties}} media-type='{{type}}'{{/if}}
-        {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="audio-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each stylesheets}}
-        <item id='css-{{@index}}'
-              {{#if url}} href='{{url}}' {{/if}}
-        {{#if properties}} media-type='{{type}}'{{/if}}
-        {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="css-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each js}}
-        <item id='js-{{@index}}'
-              {{#if url}} href='{{url}}' {{/if}}
-        {{#if properties}} media-type='{{type}}'{{/if}}
-        {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="js-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each contents}}
-        <item id='page-{{@index}}'
-              {{#if url}} href='{{url}}' {{/if}}
-        {{#if properties}} media-type='{{type}}'{{/if}}
-        {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="page-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
       </manifest>
-      {{#spine contents}}
-      properties="rendition:{{properties.layout}}  rendition:{{properties.spread}}"
-      {{/spine}}
+      {{#spine contents}} properties="rendition:{{properties.layout}} rendition:{{properties.spread}}" {{/spine}}
     </package>
 
   </script>
 
   <!-- page Template-->
   <script id="page-template" type="text/x-handlebars-template">
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE html>
+    <?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE html>
     <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-      <meta charset="utf-8" />
-      <link rel="stylesheet" type="text/css" href="../css/shared-culture.css" />
-    </head>
-    <body>
-    <section class="base">
-      <hgroup>
-        <h1>{{Heading}}</h1>
-        <h2>{{heading2}}</h2>
-      </hgroup>
-
-      {{#each components}}
-      <p>{{{markup}}}</p>
-      {{/each}}
-    </section>
-
-    </body>
-    </html>
-
+  <head>
+    <meta content="width=900, height=600" name="viewport" />
+    <title></title>
+  </head>
+  <body>
+  <p>&#160;</p>
+  {{#each components}}
+  <div style="{{renderStyles}}">
+    {{{markup}}}
+  </div>
+  {{/each}}
+  </body>
+  </html>
   </script>
 <!--container template-->
   <script id="container-template" type="text/x-handlebars-template">
@@ -131,6 +102,29 @@
       </rootfiles>
     </container>
 
+  </script>
+  <!--table of contents template-->
+  <script id="toc-template" type="text/x-handlebars-template">
+    <?xml version="1.0" encoding="utf-8"?>
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+    <head>
+      <title></title>
+    </head>
+    <body>
+    <section>
+      <header>
+        <h1>Table of Contents</h1>
+      </header>
+      <nav epub:type="toc" id="toc">
+        <ol>
+          {{#each contents}}
+          <li><a href="{{url}}">{{name}}</a></li>
+          {{/each}}
+        </ol>
+      </nav>
+    </section>
+    </body>
+    </html>
   </script>
 </body>
 </html>

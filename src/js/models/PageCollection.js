@@ -26,7 +26,10 @@ class PageCollection {
     this.lastSelected = this.pages[0];
     this.lastSelected.select();
   }
-
+ clear(){
+   this.pages=[];
+  this.lastSelected=null;
+ }
   switch(page) {
     this.lastSelected.unselect();
     this.lastSelected = page;
@@ -76,7 +79,12 @@ class PageCollection {
       return pages;
     }
   }
-
+getLength(){
+  return this.pages.length;
+}
+  changeSelection(index){
+    this.switch(this.pages[index]);
+  }
   getSelectedPage() {
     return this.lastSelected;
   }
@@ -91,7 +99,17 @@ class PageCollection {
       if(page._id==id){
         this.pages.splice(index,1);
         if(this.pages.length){
-          this.switch(this.pages[Math.abs(index-1)])
+          var nextIndex=index
+          if((nextIndex+1)>=this.pages.length){
+            nextIndex-=1;
+          };
+          if(nextIndex<0){
+            nextIndex=0;
+          }
+          console.log("switch number",Math.abs(nextIndex))
+          this.switch(this.pages[Math.abs(nextIndex)])
+        }else{
+          this.clear();
         }
         return true;
       }

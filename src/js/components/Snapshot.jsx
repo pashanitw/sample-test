@@ -19,11 +19,27 @@ var Snapshot = React.createClass({
         key: Constants.KEYBOARD.DEL,
         callback: 'removePage',
         ref:'trap'
+      },
+      {
+        key: Constants.KEYBOARD.UP,
+        callback: 'moveSelectionUp',
+        ref:'trap'
+      },
+      {
+        key: Constants.KEYBOARD.DOWN,
+        callback: 'moveSelectionDown',
+        ref:'trap'
       }
     ]
   },
   removePage(){
     EditorActionCreator.removePage(this.props.page._id);
+  },
+  moveSelectionUp(){
+    EditorActionCreator.moveSelectionUp(this.props.page.index);
+  },
+  moveSelectionDown(){
+    EditorActionCreator.moveSelectionDown(this.props.page.index)
   },
   getInitialState: function () {
     return {};

@@ -12,7 +12,9 @@ module.exports = {
     TEMPLATE_SELECTED: null,
     PAGE_SWITCHED: null,
     ADD_COMPONENT:null,
-    REMOVE_COMPONENT:null
+    REMOVE_COMPONENT:null,
+    MOVE_SELECTION_UP:null,
+    MOVE_SELECTION_DOWN:null
   }),
   Constants: keyMirror({
     LEVEL_1: null,
@@ -62,7 +64,9 @@ module.exports = {
     "type":"application/xhtml+xml"
   },
   KEYBOARD:{
-    DEL:'del'
+    DEL:'del',
+    UP:'up',
+    Down:'down'
   },
   ActionSources: keyMirror({
     SERVER_ACTION: null,

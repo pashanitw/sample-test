@@ -32,6 +32,18 @@ addPage:function(template){
     id:id
   })
 },
+  moveSelectionUp(index){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.MOVE_SELECTION_UP,
+      index:index
+    })
+  },
+  moveSelectionDown(index){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.MOVE_SELECTION_DOWN,
+      index:index
+    })
+  },
   selectTemplate:function(template){
     AppDispatcher.handleViewAction({
       type:Constants.ActionTypes.TEMPLATE_SELECTED,

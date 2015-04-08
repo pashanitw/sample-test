@@ -80,6 +80,23 @@ class PageCollection {
   getSelectedPage() {
     return this.lastSelected;
   }
+  addComponent(){
+    this.lastSelected.addComponent();
+  }
+  removeComponent(id){
+    this.lastSelected.removeComponent(id);
+  }
+  removePage(id){
+    this.pages.some((page,index)=>{
+      if(page._id==id){
+        this.pages.splice(index,1);
+        if(this.pages.length){
+          this.switch(this.pages[Math.abs(index-1)])
+        }
+        return true;
+      }
+    })
+  }
 }
 
 

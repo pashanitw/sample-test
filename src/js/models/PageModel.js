@@ -4,6 +4,7 @@
 var utils = require('../utils/utils.js');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var Component=require('./Component.js');
+var Constants = require('../constants/AppConstants');
 class PageModel {
 
   constructor(model) {
@@ -17,7 +18,7 @@ class PageModel {
   }
 
   select() {
-    this.selected = false;
+    this.selected = true;
   }
 
   unselect() {
@@ -34,6 +35,18 @@ class PageModel {
 
   switch(page) {
     EditorActionCreator.pageSwitched(page)
+  }
+  addComponent(){
+   var component=new Component(Constants.COMPONENT);
+    this.components.push(component);
+  }
+  removeComponent(id){
+    this.components.some((component,index)=>{
+      if(component._id==id){
+        this.components.splice(index,1);
+        return true;
+      }
+    })
   }
 }
 

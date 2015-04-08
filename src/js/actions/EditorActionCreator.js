@@ -15,6 +15,23 @@ addPage:function(template){
     template:template
   })
 },
+  addComponent:function(){
+  AppDispatcher.handleViewAction({
+    type:Constants.ActionTypes.ADD_COMPONENT
+  })
+},
+  removeComponent:function(id){
+  AppDispatcher.handleViewAction({
+    type:Constants.ActionTypes.REMOVE_COMPONENT,
+    id:id
+  })
+},
+  removePage:function(id){
+  AppDispatcher.handleViewAction({
+    type:Constants.ActionTypes.REMOVE_PAGE,
+    id:id
+  })
+},
   selectTemplate:function(template){
     AppDispatcher.handleViewAction({
       type:Constants.ActionTypes.TEMPLATE_SELECTED,

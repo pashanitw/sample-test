@@ -4,6 +4,7 @@ var Constants = require('../constants/AppConstants');
 var assign = require('object-assign');
 var PageModel=require('../models/PageModel.js')
 var PageCollection=require('../models/PageCollection.js');
+var ComponentModel=require('../models/Component.js');
 var $ = require('jquery');
 
 // data storage
@@ -37,7 +38,17 @@ function changeTemplateSelection(template){
 function switchPage(page){
 _pageCollection.switch(page);
 }
+function addComponent(){
+  _pageCollection.addComponent();
+}
 
+function removeComponent(id){
+  _pageCollection.removeComponent(id);
+}
+
+function removePage(id){
+  _pageCollection.removePage(id);
+}
 // Facebook style store creation.
 var EditorStore = assign({}, EventEmitter.prototype, {
 
@@ -96,7 +107,19 @@ var EditorStore = assign({}, EventEmitter.prototype, {
             switchPage(page);
             EditorStore.emitChange();
             break;
-      // add more cases for other actionTypes...
+      case Constants.ActionTypes.ADD_COMPONENT:
+            addComponent();
+            EditorStore.emitChange();
+            break;
+      case Constants.ActionTypes.REMOVE_COMPONENT:
+        var id=action.id;
+            removeComponent(id);
+            EditorStore.emitChange();
+            break;
+      case Constants.ActionTypes.REMOVE_PAGE:
+        var id=action.id;
+        removePage(id);
+            EditorStore.emitChange();
     }
   })
 

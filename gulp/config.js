@@ -12,7 +12,7 @@ module.exports = {
     settings: {
       root: dest,
       host: 'localhost',
-      port: 9000
+      port: 8000
     }
   },
   sass: {

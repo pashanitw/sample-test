@@ -51,18 +51,22 @@ function removePage(id) {
 }
 
 function moveSelectionUp(index){
-  if(index<(_pageCollection.getLength()-1)){
-    moveSelection(++index);
+  if(index>0){
+    moveSelection(--index);
   }
 }
 function moveSelectionDown(index){
-  if(index>0){
-    moveSelection(--index);
+  if(index<(_pageCollection.getLength()-1)){
+    moveSelection(++index);
   }
 }
 
 function moveSelection(index){
   _pageCollection.changeSelection(index);
+}
+
+function reArrangePages(location){
+  _pageCollection.reArrangePages(location);
 }
 // Facebook style store creation.
 var EditorStore = assign({}, EventEmitter.prototype, {
@@ -138,12 +142,17 @@ var EditorStore = assign({}, EventEmitter.prototype, {
         break;
       case Constants.ActionTypes.MOVE_SELECTION_UP:
         var index = action.index;
-        moveSelectionUp(id);
+        moveSelectionUp(index);
         EditorStore.emitChange();
         break;
       case Constants.ActionTypes.MOVE_SELECTION_DOWN:
         var index = action.index;
-        moveSelectionDown(id);
+        moveSelectionDown(index);
+        EditorStore.emitChange();
+        break;
+      case Constants.ActionTypes.RE_ARRANGE_PAGES:
+        var location = action.locationOb;
+        reArrangePages(location);
         EditorStore.emitChange();
         break;
     }

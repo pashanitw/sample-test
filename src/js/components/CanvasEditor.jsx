@@ -28,7 +28,11 @@ var CanvasEditor = React.createClass({
     var components = [];
     if (selectedPage) {
       components = selectedPage.components.map(function (component) {
-        return <Component key={component._id} {...component}></Component>
+        return (
+          <Wrapper styles={component.styles}>
+            <Component key={component._id} {...component}></Component>
+          </Wrapper>
+        )
 
       })
     }
@@ -92,9 +96,11 @@ var Component = React.createClass({
   render() {
     var props = this.props;
     var that = this;
+    var style={
+      border:"1px solid black"
+    }
     return (
       <div contentEditable="true"
-        style={props.styles}
         dangerouslySetInnerHTML={{__html: props.markup}}
         className={"component"}
         onClick={this.disable}
@@ -118,6 +124,24 @@ var Component = React.createClass({
     $(element).draggable({
       containment: "parent"
     });
+    $(element).resizable({});
+    $(element).draggable({disabled: false});
+
+  }
+
+})
+var Wrapper = React.createClass({
+
+  render() {
+    return (
+      <div style={this.props.styles}>
+      {this.props.children}
+      </div>
+    )
+  },
+  componentDidMount() {
+    var element = this.getDOMNode();
+    $(element).resizable({});
     $(element).draggable({disabled: false});
 
   }

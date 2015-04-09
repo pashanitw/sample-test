@@ -8,13 +8,16 @@ var Constants = require('../constants/AppConstants');
 class PageModel {
 
   constructor(model) {
-    this._id = model.id || utils.getUniqueId();
-    this.name = model.name;
-    this.components = model.components?model.components.map(function(item,index){
-      return new Component(item);
-    }):[];
-    this.index = model.index,
-      this.selected = false
+    this.components=[];
+    if(model){
+      this._id = model.id || utils.getUniqueId();
+      this.name = model.name;
+      this.components = model.components?model.components.map(function(item,index){
+        return new Component(item);
+      }):[];
+      this.index = model.index,
+        this.selected = false
+    }
   }
 
   select() {
@@ -34,7 +37,7 @@ class PageModel {
   }
 
   switch(page) {
-    EditorActionCreator.pageSwitched(page)
+
   }
   addComponent(){
    var component=new Component(Constants.COMPONENT);

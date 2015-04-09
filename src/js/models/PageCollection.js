@@ -23,6 +23,8 @@ class PageCollection {
     });
     this.config = template.config;
     this.templates = template.templates;
+    var blankPage=new PageModel();
+    this.templates.push(blankPage);
     this.lastSelected = this.pages[0];
     this.lastSelected.select();
   }
@@ -94,6 +96,11 @@ getLength(){
   removeComponent(id){
     this.lastSelected.removeComponent(id);
   }
+  updateIndexes(){
+     this.pages.forEach((page,index)=>{
+       page.index=index;
+     })
+  }
   removePage(id){
     this.pages.some((page,index)=>{
       if(page._id==id){
@@ -102,11 +109,12 @@ getLength(){
           var nextIndex=index
           if((nextIndex+1)>=this.pages.length){
             nextIndex-=1;
-          };
+          }
           if(nextIndex<0){
             nextIndex=0;
           }
           console.log("switch number",Math.abs(nextIndex))
+          this.updateIndexes();
           this.switch(this.pages[Math.abs(nextIndex)])
         }else{
           this.clear();
@@ -114,6 +122,23 @@ getLength(){
         return true;
       }
     })
+  }
+  reArrangePages(location){
+    var pages=[];
+    this.pages.forEach((item,index)=>{
+      if(index==location.source){
+        var page=this.pages[location.destination];
+        page.index=index;
+        pages.push(page)
+      }else if(index==location.destination){
+        var page=this.pages[location.source];
+        page.index=index;
+        pages.push(page)
+      }else{
+        pages.push(item);
+      }
+    });
+    this.pages=pages;
   }
 }
 

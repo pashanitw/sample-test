@@ -14,7 +14,8 @@ module.exports = {
     ADD_COMPONENT:null,
     REMOVE_COMPONENT:null,
     MOVE_SELECTION_UP:null,
-    MOVE_SELECTION_DOWN:null
+    MOVE_SELECTION_DOWN:null,
+    RE_ARRANGE_PAGES:null
   }),
   Constants: keyMirror({
     LEVEL_1: null,
@@ -66,7 +67,7 @@ module.exports = {
   KEYBOARD:{
     DEL:'del',
     UP:'up',
-    Down:'down'
+    DOWN:'down'
   },
   ActionSources: keyMirror({
     SERVER_ACTION: null,

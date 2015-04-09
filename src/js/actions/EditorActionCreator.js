@@ -9,24 +9,24 @@ module.exports = {
       text: text
     });
   },
-addPage:function(template){
+addPage(template){
   AppDispatcher.handleViewAction({
     type:Constants.ActionTypes.ADD_PAGE,
     template:template
   })
 },
-  addComponent:function(){
+  addComponent(){
   AppDispatcher.handleViewAction({
     type:Constants.ActionTypes.ADD_COMPONENT
   })
 },
-  removeComponent:function(id){
+  removeComponent(id){
   AppDispatcher.handleViewAction({
     type:Constants.ActionTypes.REMOVE_COMPONENT,
     id:id
   })
 },
-  removePage:function(id){
+  removePage(id){
   AppDispatcher.handleViewAction({
     type:Constants.ActionTypes.REMOVE_PAGE,
     id:id
@@ -44,16 +44,29 @@ addPage:function(template){
       index:index
     })
   },
-  selectTemplate:function(template){
+  selectTemplate(template){
     AppDispatcher.handleViewAction({
       type:Constants.ActionTypes.TEMPLATE_SELECTED,
       template:template
     })
   },
-  pageSwitched:function(page){
+  pageSwitched(page){
     AppDispatcher.handleViewAction({
       type:Constants.ActionTypes.PAGE_SWITCHED,
       page:page
+    })
+  },
+  reArrangePages(source,destination){
+    if(source==destination){
+      return;
+    }
+    var locationOb={
+      source:source,
+      destination:destination
+    }
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.RE_ARRANGE_PAGES,
+      locationOb:locationOb
     })
   },
   clearList: function() {

@@ -18,10 +18,13 @@ var TreeView = React.createClass({
   componentWillMount: function () {
     console.log(this.props);
   },
-
+  switchPage(page){
+    EditorActionCreator.pageSwitched(page)
+  },
   render: function () {
     var cx = React.addons.classSet,
       pages = this.state.pageCollection.pages;
+    var that=this;
     return (
       <div className="tree-view">
         {
@@ -29,7 +32,7 @@ var TreeView = React.createClass({
             var classes = cx({
               'child': page.type == Constants.LEVEL_2
             });
-            return <Snapshot key={page._id} page={page} clickSnap={page.switch.bind(null,page)} className={classes}></Snapshot>
+            return <Snapshot key={page._id} page={page} clickSnap={that.switchPage.bind(null,page)} className={classes}></Snapshot>
           })
 
           }
@@ -47,14 +50,21 @@ var TreeView = React.createClass({
       click: this._clicked,
       axis: "y"
     });
-
-
   },
-  _dragStopped: function () {
-    console.log('dragging stopped');
+  _dragStopped: function (evetn,ui) {
+    var node=this.getDOMNode();
+    setTimeout(()=>{
+      this.destination=$(node).children().index($(node).find('.selected'));
+      EditorActionCreator.reArrangePages(this.source,this.destination);
+      console.log("source to destination",this.source,this.destination);
+    });
   },
-  _mousedown: function () {
-    console.log("mousedown")
+  _mousedown: function (event,target) {
+    var node=this.getDOMNode();
+    this.source=$(node).children().index(target)
+    setTimeout(function(){
+      target.click();
+    });
   },
   _clicked: function () {
     console.log('clicked')
@@ -62,6 +72,7 @@ var TreeView = React.createClass({
   componentWillUnmount: function () {
   },
   onChange: function () {
+     console.log(this.getStore(EditorStore).getState());
     this.setState(this.getStore(EditorStore).getState());
   }
 });

@@ -7,11 +7,46 @@ var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var MousetrapMixin = require('../mixins/MousetrapMixin.js');
 var Constants = require('../constants/AppConstants');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
+var EditorStore=require('../stores/EditorStore.js');
+var ComponentModel=require('../models/Component.js');
+function makeDropTarget(context) {
+  return {
+    acceptDrop(component, item) {
+      const delta = context.getCurrentOffsetDelta();
+      const left = Math.round(item.left + delta.x);
+      const top = Math.round(item.top + delta.y);
 
+      component.moveBox(item.id, left, top);
+      console.log("may be it cones here");
+    }
+  };
+}
+
+var reactDnd=require('react-dnd');
 var CanvasEditor = React.createClass({
-  mixins: [FluxibleMixin],
+  mixins: [FluxibleMixin,reactDnd.DragDropMixin],
   statics: {
-    storeListeners: [EditorStore]
+    storeListeners: [EditorStore],
+    configureDragDrop(register, context) {
+      register("Component", {
+        dropTarget: makeDropTarget(context)
+      });
+    }
+  },
+  moveBox(id, left, top) {
+    var selectedPage=this.state.pageCollection.getSelectedPage();
+    var components=selectedPage.components;
+    components.some(function(item,index){
+      if(item._id==id){
+        item.styles.left=left;
+        item.styles.top=top;
+        components.splice(index,1);
+      var comp=new ComponentModel(item);
+        components.push(comp);
+        EditorStore.emitChange();
+        return true;
+      }
+    });
   },
   getInitialState: function () {
     return EditorStore.getState();
@@ -21,7 +56,7 @@ var CanvasEditor = React.createClass({
     EditorStore.emitChange();
   },
   onChange() {
-    this.setState(this.getStore(EditorStore).getState());
+    this.setState(EditorStore.getState());
   },
   _renderComponents(selectedPage) {
     var that = this;
@@ -29,9 +64,12 @@ var CanvasEditor = React.createClass({
     if (selectedPage) {
       components = selectedPage.components.map(function (component) {
         return (
-          <Wrapper styles={component.styles}>
-            <Component key={component._id} {...component}></Component>
-          </Wrapper>
+            <Component key={component._id} {...component}
+                       id={component._id}
+                       left={component.styles.left}
+                       top={component.styles.top}
+                      ></Component>
+
         )
 
       })
@@ -44,7 +82,7 @@ var CanvasEditor = React.createClass({
       selectedPage = pageCollection.getSelectedPage(),
       components = [];
     return (
-      <div className="editor-view">
+      <div className="editor-view"{...this.dropTargetFor("Component")}>
       {
         this._renderComponents(selectedPage)
 
@@ -73,16 +111,36 @@ var CanvasEditor = React.createClass({
   }
 });
 
+const dragSource = {
+  beginDrag(component) {
+    return {
+      effectAllowed: reactDnd.DropEffects.MOVE,
+      item: component.props
+    };
+  },
+  endDrag(component,ui){
+    console.log(component,ui);
+  }
+};
+
+const style = {
+  position: 'absolute',
+  border: '1px dashed gray',
+  padding: '0.5rem'
+};
 
 var Component = React.createClass({
-  mixins: [MousetrapMixin],
+  mixins: [MousetrapMixin,reactDnd.DragDropMixin],
   statics: {
     mousetrapBindings: [
       {
         key: Constants.KEYBOARD.DEL,
         callback: 'removeComponent'
       }
-    ]
+    ],
+    configureDragDrop(register) {
+      register("Component", { dragSource });
+    }
   },
   getDefaultProps() {
     return {}
@@ -94,20 +152,40 @@ var Component = React.createClass({
     EditorActionCreator.removeComponent(this.props._id);
   },
   render() {
+    const styles = {
+      position: 'absolute',
+      border: '1px dashed gray',
+      padding: '0.5rem'
+    };
     var props = this.props;
     var that = this;
     var style={
-      border:"1px solid black"
-    }
+      position: 'absolute',
+      border: '1px dashed gray',
+      padding: '0.5rem',
+      width:props.styles.width,
+      height:props.styles.height,
+      left:props.styles.left,
+      top:props.styles.top
+
+    };
     return (
-      <div contentEditable="true"
+      <div
+      {...this.dragSourceFor("Component")}
+        contentEditable="true"
         dangerouslySetInnerHTML={{__html: props.markup}}
         className={"component"}
         onClick={this.disable}
-        onDrag={this.enable}>
+        onDrag={this.enable} style={style}
+        onMouseDown={this.mousedown}>
 
       </div>
     )
+  },
+  mousedown(){
+    console.log("onMousedown");
+    var element=this.getDOMNode();
+    $(element).focus();
   },
   enable() {
     var element = this.getDOMNode();
@@ -124,17 +202,23 @@ var Component = React.createClass({
     $(element).draggable({
       containment: "parent"
     });
-    $(element).resizable({});
-    $(element).draggable({disabled: false});
+/*
+    $(element).draggable({disabled: false});*/
 
+  },
+  componentDidUpdate(){/*
+    var element = this.getDOMNode();
+    $(element).resizable({});*/
   }
 
-})
+});
 var Wrapper = React.createClass({
-
+  onClick(evt){
+    evt.preventDefault();
+  },
   render() {
     return (
-      <div style={this.props.styles}>
+      <div style={this.props.styles} onclick={this.onClick}>
       {this.props.children}
       </div>
     )
@@ -142,9 +226,8 @@ var Wrapper = React.createClass({
   componentDidMount() {
     var element = this.getDOMNode();
     $(element).resizable({});
-    $(element).draggable({disabled: false});
 
   }
 
-})
+});
 module.exports = CanvasEditor;

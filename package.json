@@ -30,6 +30,7 @@
     "lodash": "^3.5.0",
     "material-ui": "^0.7.3",
     "mousetrap": "^1.5.2",
+    "react-dnd": "^0.9.8",
     "react-intl": "^1.2.0",
     "reactify": "^1.0.0",
     "require-dir": "^0.1.0",

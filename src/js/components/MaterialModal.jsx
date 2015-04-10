@@ -21,10 +21,9 @@ let MaterialModal = React.createClass({
       <div  className="modal modal-fixed-footer">
         <div className="modal-content">
           <h4>{this.state.modalHeader}</h4>
-          <TemplateList templates={this.state.templates} onSelect={this.doneSelection}/>
         </div>
         <div className="modal-footer">
-          <a href="#" className="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
+          <a href="#" className="waves-effect waves-green btn-flat modal-action modal-close" onClick={this._closeModal}>Agree</a>
         </div>
       </div>
     );
@@ -32,6 +31,7 @@ let MaterialModal = React.createClass({
   doneSelection: function () {
     var node = this.getDOMNode();
     $(node).closeModal();
+    this._closeModal();
 
   },
   componentDidMount() {
@@ -56,7 +56,7 @@ let MaterialModal = React.createClass({
     this.setState(this.getStore(ModalStore).getState());
   },
   _closeModal: function () {
-
+    ModalStore.closeModal();
   }
 });
 

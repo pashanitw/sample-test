@@ -35,25 +35,13 @@ function loadTemplates() {
   });
   return deferred.promise();
 }
-/*
- * return {
- tasks: [],
- modal: {
- modalHeader: "Select the template",
- isOpen: false,
- templates: []
- },
- editorView:{
- pages:[]
- }
- }*/
 var _modalData = {
   header:labels.modalHeader,
   isOpen:false,
   templates:[]}
 
 // Facebook style store creation.
-var DataStore = assign({}, EventEmitter.prototype, {
+var ModalStore = assign({}, EventEmitter.prototype, {
 
   // public methods used by Controller-View to operate on data
   getAll() {
@@ -71,6 +59,10 @@ var DataStore = assign({}, EventEmitter.prototype, {
   },
   openModal:function(){
     _modalData.isOpen=true;
+    this.emitChange();
+  },
+  closeModal:function(){
+    _modalData.isOpen=false;
     this.emitChange();
   },
   // Allow Controller-View to register itself with store
@@ -106,4 +98,4 @@ var DataStore = assign({}, EventEmitter.prototype, {
 
 });
 
-module.exports = DataStore;
+module.exports = ModalStore;

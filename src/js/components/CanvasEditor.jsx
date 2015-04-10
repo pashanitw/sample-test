@@ -7,7 +7,6 @@ var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var MousetrapMixin = require('../mixins/MousetrapMixin.js');
 var Constants = require('../constants/AppConstants');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
-var EditorStore=require('../stores/EditorStore.js');
 var ComponentModel=require('../models/Component.js');
 function makeDropTarget(context) {
   return {

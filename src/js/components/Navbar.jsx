@@ -6,6 +6,7 @@ var AddWidgetButton=require('./AddWidgetButton.jsx');
 var ExportButton=require('./ExportButton.jsx');
 var LogoMenu=require('./LogoMenu.jsx');
 var TemplateButton=require('./TemplateButton.jsx');
+var AddImageButton=require('./AddImageButton.jsx');
 
 var Navbar = React.createClass({
   getInitialState: function() {
@@ -27,7 +28,7 @@ var Navbar = React.createClass({
           <AddPageButton></AddPageButton>
           <TemplateButton></TemplateButton>
           <AddTextButton></AddTextButton>
-          <AddWidgetButton></AddWidgetButton>
+          <AddImageButton></AddImageButton>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><a href="something.html">Preview</a></li>
             <li><a href="something.html">Export</a></li>

@@ -17,10 +17,10 @@ require('jquery-ui-resizable');
 var PageModel = require('../models/PageModel.js');
 var _=require('lodash');
 var EditorStore=require("../stores/EditorStore.js");
-var EditorStore = require('../stores/EditorStore.js');
 var ModalStore=require('../stores/ModalStore.js');
-var mui = require('material-ui')
-
+var FileImportStore=require('../stores/FileImportStore.js');
+var mui = require('material-ui');
+var FileImportModal=require('./FileImportModal.jsx');
 
 var App = React.createClass({
 
@@ -56,6 +56,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div className="app-container">
+        <FileImportModal></FileImportModal>
         <MaterialModal></MaterialModal>
         <Navbar/>
         <EditorView/>

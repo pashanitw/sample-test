@@ -63,6 +63,17 @@
         },
         {
           "_id": "0",
+          "type": "image",
+          "styles": {
+            "width": 430,
+            "height": 200,
+            "left": 30,
+            "top": 40
+          },
+          "src":"http://placehold.it/430x200"
+        },
+        {
+          "_id": "0",
           "type": "text",
           "styles": {
             "width": 430,

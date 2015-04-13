@@ -1,7 +1,9 @@
-var React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var ModalStore=require('../stores/ModalStore.js');
 
 var TemplateButton = React.createClass({
+  mixins:[PureRenderMixin],
   getInitialState: function() {
     return {};
   },

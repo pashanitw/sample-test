@@ -1,7 +1,7 @@
-var React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var DataStore = require('../stores/DataStore');
 var ActionCreator = require('../actions/DataActionCreators');
-var TaskList = require('./TaskList.jsx');
 var mui = require('material-ui'),
   RaisedButton = mui.RaisedButton;
 var TreeView = require('./TreeView.jsx');
@@ -23,7 +23,7 @@ var mui = require('material-ui');
 var FileImportModal=require('./FileImportModal.jsx');
 
 var App = React.createClass({
-
+  mixins:[PureRenderMixin],
   onChange: function () {
 
   },

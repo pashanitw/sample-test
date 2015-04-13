@@ -1,74 +1,57 @@
-var React = require('react');
-var ComponentContainer = require('./ComponentContainer.jsx');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var assign = require('object-assign');
-var EditorStore = require('../stores/EditorStore');
-var Components;
+var CanvasStore = require('../stores/CanvasStore.js');
 var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var MousetrapMixin = require('../mixins/MousetrapMixin.js');
 var Constants = require('../constants/AppConstants');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
-var ComponentModel=require('../models/Component.js');
-function makeDropTarget(context) {
-  return {
-    acceptDrop(component, item) {
-      const delta = context.getCurrentOffsetDelta();
-      const left = Math.round(item.left + delta.x);
-      const top = Math.round(item.top + delta.y);
+var ComponentModel = require('../models/Component.js');
+var Component = require('./Component.jsx');
 
-      component.moveBox(item.id, left, top);
-      console.log("may be it cones here");
-    }
-  };
-}
 
-var reactDnd=require('react-dnd');
+
+var reactDnd = require('react-dnd');
 var CanvasEditor = React.createClass({
-  mixins: [FluxibleMixin,reactDnd.DragDropMixin],
-  statics: {
-    storeListeners: [EditorStore],
-    configureDragDrop(register, context) {
-      register("Component", {
-        dropTarget: makeDropTarget(context)
-      });
-    }
+  mixins: [FluxibleMixin, PureRenderMixin],
+  getInitialState: function () {
+    return CanvasStore.getState();
   },
-  moveBox(id, left, top) {
-    var selectedPage=this.state.pageCollection.getSelectedPage();
-    var components=selectedPage.components;
-    components.some(function(item,index){
-      if(item._id==id){
-        item.styles.left=left;
-        item.styles.top=top;
-        components.splice(index,1);
-      var comp=new ComponentModel(item);
+  statics: {
+    storeListeners: [CanvasStore]
+  },
+  moveItem(id, left, top) {
+    var selectedPage = this.state.currentPage;
+    var components = selectedPage.components;
+    components.some(function (item, index) {
+      if (item._id == id) {
+        item.styles.left = left;
+        item.styles.top = top;
+        components.splice(index, 1);
+        var comp = new ComponentModel(item);
         components.push(comp);
-        EditorStore.emitChange();
+        CanvasStore.emitChange();
         return true;
       }
     });
   },
-  getInitialState: function () {
-    return EditorStore.getState();
-  },
   updateHtml: function (component, html) {
     component.markup = $(html.target).html();
-    EditorStore.emitChange();
+    CanvasStore.emitChange();
   },
   onChange() {
-    this.setState(EditorStore.getState());
+    this.setState(CanvasStore.getState());
   },
   _renderComponents(selectedPage) {
     var that = this;
     var components = [];
     if (selectedPage) {
-      components = selectedPage.components.map(function (component) {
+      components = selectedPage.components.map(function (component, index) {
         return (
             <Component key={component._id} {...component}
-                       id={component._id}
-                       left={component.styles.left}
-                       top={component.styles.top}
-                      ></Component>
-
+              index={index}
+              id={component._id}>
+            </Component>
         )
 
       })
@@ -77,11 +60,10 @@ var CanvasEditor = React.createClass({
   },
   render: function (component) {
     var that = this,
-      pageCollection = this.state.pageCollection,
-      selectedPage = pageCollection.getSelectedPage(),
+      selectedPage = this.state.currentPage,
       components = [];
     return (
-      <div className="editor-view"{...this.dropTargetFor("Component")}>
+      <div className="editor-view">
       {
         this._renderComponents(selectedPage)
 
@@ -91,7 +73,6 @@ var CanvasEditor = React.createClass({
   },
 
   componentDidMount: function () {
-    $("body").droppable();
 
   },
   updateElement(evt) {
@@ -117,8 +98,8 @@ const dragSource = {
       item: component.props
     };
   },
-  endDrag(component,ui){
-    console.log(component,ui);
+  endDrag(component, ui) {
+    console.log(component, ui);
   }
 };
 
@@ -128,91 +109,8 @@ const style = {
   padding: '0.5rem'
 };
 
-var Component = React.createClass({
-  mixins: [MousetrapMixin,reactDnd.DragDropMixin],
-  statics: {
-    mousetrapBindings: [
-      {
-        key: Constants.KEYBOARD.DEL,
-        callback: 'removeComponent'
-      }
-    ],
-    configureDragDrop(register) {
-      register("Component", { dragSource });
-    }
-  },
-  getDefaultProps() {
-    return {}
-  },
-  componentWillMount() {
-  },
-  removeComponent() {
-    alert("remove component called");
-    EditorActionCreator.removeComponent(this.props._id);
-  },
-  render() {
-    const styles = {
-      position: 'absolute',
-      border: '1px dashed gray',
-      padding: '0.5rem'
-    };
-    var props = this.props;
-    var that = this;
-    var style={
-      position: 'absolute',
-      border: '1px dashed gray',
-      padding: '0.5rem',
-      width:props.styles.width,
-      height:props.styles.height,
-      left:props.styles.left,
-      top:props.styles.top
-
-    };
-    return (
-      <div
-      {...this.dragSourceFor("Component")}
-        contentEditable="true"
-        dangerouslySetInnerHTML={{__html: props.markup}}
-        className={"component"}
-        onClick={this.disable}
-        onDrag={this.enable} style={style}
-        onMouseDown={this.mousedown}>
-
-      </div>
-    )
-  },
-  mousedown(){
-    console.log("onMousedown");
-    var element=this.getDOMNode();
-    $(element).focus();
-  },
-  enable() {
-    var element = this.getDOMNode();
-    $(element).draggable({disabled: false});
-  },
-  disable() {
-    var element = this.getDOMNode();
-    $(element).draggable({disabled: true});
-    element.focus();
-  },
-  componentDidMount() {
-    var element = this.getDOMNode();
-    CKEDITOR.inline(element);
-    $(element).draggable({
-      containment: "parent"
-    });
-/*
-    $(element).draggable({disabled: false});*/
-
-  },
-  componentDidUpdate(){/*
-    var element = this.getDOMNode();
-    $(element).resizable({});*/
-  }
-
-});
 var Wrapper = React.createClass({
-  onClick(evt){
+  onClick(evt) {
     evt.preventDefault();
   },
   render() {
@@ -223,8 +121,6 @@ var Wrapper = React.createClass({
     )
   },
   componentDidMount() {
-    var element = this.getDOMNode();
-    $(element).resizable({});
 
   }
 

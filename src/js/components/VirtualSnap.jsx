@@ -1,4 +1,5 @@
-var React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var ComponentContainer = require('./ComponentContainer.jsx');
 var assign = require('object-assign');
 var EditorStore = require('../stores/EditorStore');
@@ -6,6 +7,7 @@ var Components;
 var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var propTypes = React.PropTypes;
 var CanvasEditor = React.createClass({
+  mixins:[PureRenderMixin],
   propTypes: {
     page: propTypes.object.isRequired,
     styles:propTypes.object.isRequired

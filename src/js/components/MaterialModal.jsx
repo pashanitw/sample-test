@@ -1,10 +1,11 @@
-const React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 let TemplateList = require("./TemplateList.jsx");
 let ModalStore = require('../stores/ModalStore.js');
 let FluxibleMixin=require('../mixins/FliuxibleMixin.js');
 let propTypes = React.PropTypes;
 let MaterialModal = React.createClass({
-  mixins:[FluxibleMixin],
+  mixins:[FluxibleMixin,PureRenderMixin],
 
   statics: {
     storeListeners: [ModalStore]
@@ -21,6 +22,7 @@ let MaterialModal = React.createClass({
       <div  className="modal modal-fixed-footer">
         <div className="modal-content">
           <h4>{this.state.modalHeader}</h4>
+          <TemplateList templates={this.state.templates} onSelect={this.doneSelection}/>
         </div>
         <div className="modal-footer">
           <a href="#" className="waves-effect waves-green btn-flat modal-action modal-close" onClick={this._closeModal}>Agree</a>
@@ -42,11 +44,13 @@ let MaterialModal = React.createClass({
         var node = this.getDOMNode();
         $(node).openModal({
           complete: function () {
+            ModalStore.closeModal();
           }
         });
       } else {
         var node = this.getDOMNode();
         $(node).closeModal();
+        ModalStore.closeModal();
       }
     }
   },

@@ -1,29 +1,36 @@
-var React = require('react');
 var Snapshot = require('./Snapshot.jsx');
 var AddPageButton = require('./AddPageButton.jsx');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var EditorStore = require('../stores/EditorStore.js');
 var Constants = require('../constants/AppConstants').Constants;
-require('react/addons');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var CanvasStore=require('../stores/CanvasStore.js');
+var update=React.addons.update;
 
 var TreeView = React.createClass({
-  mixins: [FluxibleMixin],
+  mixins: [FluxibleMixin,PureRenderMixin],
   statics: {
     storeListeners: [EditorStore]
   },
   getInitialState: function () {
-    return EditorStore.getState();
-  },
-  componentWillMount: function () {
-    console.log(this.props);
+    return {
+      pages:EditorStore.getState().pageCollection.pages
+    }
+
   },
   switchPage(page){
     EditorActionCreator.pageSwitched(page)
   },
+  updatePages(id){
+    EditorActionCreator.updatePages(this.state.pages);
+    var page=this.state.pages.filter(c => c._id === id)[0];
+    this.switchPage(page);
+  },
   render: function () {
     var cx = React.addons.classSet,
-      pages = this.state.pageCollection.pages;
+      pages = this.state.pages;
     var that=this;
     return (
       <div className="tree-view">
@@ -32,7 +39,14 @@ var TreeView = React.createClass({
             var classes = cx({
               'child': page.type == Constants.LEVEL_2
             });
-            return <Snapshot key={page._id} page={page} clickSnap={that.switchPage.bind(null,page)} className={classes}></Snapshot>
+            return <Snapshot
+              key={page._id}
+              page={page}
+              clickSnap={that.switchPage.bind(null,page)}
+              className={classes}
+              moveSnapshot={that.moveSnapshot}
+              updatePages={that.updatePages}>
+            </Snapshot>
           })
 
           }
@@ -40,16 +54,28 @@ var TreeView = React.createClass({
       </div>
     )
   },
+  moveSnapshot(id, afterId) {
+    console.log("moving snapshot",id,afterId);
+    const {pages} = this.state;
+
+    const page = pages.filter(c => c._id === id)[0];
+    const afterPage = pages.filter(c => c._id === afterId)[0];
+    const pageIndex = pages.indexOf(page);
+    const afterIndex = pages.indexOf(afterPage);
+    page.index=afterIndex;
+    afterPage.index=pageIndex;
+    this.setState(update(this.state, {
+      pages: {
+        $splice: [
+          [pageIndex, 1],
+          [afterIndex, 0, page]
+        ]
+      }
+    }));
+  },
   componentDidMount: function () {
     var slides = this.getDOMNode();
-    $(slides).multisortable({
-      items: "div.chapter-frame",
-      placeholder: "slidePlaceholder",
-      stop: this._dragStopped,
-      mousedown: this._mousedown,
-      click: this._clicked,
-      axis: "y"
-    });
+
   },
   _dragStopped: function (evetn,ui) {
     var node=this.getDOMNode();
@@ -73,7 +99,7 @@ var TreeView = React.createClass({
   },
   onChange: function () {
      console.log(this.getStore(EditorStore).getState());
-    this.setState(this.getStore(EditorStore).getState());
+    this.setState({pages:this.getStore(EditorStore).getState().pageCollection.pages});
   }
 });
 

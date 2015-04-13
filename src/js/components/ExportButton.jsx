@@ -1,4 +1,5 @@
-var React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var PageModel = require('../models/PageModel.js');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var Snapshot = require('./Snapshot.jsx')
@@ -36,6 +37,7 @@ var position="position:absolute;"
 
 
 var AddPageButton = React.createClass({
+  mixins:[PureRenderMixin],
   getInitialState: function () {
     return {};
   },

@@ -3,6 +3,9 @@ var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/AppConstants');
 var assign = require('object-assign');
 var labels=Constants.Labels;
+var React=require('react/addons');
+var update=React.addons.update;
+
 var _modalData = {
   header:labels.modalHeader,
   isOpen:false,
@@ -17,16 +20,19 @@ var FileImportStore = assign({}, EventEmitter.prototype, {
     return _modalData;
   },
   getState(){
-    var that=this;
-    setTimeout(function(){
-      _modalData.templates=[{something:"changed"}];
-      that.emitChange();
-    })
     return _modalData;
   },
-  openModal:function(){
-    _modalData.isOpen=true;
-    _modalData.templates=[{something:"changed"}];
+  openModal:function(type){
+    _modalData=update(_modalData,{
+      isOpen:{$set:true},
+      type:{$set:type}
+    });
+    this.emitChange();
+  },
+  closeModal:function(){
+    _modalData=update(_modalData,{
+      isOpen:{$set:false}
+    });
     this.emitChange();
   },
   // Allow Controller-View to register itself with store

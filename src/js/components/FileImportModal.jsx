@@ -1,10 +1,14 @@
-const React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 let FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 let propTypes = React.PropTypes;
-let FileImportStore=require('../stores/FileImportStore.js');
+let FileImportStore = require('../stores/FileImportStore.js');
+let EditorActionCreator = require('../actions/EditorActionCreator.js');
+var Constants = require('../constants/AppConstants');
+var ComponentTypes = Constants.ComponentTypes;
+
 let FileImportModal = React.createClass({
-
-
+  mixins: [PureRenderMixin],
   statics: {
     storeListeners: [FileImportStore]
   },
@@ -19,20 +23,42 @@ let FileImportModal = React.createClass({
           <h4>{this.state.modalHeader}</h4>
           <div>
             <p>Browse</p>
-            <input type="file"/>
+            <input type="text"/>
           </div>
           <div>
             <p>Enter Url</p>
-            <input type="text"/>
+            <input type="file"  onChange={this.fileChosen}/>
           </div>
         </div>
         <div className="modal-footer">
-          <a href="#" className="waves-effect waves-green btn-flat modal-action modal-close">Import</a>
+          <a href="#" className="waves-effect waves-green btn-flat modal-action" onClick={this.insertMedia}>Import</a>
         </div>
       </div>
     );
   },
-  componentWillMount(){
+  fileChosen(evt) {
+    var file = evt.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (e)=> {
+      this.uriData = e.target.result;
+    }
+    reader.readAsDataURL(file);
+  },
+  insertMedia() {
+    switch (this.state.type) {
+      case ComponentTypes.IMAGE:
+        var data = {
+          source: this.uriData
+        };
+        EditorActionCreator.addComponent(ComponentTypes.IMAGE, data);
+        break;
+      case ComponentTypes.VIDEO:
+        console.log("do nothing");
+        break;
+    }
+
+  },
+  componentWillMount() {
     FileImportStore.addChangeListener(this.onChange);
   },
   componentDidMount() {
@@ -43,11 +69,13 @@ let FileImportModal = React.createClass({
         var node = this.getDOMNode();
         $(node).openModal({
           complete: function () {
+            FileImportStore.closeModal();
           }
         });
       } else {
         var node = this.getDOMNode();
         $(node).closeModal();
+        FileImportStore.closeModal();
       }
     }
   },

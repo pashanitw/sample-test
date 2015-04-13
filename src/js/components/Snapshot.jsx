@@ -1,44 +1,75 @@
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var CanvasEditor = require('./CanvasEditor.jsx');
 var CanvasBar = require('../../handlebars/CanvasEditor.bars');
 var HandleBars = require('Handlebars');
-var VirtualSnap=require('./VirtualSnap.jsx');
+var VirtualSnap = require('./VirtualSnap.jsx');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var MousetrapMixin = require('../mixins/MousetrapMixin.js');
 var Constants = require('../constants/AppConstants');
 var cx = React.addons.classSet;
+var DragDropMixin = require('react-dnd').DragDropMixin;
 var styles = {
   transform: "scale(0.12,0.15)",
   transformOrigin: "0% 0%"
 };
+const dragSource = {
+  beginDrag(component) {
+    return {
+      item: {
+        id: component.props.page._id
+      }
+    };
+  },
+  endDrag(component){
+
+    var id= component.props.page._id;
+    if(component.props.updatePages){
+      component.props.updatePages(id);
+    }
+  }
+};
+const dropTarget = {
+  over(component, item) {
+    component.props.moveSnapshot(item.id, component.props.page._id);
+  }
+};
+
 var Snapshot = React.createClass({
-  mixins: [MousetrapMixin],
+  mixins: [MousetrapMixin, PureRenderMixin, DragDropMixin],
   statics: {
     mousetrapBindings: [
       {
         key: Constants.KEYBOARD.DEL,
         callback: 'removePage',
-        ref:'trap'
+        ref: 'trap'
       },
       {
         key: Constants.KEYBOARD.UP,
         callback: 'moveSelectionUp',
-        ref:'trap'
+        ref: 'trap'
       },
       {
         key: Constants.KEYBOARD.DOWN,
         callback: 'moveSelectionDown',
-        ref:'trap'
+        ref: 'trap'
       }
-    ]
+    ],
+    configureDragDrop(register) {
+      register("SNAPSHOT", {
+        dragSource,
+        dropTarget
+      });
+    }
   },
-  removePage(){
+  removePage() {
     EditorActionCreator.removePage(this.props.page._id);
   },
-  moveSelectionUp(){
+  moveSelectionUp() {
     EditorActionCreator.moveSelectionUp(this.props.page.index);
+    console.log("move selection up");
   },
-  moveSelectionDown(){
+  moveSelectionDown() {
     EditorActionCreator.moveSelectionDown(this.props.page.index)
   },
   getInitialState: function () {
@@ -54,8 +85,8 @@ var Snapshot = React.createClass({
       }
     }
   },
-  handleClick(){
-    if(this.props.clickSnap){
+  handleClick() {
+    if (this.props.clickSnap) {
       this.props.clickSnap();
     }
   },
@@ -63,29 +94,39 @@ var Snapshot = React.createClass({
     var snapStyle = {
       overflow: "hidden"
     };
-    var trapStyle={
-      position:'absolute',
-      width:'100%',
-      height:'100%',
-      zIndex:1000,
-      top:0,
-      content:'\'\'',
-      opacity:0
+    var trapStyle = {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      zIndex: 1000,
+      top: 0,
+      content: '\'\'',
+      opacity: 0
     };
     var classes = cx({
-      'chapter-frame':true,
+      'chapter-frame': true,
       'selected': this.props.page.selected
     });
+    const { text } = this.props;
+    const { isDragging } = this.getDragState("SNAPSHOT");
+    const opacity = isDragging ? 0 : 1;
+    var parentStyles = {
+      opacity: opacity
+    }
 
     return (
 
 
-        <div className={classes} onClick={this.handleClick}>
-          <div ref="snap" className="snap-shot card-panel" style={snapStyle}>
-            <VirtualSnap styles={styles} page={this.props.page}/>
-          </div>
-          <div ref="trap" contentEditable="true" style={trapStyle}></div>
+      <div {...this.dragSourceFor("SNAPSHOT")}
+          {...this.dropTargetFor("SNAPSHOT")}
+        className={classes}
+        style={parentStyles}
+        onClick={this.handleClick}>
+        <div ref="snap" className="snap-shot card-panel" style={snapStyle}>
+          <VirtualSnap styles={styles} page={this.props.page}/>
         </div>
+        <div ref="trap" contentEditable="true" style={trapStyle}></div>
+      </div>
     );
 
   },

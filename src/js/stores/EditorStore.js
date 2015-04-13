@@ -2,7 +2,7 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/AppConstants');
 var assign = require('object-assign');
-var PageModel = require('../models/PageModel.js')
+var PageModel = require('../models/PageModel.js');
 var PageCollection = require('../models/PageCollection.js');
 var ComponentModel = require('../models/Component.js');
 var $ = require('jquery');
@@ -28,7 +28,7 @@ function addItem(title, completed = false) {
   _data.push({title, completed});
 }
 function addPage(template) {
-  _pageCollection.addPage(template);
+  _pageCollection = _pageCollection.addPage(template);
 }
 
 function changeTemplateSelection(template) {
@@ -36,10 +36,11 @@ function changeTemplateSelection(template) {
   debugger;
 }
 function switchPage(page) {
-  _pageCollection.switch(page);
+  _pageCollection = _pageCollection.switch(page);
+
 }
-function addComponent() {
-  _pageCollection.addComponent();
+function addComponent(type, data) {
+  _pageCollection.addComponent(type, data);
 }
 
 function removeComponent(id) {
@@ -50,23 +51,34 @@ function removePage(id) {
   _pageCollection.removePage(id);
 }
 
-function moveSelectionUp(index){
-  if(index>0){
+function moveSelectionUp(index) {
+  if (index > 0) {
     moveSelection(--index);
   }
 }
-function moveSelectionDown(index){
-  if(index<(_pageCollection.getLength()-1)){
+function moveSelectionDown(index) {
+  if (index < (_pageCollection.getLength() - 1)) {
     moveSelection(++index);
   }
 }
 
-function moveSelection(index){
-  _pageCollection.changeSelection(index);
+function moveSelection(index) {
+  _pageCollection = _pageCollection.changeSelection(index);
 }
 
-function reArrangePages(location){
+function reArrangePages(location) {
   _pageCollection.reArrangePages(location);
+}
+
+function updateComponentPosition(id, position) {
+  _pageCollection = _pageCollection.updateComponentPosition(id, position);
+}
+function updateComponentMarkup(index, html) {
+  _pageCollection = _pageCollection.updateComponentMarkup(index, html);
+}
+
+function updatePages(pages) {
+  _pageCollection = _pageCollection.updatePages(pages);
 }
 // Facebook style store creation.
 var EditorStore = assign({}, EventEmitter.prototype, {
@@ -92,7 +104,9 @@ var EditorStore = assign({}, EventEmitter.prototype, {
   emitChange: function () {
     this.emit(Constants.CHANGE_EVENT);
   },
-
+  updateCurrentPage: function (page) {
+    _pageCollection.updateCurrentPage(page);
+  },
 
   // register store with dispatcher, allowing actions to flow through
   dispatcherIndex: AppDispatcher.register(function (payload) {
@@ -127,7 +141,9 @@ var EditorStore = assign({}, EventEmitter.prototype, {
         EditorStore.emitChange();
         break;
       case Constants.ActionTypes.ADD_COMPONENT:
-        addComponent();
+        var type = action.componentType;
+        var data = action.data;
+        addComponent(type, data);
         EditorStore.emitChange();
         break;
       case Constants.ActionTypes.REMOVE_COMPONENT:
@@ -153,6 +169,22 @@ var EditorStore = assign({}, EventEmitter.prototype, {
       case Constants.ActionTypes.RE_ARRANGE_PAGES:
         var location = action.locationOb;
         reArrangePages(location);
+        EditorStore.emitChange();
+        break;
+      case Constants.ActionTypes.UPDATE_COMPONENT_MARKUP:
+        var data = action.data;
+        updateComponentMarkup(data.index, data.html);
+        EditorStore.emitChange();
+        break;
+      case Constants.ActionTypes.UPDATE_COMPONENT_POSITION:
+        var position = action.position;
+        var index = action.index;
+        updateComponentPosition(index, position)
+        EditorStore.emitChange();
+        break;
+      case Constants.ActionTypes.UPDATE_PAGES:
+        var pages = action.pages;
+        updatePages(pages);
         EditorStore.emitChange();
         break;
     }

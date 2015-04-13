@@ -1,4 +1,5 @@
-var React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var PageModel = require('../models/PageModel.js');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var Snapshot = require('./Snapshot.jsx')
@@ -15,7 +16,7 @@ var numberMenuItems = [
   { payload: '4', text: 'Trash', number: 'F12' }
 ];
 var LogoMenu = React.createClass({
-  mixins: [FluxibleMixin],
+  mixins: [FluxibleMixin,PureRenderMixin],
   statics: {
     storeListeners: [EditorSore]
   },

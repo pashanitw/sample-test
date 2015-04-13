@@ -1,7 +1,9 @@
-const React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var Snapshot=require('./Snapshot.jsx');
 var EditorActionCreator=require('../actions/EditorActionCreator.js');
 let TemplateList = React.createClass({
+  mixins:[PureRenderMixin],
   propTypes:{
     templates:React.PropTypes.array.isRequired
   },

@@ -50,7 +50,7 @@ var AddPageButton = React.createClass({
     );
   },
   togglePages:function(){
-   var state=this.state;
+    var state=this.state;
     state.showPages=!state.showPages;
     this.setState(state);
   },

@@ -5,17 +5,32 @@ var utils = require('../utils/utils.js');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 
 class Component {
-constructor(model){
+constructor(type,model){
+  if(!type){
+    console.warn("Did not pass any type to Component Model Constructor");
+  }
   this._id = model&&model.id || utils.getUniqueId();
-  this.type=model?model.type:'';
-  this.styles=model?model.styles:'';
-  this.markup=model?model.markup:'';
+  if(type){
+    this.type=type;
+  }
+  this.styles=model&&model.styles?model.styles:{};
+  this.markup=model&&model.markup?model.markup:'';
+  this.src=model&&model.src?model.src:'';
 }
   updateStyles(styles){
     this.styles=styles
   }
   styleMapper(styles){
     this.styles=styles
+  }
+  setSource(src){
+    this.src=src;
+  }
+  setMarkup(markup){
+    this.markup=markup;
+  }
+  setType(type){
+    this.type=type;
   }
 }
 

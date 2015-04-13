@@ -2,6 +2,8 @@ var AppDispatcher = require('../dispatchers/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/AppConstants');
 var assign = require('object-assign');
+var React=require('react/addons');
+var update=React.addons.update;
 
 var labels=Constants.Labels;
 // data storage
@@ -53,16 +55,22 @@ var ModalStore = assign({}, EventEmitter.prototype, {
   getTemplates() {
     var that = this;
     loadTemplates().done(function (templates) {
-      _modalData.templates = templates;
+      _modalData=update(_modalData,{
+        templates:{$set:templates}
+      });
       that.emitChange();
     })
   },
   openModal:function(){
-    _modalData.isOpen=true;
+    _modalData=update(_modalData,{
+      isOpen:{$set:true}
+    });
     this.emitChange();
   },
   closeModal:function(){
-    _modalData.isOpen=false;
+    _modalData=update(_modalData,{
+      isOpen:{$set:false}
+    });
     this.emitChange();
   },
   // Allow Controller-View to register itself with store

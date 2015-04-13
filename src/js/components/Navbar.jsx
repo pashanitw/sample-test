@@ -1,14 +1,17 @@
-var React = require('react');
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
+var AddComponentButton=require('./AddComponentButton.jsx');
 var AddPageButton=require('./AddPageButton.jsx');
-var AddShapesButton=require('./AddShapesButton.jsx');
-var AddTextButton=require('./AddTextButton.jsx');
 var AddWidgetButton=require('./AddWidgetButton.jsx');
 var ExportButton=require('./ExportButton.jsx');
 var LogoMenu=require('./LogoMenu.jsx');
 var TemplateButton=require('./TemplateButton.jsx');
-var AddImageButton=require('./AddImageButton.jsx');
+var Constants = require('../constants/AppConstants');
+var ComponentTypes=Constants.ComponentTypes
+
 
 var Navbar = React.createClass({
+  mixins:[PureRenderMixin],
   getInitialState: function() {
     return {};
   },
@@ -27,8 +30,10 @@ var Navbar = React.createClass({
           <LogoMenu></LogoMenu>
           <AddPageButton></AddPageButton>
           <TemplateButton></TemplateButton>
-          <AddTextButton></AddTextButton>
-          <AddImageButton></AddImageButton>
+          <AddComponentButton type={ComponentTypes.TEXT}></AddComponentButton>
+          <AddComponentButton type={ComponentTypes.IMAGE}></AddComponentButton>
+          <AddComponentButton type={ComponentTypes.VIDEO}></AddComponentButton>
+          <AddComponentButton type={ComponentTypes.TABLE}></AddComponentButton>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><a href="something.html">Preview</a></li>
             <li><a href="something.html">Export</a></li>

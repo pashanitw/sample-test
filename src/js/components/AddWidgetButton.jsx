@@ -1,6 +1,7 @@
-var React = require('react');
-
+var React=require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var AddWidgetButton = React.createClass({
+  mixins:[PureRenderMixin],
   getInitialState: function() {
     return {};
   },

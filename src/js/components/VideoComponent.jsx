@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Components = React.createClass({
+var VideoComponent = React.createClass({
   getInitialState: function() {
     return {};
   },
@@ -15,4 +15,4 @@ var Components = React.createClass({
   }
 });
 
-module.exports = Components;
+module.exports = VideoComponent;

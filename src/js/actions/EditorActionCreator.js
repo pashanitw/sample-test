@@ -15,9 +15,11 @@ addPage(template){
     template:template
   })
 },
-  addComponent(){
+  addComponent(type,data){
   AppDispatcher.handleViewAction({
-    type:Constants.ActionTypes.ADD_COMPONENT
+    type:Constants.ActionTypes.ADD_COMPONENT,
+    componentType:type,
+    data:data
   })
 },
   removeComponent(id){
@@ -67,6 +69,33 @@ addPage(template){
     AppDispatcher.handleViewAction({
       type:Constants.ActionTypes.RE_ARRANGE_PAGES,
       locationOb:locationOb
+    })
+  },
+  updateComponentMarkup(index,html){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.UPDATE_COMPONENT_MARKUP,
+        data:{
+          index:index,
+          html:html
+        }
+    })
+  },
+  updateRoot(){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.UPDATE_ROOT
+    })
+  },
+  updateComponentPosition(index,position){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.UPDATE_COMPONENT_POSITION,
+      position:position,
+      index:index
+    })
+  },
+  updatePages(pages){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.UPDATE_PAGES,
+      pages:pages
     })
   },
   clearList: function() {

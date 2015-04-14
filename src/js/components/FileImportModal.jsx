@@ -6,6 +6,8 @@ let FileImportStore = require('../stores/FileImportStore.js');
 let EditorActionCreator = require('../actions/EditorActionCreator.js');
 var Constants = require('../constants/AppConstants');
 var ComponentTypes = Constants.ComponentTypes;
+var ImageComponent=require('./ImageComponent.jsx');
+var update=React.addons.update;
 
 let FileImportModal = React.createClass({
   mixins: [PureRenderMixin],
@@ -13,21 +15,31 @@ let FileImportModal = React.createClass({
     storeListeners: [FileImportStore]
   },
   getInitialState() {
+    this.source='';
     return FileImportStore.getState();
   },
   render() {
+    var inputStyle={
+      width:'80%',
+      marginLeft:0
+    };
     return (
       <div  className="modal modal-fixed-footer">
         <div className="modal-content">
           <h4>{this.state.modalHeader}</h4>
-          <div>
-            <p>Browse</p>
-            <input type="text" onChange={this.urlChoosen}/>
+          <div className="file-field input-field">
+            <input ref='urlSelector' className="file-path validate"
+              type="text" onChange={this.urlChoosen}
+              style={inputStyle}
+              placeholder="Enter The Url Here"/>
+            <div className="btn">
+              <span>Browse</span>
+              <input ref='fileSelector' type="file" onChange={this.fileChosen}/>
+            </div>
           </div>
-          <div>
-            <p>Enter Url</p>
-            <input type="file"  onChange={this.fileChosen}/>
-          </div>
+        {
+          this.state.type=='image'?<ImageComponent src={this.state.source}></ImageComponent>:null
+          }
         </div>
         <div className="modal-footer">
           <a href="#" className="waves-effect waves-green btn-flat modal-action" onClick={this.insertMedia}>Import</a>
@@ -37,21 +49,29 @@ let FileImportModal = React.createClass({
   },
   urlChoosen(evt){
     var value=evt.target.value;
-    this.source = value;
+
+    this.setState(update(this.state, {
+        source: {$set:value}
+      })
+    );
   },
   fileChosen(evt) {
     var file = evt.target.files[0];
     var reader = new FileReader();
     reader.onload = (e)=> {
-      this.source = e.target.result;
-    }
+      var value = e.target.result;
+      this.setState(update(this.state, {
+          source: {$set:value}
+        })
+      );
+    };
     reader.readAsDataURL(file);
   },
   insertMedia() {
     switch (this.state.type) {
       case ComponentTypes.IMAGE:
         var data = {
-          source: this.source
+          source: this.state.source
         };
         EditorActionCreator.addComponent(ComponentTypes.IMAGE, data);
         break;
@@ -59,13 +79,16 @@ let FileImportModal = React.createClass({
         console.log("do nothing");
         break;
     }
-    FileImportStore.closeModal();
+    this._closeModal();
 
   },
   componentWillMount() {
     FileImportStore.addChangeListener(this.onChange);
   },
   componentDidMount() {
+  },
+  clearFlags(){
+
   },
   componentWillUpdate(nextProps, nextState) {
     var that=this;
@@ -74,14 +97,13 @@ let FileImportModal = React.createClass({
         var node = this.getDOMNode();
         $(node).openModal({
           complete: function () {
-            that.source='';
-            FileImportStore.closeModal();
+            that._closeModal();
           }
         });
       } else {
         var node = this.getDOMNode();
         $(node).closeModal();
-        FileImportStore.closeModal();
+        that._closeModal();
       }
     }
   },
@@ -89,7 +111,9 @@ let FileImportModal = React.createClass({
     this.setState(FileImportStore.getState());
   },
   _closeModal: function () {
-
+    $(this.refs.fileSelector.getDOMNode()).val('');
+    $(this.refs.urlSelector.getDOMNode()).val('');
+    FileImportStore.closeModal();
   }
 });
 

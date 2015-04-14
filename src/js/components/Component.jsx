@@ -147,14 +147,15 @@ var Component = React.createClass({
     });
   },
   render: function () {
-    const { left, top, width,height } = this.props.styles;
+    const { left, top, width,height,backgroundImage} = this.props.styles;
     var styles = assign({}, {
       position: 'absolute',
       border: '1px dashed gray',
       padding: '0.5rem',
       width: getStyles(this.state.width),
       height: getStyles(this.state.height),
-      overflow:"hidden"
+      overflow:"hidden",
+      backgroundImage:backgroundImage
     });
     function getStyles(style, name) {
       style+='';

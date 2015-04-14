@@ -28,7 +28,8 @@ var FileImportStore = assign({}, EventEmitter.prototype, {
   openModal:function(type){
     _modalData=update(_modalData,{
       isOpen:{$set:true},
-      type:{$set:type}
+      type:{$set:type},
+      source:{$set:''}
     });
     this.emitChange();
   },

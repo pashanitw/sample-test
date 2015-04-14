@@ -35,7 +35,7 @@ var DropDownMenu = React.createClass({
   },
 
   componentDidMount: function() {
-    if (this.props.autoWidth) this._setWidth();
+ //   if (this.props.autoWidth) this._setWidth();
     if (this.props.hasOwnProperty('selectedIndex')) this._setSelectedIndex(this.props);
   },
 
@@ -94,7 +94,7 @@ var DropDownMenu = React.createClass({
   },
 
   _onMenuItemClick: function(e, key, payload) {
-    if (this.props.onChange && this.state.selectedIndex !== key) this.props.onChange(e, key, payload);
+    if (this.props.onChange ) this.props.onChange(e, key, payload);
     this.setState({
       selectedIndex: key,
       open: false

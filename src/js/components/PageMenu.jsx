@@ -19,7 +19,10 @@ let PageMenu = React.createClass({
   },
   render() {
     var style = {
-      position: 'absolute'
+      position: 'absolute',
+      height:'auto',
+      width:'auto',
+      zIndex:2000
     };
     var container = {
       position: 'absolute',
@@ -31,8 +34,9 @@ let PageMenu = React.createClass({
 
     };
     return (
-      <div style={container} className={classes}>
-        <Paper zDepth={5} innerStyle={style}>
+      this.props.visible?
+        <div style={style}>
+        <Paper zDepth={5}>
 
            {
              this.props.menuItems.map((page, index) => {
@@ -42,7 +46,8 @@ let PageMenu = React.createClass({
              })
              }
         </Paper>
-      </div>
+        </div>
+     :null
     );
   }
 });

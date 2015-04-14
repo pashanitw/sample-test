@@ -24,9 +24,10 @@ var AddPageButton = React.createClass({
     return (
       <CustomDropDownMenu
         menuItems={this.state.pageCollection.templates}
-        onChange={this._onItemClick}>
+        onChange={this.addPage}>
         <a ref="addComponent"
-          className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey">
+          className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey"
+        >
           <i className="mdi-content-add"></i>
         </a>
       </CustomDropDownMenu>
@@ -61,7 +62,6 @@ var AddPageButton = React.createClass({
     this.setState(EditorSore.getState());
   },
   addPage(template) {
-    this.togglePages();
     EditorActionCreator.addPage(template);
   }
 });

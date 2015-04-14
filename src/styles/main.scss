@@ -30,14 +30,30 @@
 }
 
 .tree-view{
-  width: 25%;
+  width: 184px;
   background: rgb(245, 242, 240);
   margin-left: 15px;
   float: left;
 }
 .editor-view{
+}
+.editor-container{
   float: left;
+  width:calc(100% - 184px);
+  .mui-paper{
+    margin: 0 auto;
+    width: 956px;
+    height: 630px;
+  }
+  padding: 16px;
 }
 .add-component{
   margin-left: 26px;
+}
+.clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }

@@ -8,7 +8,8 @@ var Constants = require('../constants/AppConstants');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var ComponentModel = require('../models/Component.js');
 var Component = require('./Component.jsx');
-
+var mui = require('material-ui');
+var Paper=mui.Paper;
 
 
 var reactDnd = require('react-dnd');
@@ -48,10 +49,10 @@ var CanvasEditor = React.createClass({
     if (selectedPage) {
       components = selectedPage.components.map(function (component, index) {
         return (
-            <Component key={component._id} {...component}
-              index={index}
-              id={component._id}>
-            </Component>
+          <Component key={component._id} {...component}
+            index={index}
+            id={component._id}>
+          </Component>
         )
 
       })
@@ -63,11 +64,16 @@ var CanvasEditor = React.createClass({
       selectedPage = this.state.currentPage,
       components = [];
     return (
-      <div className="editor-view">
+      <div className="editor-container">
+        <Paper zDepth={5}>
+          <div className="editor-view">
       {
         this._renderComponents(selectedPage)
 
         }
+          </div>
+        </Paper>
+
       </div>
     )
   },

@@ -9,7 +9,7 @@ var EditorView = React.createClass({
   mixins:[PureRenderMixin],
   render: function () {
     return (
-      <div className="editor-area">
+      <div className="editor-area clearfix">
         <TreeView/>
         <CanvasEditor/>
       </div>

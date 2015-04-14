@@ -32,9 +32,16 @@ var position="position:absolute;"
     getStyles(this.styles.height, 'height') +
     getStyles(this.styles.top, 'top') +
     getStyles(this.styles.left, 'left')+
+    (this.styles.backgroundImage?"background-image:"+this.styles.backgroundImage:'')+
     position;
 });
 
+Handlebars.registerHelper("ifcond", function(conditional, options) {
+  if (options.hash.desired === options.hash.type) {
+    return options.fn(this);
+  }
+  return '';
+});
 
 var AddPageButton = React.createClass({
   mixins:[PureRenderMixin],

@@ -81,15 +81,22 @@
     <?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE html>
     <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta content="width=900, height=600" name="viewport" />
+    <meta content="width=956, height=630" name="viewport" />
     <title></title>
   </head>
   <body>
   <p>&#160;</p>
   {{#each components}}
+
+  {{#ifcond type desired="text" type=type}}
   <div style="{{renderStyles}}">
     {{{markup}}}
   </div>
+  {{/ifcond}}
+  {{#ifcond type desired="image" type=type}}
+  <img src="{{src}}" style="{{renderStyles}}"/>
+  {{/ifcond}}
+
   {{/each}}
   </body>
   </html>

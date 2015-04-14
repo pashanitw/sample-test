@@ -6,17 +6,25 @@ var Snapshot = require('./Snapshot.jsx')
 require('react/addons');
 var EditorSore = require('../stores/EditorStore.js');
 var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
-var mui = require('material-ui');
-var Menu=mui.Menu;
-var DropDownMenu=mui.DropDownMenu;
+var DropDownMenu=require('./DropDownMenu.jsx');
+var cx = React.addons.classSet;
 
 var numberMenuItems = [
-  { payload: '1', text: 'All', number: 'F2' },
-  { payload: '3', text: 'Uncategorized', number: 'F6'},
-  { payload: '4', text: 'Trash', number: 'F12' }
+  { payload: '1', text: 'new' },
+  { payload: '2', text: 'open'},
+  { payload: '3', text: 'save' },
+  { payload: '4', text: 'save as..' },
+  { payload: '4', text: 'undo',number: 'ctrl+z' },
+  { payload: '4', text: 'redo',number: 'ctrl+y' },
+  { payload: '4', text: 'cut',number: 'ctrl+x' },
+  { payload: '4', text: 'copy',number: 'ctrl+c' },
+  { payload: '4', text: 'paste',number: 'ctrl+v' },
+  { payload: '4', text: 'delete',number: 'Del' },
+  { payload: '4', text: 'import' },
+  { payload: '4', text: 'export' }
 ];
 var LogoMenu = React.createClass({
-  mixins: [FluxibleMixin,PureRenderMixin],
+  mixins: [FluxibleMixin],
   statics: {
     storeListeners: [EditorSore]
   },
@@ -26,17 +34,26 @@ var LogoMenu = React.createClass({
    }
   },
   render: function () {
+    var iconStyle={
+      lineHeight: '34px'
+    };
+    var classes=cx({
+      'mdi-hardware-keyboard-arrow-down':true,
+      'right':true
+    });
     var style = {
       display: 'inline-block',
       position: 'relative',
       color:'#000'
     };
     var that = this;
-    var cx = React.addons.classSet;
+
     return (
-      <div style={style} className={"nextbook-logo"}>
-        <a href="#" className="brand-logo">Nextbook</a>
-        <DropDownMenu menuItems={numberMenuItems} onChange={this._onItemClick} />
+      <div style={style}>
+        <DropDownMenu menuItems={numberMenuItems} onChange={this._onItemClick} >
+          <a className="waves-effect waves-light btn">
+            <i className={classes} style={iconStyle}></i>Nextbook</a>
+        </DropDownMenu>
       </div>
 
     );

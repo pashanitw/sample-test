@@ -4,11 +4,12 @@ body, html {
 }
 
 body {
+  padding: 0 10px;
   #main {
     height: 100%;
     .app-container {
       height: 100%;
-
+      border: 1px solid #eee;
       nav.tool-bar {
         height: 10%;
       }
@@ -41,6 +42,9 @@ body {
       width: auto;
     }
   }
+  .toolbar{
+    padding: 0 14px;
+  }
 }
 
 .editor-view {
@@ -64,7 +68,7 @@ body {
 }
 
 .app-container .toolbar {
-  overflow: visible
+  overflow: visible;
 }
 
 .mui-svg-icon {

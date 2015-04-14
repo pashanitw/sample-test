@@ -154,7 +154,7 @@ var Component = React.createClass({
       padding: '0.5rem',
       width: getStyles(this.state.width),
       height: getStyles(this.state.height),
-      overflow:"scroll"
+      overflow:"hidden"
     });
     function getStyles(style, name) {
       style+='';

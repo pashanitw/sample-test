@@ -5,6 +5,7 @@ var Snapshot = require('./Snapshot.jsx')
 require('react/addons');
 var EditorSore = require('../stores/EditorStore.js');
 var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
+var CustomDropDownMenu=require("./CustomDropDownMenu.jsx");
 var AddPageButton = React.createClass({
   mixins: [FluxibleMixin],
   statics: {
@@ -21,32 +22,14 @@ var AddPageButton = React.createClass({
     var that = this;
     var cx = React.addons.classSet;
     return (
-      <div style={style}>
+      <CustomDropDownMenu
+        menuItems={this.state.pageCollection.templates}
+        onChange={this._onItemClick}>
         <a ref="addComponent"
-          className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey"
-          onClick={this.togglePages}>
+          className="add-component dropdown-button  btn-floating btn-large waves-effect waves-light grey">
           <i className="mdi-content-add"></i>
         </a>
-      {
-        this.state.showPages ?
-          (<ul className='add-templates'>
-           {
-             this.state.pageCollection.templates.map((page, index) => {
-               var classes = cx({
-                 "something": true,
-                 'child': page.type == "page"
-               });
-               return <li key={index}>
-                 <Snapshot page={page} clickSnap={that.addPage.bind(null, page)}/>
-               </li>
-
-             })
-             }
-          </ul>) : null
-        }
-
-      </div>
-
+      </CustomDropDownMenu>
     );
   },
   togglePages:function(){

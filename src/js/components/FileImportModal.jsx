@@ -13,7 +13,6 @@ let FileImportModal = React.createClass({
     storeListeners: [FileImportStore]
   },
   getInitialState() {
-
     return FileImportStore.getState();
   },
   render() {
@@ -23,7 +22,7 @@ let FileImportModal = React.createClass({
           <h4>{this.state.modalHeader}</h4>
           <div>
             <p>Browse</p>
-            <input type="text"/>
+            <input type="text" onChange={this.urlChoosen}/>
           </div>
           <div>
             <p>Enter Url</p>
@@ -36,11 +35,15 @@ let FileImportModal = React.createClass({
       </div>
     );
   },
+  urlChoosen(evt){
+    var value=evt.target.value;
+    this.source = value;
+  },
   fileChosen(evt) {
     var file = evt.target.files[0];
     var reader = new FileReader();
     reader.onload = (e)=> {
-      this.uriData = e.target.result;
+      this.source = e.target.result;
     }
     reader.readAsDataURL(file);
   },
@@ -48,7 +51,7 @@ let FileImportModal = React.createClass({
     switch (this.state.type) {
       case ComponentTypes.IMAGE:
         var data = {
-          source: this.uriData
+          source: this.source
         };
         EditorActionCreator.addComponent(ComponentTypes.IMAGE, data);
         break;
@@ -56,6 +59,7 @@ let FileImportModal = React.createClass({
         console.log("do nothing");
         break;
     }
+    FileImportStore.closeModal();
 
   },
   componentWillMount() {
@@ -64,11 +68,13 @@ let FileImportModal = React.createClass({
   componentDidMount() {
   },
   componentWillUpdate(nextProps, nextState) {
+    var that=this;
     if (this.state.isOpen !== nextState.isOpen) {
       if (nextState.isOpen) {
         var node = this.getDOMNode();
         $(node).openModal({
           complete: function () {
+            that.source='';
             FileImportStore.closeModal();
           }
         });

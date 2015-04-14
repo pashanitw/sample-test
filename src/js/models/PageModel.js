@@ -14,7 +14,7 @@ class PageModel {
     this.components = [];
     if (model) {
       this._id = model.id || utils.getUniqueId();
-      this.name = model.name;
+      this.name = "Page-"+this._id;
       this.components = model.components ? model.components.map(function (item, index) {
         return new Component(item.type,item);
       }) : [];

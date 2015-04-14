@@ -54,11 +54,6 @@ class PageCollection {
   pageComparator() {
     console.log("slide added");
   }
-
-  updateIndexes() {
-
-  }
-
   pagesReorganized() {
 
   }
@@ -67,8 +62,6 @@ class PageCollection {
 
     var self = this;
     var model = new PageModel(item);
-    item.name = "page-" + model._id;
-    this.pages.push(model);
     this.lastSelected.unselect();
     $splice:[[this.lastSelected.index, 1, this.lastSelected]]
     var collection;
@@ -88,8 +81,8 @@ class PageCollection {
 
       });
     }
-
-    this.pages=this.updateIndexes(collection.pages);
+   this.pages=collection.pages;
+   this.updateIndexes();
     return this.switch(model);
 
   }
@@ -139,12 +132,11 @@ class PageCollection {
     this.lastSelected.removeComponent(id);
   }
 
-  updateIndexes(pages) {
-    pages.forEach((page, index)=> {
+  updateIndexes() {
+    this.pages.forEach((page, index)=> {
       page.index = index;
       console.log(page.index);
     })
-    return pages;
   }
 
   removePage(id) {

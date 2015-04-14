@@ -9,7 +9,10 @@ var update=React.addons.update;
 var _modalData = {
   header:labels.modalHeader,
   isOpen:false,
-  templates:[]}
+  templates:[],
+  url:'',
+  file:''
+}
 
 // Facebook style store creation.
 var FileImportStore = assign({}, EventEmitter.prototype, {

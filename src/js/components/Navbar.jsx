@@ -24,16 +24,30 @@ var Navbar = React.createClass({
   },
 
   render: function() {
+   const functionButtons={
+      display:"inline-block",
+      marginLeft:10
+    };
+    const componentTypes={
+      display:'inline-block',
+      marginLeft:10
+    };
     return (
       <nav className="toolbar">
         <div className="nav-wrapper">
+
           <LogoMenu></LogoMenu>
-          <AddPageButton></AddPageButton>
+
+          <div style={functionButtons}>
+            <AddPageButton></AddPageButton>
           <TemplateButton></TemplateButton>
+            </div>
+          <div style={componentTypes}>
           <AddComponentButton type={ComponentTypes.TEXT}></AddComponentButton>
           <AddComponentButton type={ComponentTypes.IMAGE}></AddComponentButton>
           <AddComponentButton type={ComponentTypes.VIDEO}></AddComponentButton>
           <AddComponentButton type={ComponentTypes.TABLE}></AddComponentButton>
+          </div>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><a href="something.html">Preview</a></li>
             <li><a href="something.html">Export</a></li>

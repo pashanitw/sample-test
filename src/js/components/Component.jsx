@@ -168,6 +168,10 @@ var Component = React.createClass({
 
     var handleSize=[20,20];
     return (
+      this.props.behaviour=='fixed'?
+        <div style={this.props.styles}
+          dangerouslySetInnerHTML={{__html: this.props.markup}}>
+        </div>:
       <Draggable
         zIndex={100}
         start={{x: left, y: top}}

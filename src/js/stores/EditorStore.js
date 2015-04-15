@@ -40,7 +40,7 @@ function switchPage(page) {
 
 }
 function addComponent(type, data) {
-  _pageCollection.addComponent(type, data);
+  _pageCollection=_pageCollection.addComponent(type, data);
 }
 
 function removeComponent(id) {
@@ -79,6 +79,9 @@ function updateComponentMarkup(index, html) {
 
 function updatePages(pages) {
   _pageCollection = _pageCollection.updatePages(pages);
+}
+function addGutter(pages){
+  _pageCollection= _pageCollection.addGutter();
 }
 // Facebook style store creation.
 var EditorStore = assign({}, EventEmitter.prototype, {
@@ -185,6 +188,10 @@ var EditorStore = assign({}, EventEmitter.prototype, {
       case Constants.ActionTypes.UPDATE_PAGES:
         var pages = action.pages;
         updatePages(pages);
+        EditorStore.emitChange();
+        break;
+      case Constants.ActionTypes.ADD_GUTTER:
+        addGutter();
         EditorStore.emitChange();
         break;
     }

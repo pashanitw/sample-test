@@ -26,7 +26,9 @@ var Navbar = React.createClass({
   componentDidMount: function () {
   },
  gutterChange(evt){
-   console.log(evt.target.value);
+   if(evt.target.checked){
+     EditorActionCreator.addGutter();
+   }
  },
   render: function () {
     const functionButtons = {
@@ -54,6 +56,15 @@ var Navbar = React.createClass({
             <AddComponentButton type={ComponentTypes.TABLE}></AddComponentButton>
           </div>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li>
+              <div className="switch gutter-switch">
+                <label>
+                  <input type="checkbox" onChange={this.enableGrid}/>
+                  <span className="lever"></span>
+                </label>
+                <span>Grid</span>
+              </div>
+            </li>
             <li>
               <div className="switch gutter-switch">
                 <label>

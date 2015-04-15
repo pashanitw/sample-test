@@ -98,9 +98,15 @@ addPage(template){
       pages:pages
     })
   },
+  addGutter(){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.ADD_GUTTER
+    })
+  },
   clearList: function() {
     console.warn('clearList action not yet implemented...');
   },
+
 
   completeTask: function(task) {
     console.warn('completeTask action not yet implemented...');

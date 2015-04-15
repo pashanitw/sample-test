@@ -125,10 +125,30 @@ class PageCollection {
   }
 
   addComponent(type, data) {
-    this.lastSelected = this.lastSelected.addComponent(type, data);
+    var self=this;
+     this.lastSelected=this.lastSelected.addComponent(type, data);
+    var pages = update(this.pages, {
+      $splice: [[this.lastSelected.index, 1, this.lastSelected]]
+    });
+    var pageCollection = update(self, {
+      pages: {
+        $set: pages
+      }
+    });
+    return pageCollection;
   }
   addGutter(){
-   this.lastSelected=this.lastSelected.addGutter();
+    var self=this;
+    this.lastSelected=this.lastSelected.addGutter();
+    var pages = update(this.pages, {
+      $splice: [[this.lastSelected.index, 1, this.lastSelected]]
+    });
+    var pageCollection = update(self, {
+      pages: {
+        $set: pages
+      }
+    });
+    return pageCollection;
   }
   removeGutter(){
     this.lastSelected=this.lastSelected.removeGutter()

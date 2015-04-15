@@ -69,6 +69,7 @@ var CanvasStore = assign({}, EventEmitter.prototype, {
       case Constants.ActionTypes.MOVE_SELECTION_UP:
       case Constants.ActionTypes.MOVE_SELECTION_DOWN:
       case  Constants.ActionTypes.ADD_COMPONENT:
+      case Constants.ActionTypes.ADD_GUTTER:
         AppDispatcher.waitFor([EditorStore.dispatcherIndex]);
         CanvasStore.emitChange();
         break;

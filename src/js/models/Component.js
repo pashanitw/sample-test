@@ -16,6 +16,7 @@ constructor(type,model){
   this.styles=model&&model.styles?model.styles:{};
   this.markup=model&&model.markup?model.markup:'';
   this.src=model&&model.src?model.src:'';
+  this.behaviour=model&&model.behaviour?model.behaviour:'';
 }
   updateStyles(styles){
     this.styles=styles

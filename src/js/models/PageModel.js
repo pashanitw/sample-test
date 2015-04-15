@@ -74,9 +74,19 @@ class PageModel {
     return page;
   }
   addGutter(){
-    var gutterStyles=update({},{$set:Constants.GUTTER_STYLE})
-    var component=new Component(Constants.ComponentTypes.text,gutterStyles);
-    return addComponent()
+    var self=this;
+    var gutter=update({},{
+    styles:{$set:Constants.GUTTER_STYLE},
+      behaviour:{$set:'fixed'}
+  });
+    var component=new Component(Constants.ComponentTypes.text,gutter);
+    var components=update(this.components,{$push:[component]});
+    var page= update(self, {
+      components: {
+        $set:components
+      }
+    });
+    return page;
   }
 
   removeComponent(id) {

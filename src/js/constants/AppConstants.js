@@ -20,7 +20,8 @@ module.exports = {
     UPDATE_ROOT: null,
     INSERT_IMAGE: null,
     UPDATE_COMPONENT_POSITION:null,
-    UPDATE_PAGES:null
+    UPDATE_PAGES:null,
+    ADD_GUTTER:null
   }),
   ItemType: "Component",
   ComponentTypes: {

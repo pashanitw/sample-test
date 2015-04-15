@@ -5,9 +5,12 @@ var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var Snapshot = require('./Snapshot.jsx')
 require('react/addons');
 var EditorSore = require('../stores/EditorStore.js');
+var ModalSore = require('../stores/ModalStore.js');
 var FluxibleMixin = require('../mixins/FliuxibleMixin.js');
 var DropDownMenu=require('./DropDownMenu.jsx');
 var cx = React.addons.classSet;
+var ExportButton=require("./ExportButton.jsx");
+
 
 var numberMenuItems = [
   { payload: '1', text: 'new' },
@@ -59,7 +62,10 @@ var LogoMenu = React.createClass({
     );
   },
   _onItemClick(e, key, menuItem){
-    console.log(menuItem);
+   if(menuItem.payload==1){
+     ModalSore.openModal();
+     ExportButton.show();
+   }
   },
   togglePages:function(){
     var state=this.state;
@@ -73,6 +79,7 @@ var LogoMenu = React.createClass({
   },
   onChange() {
     this.setState(EditorSore.getState());
+
   }
 });
 

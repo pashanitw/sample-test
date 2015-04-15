@@ -1,5 +1,5 @@
 var React = require('react');
-var mui = require('material-ui')
+var mui = require('material-ui');
 var Classable = mui.Mixins.Classable;
 var ClickAwayable = mui.Mixins.ClickAwayable;
 var DropDownArrow = mui.DropDownIcon;

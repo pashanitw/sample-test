@@ -20,20 +20,20 @@ Handlebars.registerHelper('spine', function (items, options) {
 });
 Handlebars.registerHelper('renderStyles', function () {
   function getStyles(style, name) {
-    style+='';
     if (style) {
+      style+='';
       return name + ":" + (style.match(/(.*?)%$/) ? style : style + "px") + ";";
     }
-    return '';
+    return name+ ":0;";
 
   }
-var position="position:absolute;"
+var position="position:absolute;";
   return getStyles(this.styles.width, 'width') +
     getStyles(this.styles.height, 'height') +
     getStyles(this.styles.top, 'top') +
     getStyles(this.styles.left, 'left')+
-    (this.styles.backgroundImage?"background-image:"+this.styles.backgroundImage:'')+
-    position;
+    position+
+    (this.styles.backgroundImage?(";background-image:"+this.styles.backgroundImage+";"):'');
 });
 
 Handlebars.registerHelper("ifcond", function(conditional, options) {
@@ -47,6 +47,11 @@ var AddPageButton = React.createClass({
   mixins:[PureRenderMixin],
   getInitialState: function () {
     return {};
+  },
+  statics:{
+    show:function(){
+      console.log("in show method",this);
+    }
   },
   componentWillMount: function () {
 

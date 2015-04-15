@@ -29,6 +29,13 @@ module.exports = {
     VIDEO: "video",
     TABLE: "table"
   },
+  GUTTER_STYLE:{
+    width:0,
+    height:'100%',
+    border:'3px solid black',
+    left:'50%',
+    top:0
+  },
   Constants: keyMirror({
     LEVEL_1: null,
     LEVEL_2: null

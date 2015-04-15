@@ -73,6 +73,11 @@ class PageModel {
     });
     return page;
   }
+  addGutter(){
+    var gutterStyles=update({},{$set:Constants.GUTTER_STYLE})
+    var component=new Component(Constants.ComponentTypes.text,gutterStyles);
+    return addComponent()
+  }
 
   removeComponent(id) {
     this.components.some((component, index)=> {

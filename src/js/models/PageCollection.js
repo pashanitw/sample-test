@@ -127,7 +127,12 @@ class PageCollection {
   addComponent(type, data) {
     this.lastSelected = this.lastSelected.addComponent(type, data);
   }
-
+  addGutter(){
+   this.lastSelected=this.lastSelected.addGutter();
+  }
+  removeGutter(){
+    this.lastSelected=this.lastSelected.removeGutter()
+  }
   removeComponent(id) {
     this.lastSelected.removeComponent(id);
   }

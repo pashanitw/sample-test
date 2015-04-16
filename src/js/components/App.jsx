@@ -29,6 +29,10 @@ var App = React.createClass({
   },
 
   componentDidMount: function () {
+    CKEDITOR.on('configLoaded', function (event) {
+      var editor=event.editor;
+      alert(editor.config)
+  })
   },
 
   componentWillUnmount: function () {

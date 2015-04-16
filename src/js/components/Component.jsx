@@ -177,7 +177,8 @@ var Component = React.createClass({
         start={{x: left, y: top}}
         onStart={this.handleStart}
         onDrag={this.handleDrag}
-        onStop={this.handleStop}>
+        onStop={this.handleStop}
+        grid={[20, 20]}>
         <Resizable
           handleSize={handleSize}
           width={this.state.width}

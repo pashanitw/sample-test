@@ -23,7 +23,7 @@ var TextComponent = React.createClass({
     var props = this.props;
     var that = this;
     return (
-      <div>
+      <div style={this.props.childStyle}>
         {
           this.props.isEditable?
 
@@ -62,13 +62,21 @@ var TextComponent = React.createClass({
     if(this.props.isEditable){
       var element = this.refs.editable.getDOMNode();
       CKEDITOR.inline(element);
+      CKEDITOR.on('configLoaded', function (event) {
+        var editor=event.editor;
+        alert(editor.config)
+      })
       $(element).focus();
     }
   },
   componentDidUpdate(){
     if(this.props.isEditable){
       var element = this.refs.editable.getDOMNode();
+      CKEDITOR.editorConfig = function( config ) {
+        config.allowedContent = true;
+      };
       CKEDITOR.inline(element);
+
       $(element).focus();
     }
   },

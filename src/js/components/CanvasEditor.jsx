@@ -66,7 +66,7 @@ var CanvasEditor = React.createClass({
     return (
       <div className="editor-container">
         <Paper zDepth={5}>
-          <div className="editor-view">
+          <div className="editor-view gradient-pattern">
       {
         this._renderComponents(selectedPage)
 

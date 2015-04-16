@@ -54,6 +54,18 @@
           "_id": "0",
           "type": "text",
           "styles": {
+            "width": 500,
+            "height": 200,
+            "left": 10,
+            "top": 20
+          },
+          "className":"heading-component",
+          "markup": "<div class='heading-component'><div class='arrow-up'> <span>1</span></div><div class='rectangle'> <span>CHAPTER</span> </div></div>"
+        },
+        {
+          "_id": "0",
+          "type": "text",
+          "styles": {
             "width": 430,
             "height": 200,
             "left": 600,

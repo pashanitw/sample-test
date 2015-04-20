@@ -3,6 +3,7 @@
  */
 var utils = require('../utils/utils.js');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
+var ComponentTypes=require('../constants/AppConstants.js').ComponentTypes;
 
 class Component {
 constructor(type,model){
@@ -17,6 +18,9 @@ constructor(type,model){
   this.markup=model&&model.markup?model.markup:'';
   this.src=model&&model.src?model.src:'';
   this.behaviour=model&&model.behaviour?model.behaviour:'';
+  if(type==ComponentTypes.TABLE){
+    this.rows=model.rows;
+  }
 
 }
   updateStyles(styles){

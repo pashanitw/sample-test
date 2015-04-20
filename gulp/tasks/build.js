@@ -99,3 +99,7 @@ gulp.task('moveMaterializeFonts', function(){
   gulp.src('./bower_components/materialize/font/**/*.*')
     .pipe(gulp.dest('dist/font'));
 });
+gulp.task('moveMyriaFonts', function(){
+  gulp.src('./src/fonts/**/*.*')
+    .pipe(gulp.dest('dist/font'));
+});

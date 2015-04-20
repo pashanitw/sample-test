@@ -5,10 +5,9 @@ var MousetrapMixin = require('../mixins/MousetrapMixin.js');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var Constants = require('../constants/AppConstants');
 var ComponentTypes = Constants.ComponentTypes;
-var reactDnd=require('react-dnd');
+var reactDnd = require('react-dnd');
 var _ = require("lodash");
-var update=React.addons.update;
-
+var update = React.addons.update;
 
 
 var TextComponent = React.createClass({
@@ -25,73 +24,69 @@ var TextComponent = React.createClass({
     return (
       <div style={this.props.childStyle}>
         {
-          this.props.isEditable?
+          this.props.isEditable ?
 
-          <div ref="editable" contentEditable="true" dangerouslySetInnerHTML={{__html: props.markup}}
-            onBlur={this.updateComponentMarkup}>
-          </div>
+            <div ref="editable" contentEditable="true" dangerouslySetInnerHTML={{__html: props.markup}}
+              onBlur={this.updateComponentMarkup}>
+            </div>
             :
             <div ref="uneditable" dangerouslySetInnerHTML={{__html: props.markup}}
-             >
+            >
             </div>
 
           }
       </div>
 
 
-)
+    )
   },
-  enableEditable(evt){
+  enableEditable(evt) {
     evt.preventDefault();
 
     var element = that.refs.editable.getDOMNode();
     $(element).focus();
-    if(this.props.elementFocused){
+    if (this.props.elementFocused) {
       this.props.elementFocused();
     }
-    var that=this;
+    var that = this;
     _.debounce(function () {
 
     }, 300)();
 
 
   },
-  mousedown(){
+  mousedown() {
   },
   componentDidMount() {
-    if(this.props.isEditable){
+    if (this.props.isEditable) {
       var element = this.refs.editable.getDOMNode();
       CKEDITOR.inline(element);
-      CKEDITOR.on('configLoaded', function (event) {
-        var editor=event.editor;
-        alert(editor.config)
-      })
       $(element).focus();
     }
   },
-  componentDidUpdate(){
-    if(this.props.isEditable){
+  componentDidUpdate() {
+    if (this.props.isEditable) {
       var element = this.refs.editable.getDOMNode();
-      CKEDITOR.editorConfig = function( config ) {
-        config.allowedContent = true;
-      };
-      CKEDITOR.inline(element);
+
+      CKEDITOR.inline(element, {
+        allowedContent: true
+      });
 
       $(element).focus();
     }
   },
-  componentWillUpdate(){
-   this. _destroyCk();
+  componentWillUpdate() {
+    this._destroyCk();
   },
   _destroyCk() {
     for (var name in CKEDITOR.instances) {
       CKEDITOR.instances[name].destroy()
     }
   },
-  updateComponentMarkup(evt){
+  updateComponentMarkup(evt) {
 
-    var html= $(evt.target).html();
-    EditorActionCreator.updateComponentMarkup(this.props.index,html)
+    var html = $(evt.target).html();
+    EditorActionCreator.updateComponentMarkup(this.props.index, html)
 
   }
 

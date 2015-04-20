@@ -106,7 +106,15 @@ addPage(template){
   clearList: function() {
     console.warn('clearList action not yet implemented...');
   },
-
+  updateTableCell(index,rowIndex,columnIndex, html){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.UPDATE_TABLE_CELL,
+      index:index,
+      rowIndex:rowIndex,
+      columnIndex:columnIndex,
+      html:html
+    })
+  },
 
   completeTask: function(task) {
     console.warn('completeTask action not yet implemented...');

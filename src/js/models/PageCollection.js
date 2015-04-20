@@ -241,6 +241,20 @@ class PageCollection {
     });
     return pageCollection;
   }
+  updateTableCell(props) {
+    const {index,rowIndex,columnIndex,html}=props
+    var self = this;
+    this.lastSelected = this.lastSelected.updateTableCell(index,rowIndex,columnIndex,html);
+    var pages = update(this.pages, {
+      $splice: [[this.lastSelected.index, 1, this.lastSelected]]
+    });
+    var pageCollection = update(self, {
+      pages: {
+        $set: pages
+      }
+    });
+    return pageCollection;
+  }
 
   updatePages(pages) {
     var self = this;

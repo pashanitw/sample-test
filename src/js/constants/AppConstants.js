@@ -21,7 +21,8 @@ module.exports = {
     INSERT_IMAGE: null,
     UPDATE_COMPONENT_POSITION:null,
     UPDATE_PAGES:null,
-    ADD_GUTTER:null
+    ADD_GUTTER:null,
+    UPDATE_TABLE_CELL:null
   }),
   ItemType: "Component",
   ComponentTypes: {

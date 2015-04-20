@@ -58,11 +58,13 @@
   },
   "dependencies": {
     "flux": "^2.0.1",
+    "griddle-react": "^0.2.12",
     "material-ui": "^0.7.0",
     "material-ui-sass": "^0.5.3",
     "object-assign": "^2.0.0",
     "react": "^0.12.2",
-    "react-tap-event-plugin": "^0.1.4"
+    "react-tap-event-plugin": "^0.1.4",
+    "underscore": "^1.8.3"
   },
   "browserify": {
     "transform": [

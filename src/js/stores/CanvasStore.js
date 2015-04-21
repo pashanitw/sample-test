@@ -75,6 +75,7 @@ var CanvasStore = assign({}, EventEmitter.prototype, {
       case  Constants.ActionTypes.ADD_COMPONENT:
       case Constants.ActionTypes.ADD_GUTTER:
       case Constants.ActionTypes.HANDLE_GUTTER:
+      case  Constants.ActionTypes.TEMPLATE_SELECTED:
         AppDispatcher.waitFor([EditorStore.dispatcherIndex]);
         CanvasStore.emitChange();
         break;

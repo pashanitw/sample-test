@@ -35,7 +35,6 @@ function addPage(template) {
 
 function changeTemplateSelection(template) {
   _pageCollection = new PageCollection(template);
-  debugger;
 }
 function switchPage(page) {
   _pageCollection = _pageCollection.switch(page);

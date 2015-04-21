@@ -1,3 +1,5 @@
+var React=require('react/addons');
+var update=React.addons.update;
 var AppDispatcher = require('../dispatchers/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/AppConstants');
@@ -88,6 +90,16 @@ function updateTableCell(props){
   _pageCollection=_pageCollection.updateTableCell(props);
 }
 
+
+function updateState(){
+  state={
+    pageCollection: _pageCollection
+  }
+}
+function handleGutter(value){
+  _pageCollection=_pageCollection.handleGutter(value);
+}
+var state;
 // Facebook style store creation.
 var EditorStore = assign({}, EventEmitter.prototype, {
 
@@ -96,9 +108,8 @@ var EditorStore = assign({}, EventEmitter.prototype, {
     return editorModel;
   },
   getState: function () {
-    return {
-      pageCollection: _pageCollection
-    }
+    updateState();
+    return state;
   },
 
   // Allow Controller-View to register itself with store
@@ -202,6 +213,11 @@ var EditorStore = assign({}, EventEmitter.prototype, {
         updateTableCell(action);
         EditorStore.emitChange();
         break;
+      case Constants.ActionTypes.HANDLE_GUTTER:
+        handleGutter(action.value);
+        EditorStore.emitChange();
+        break;
+
     }
   })
 

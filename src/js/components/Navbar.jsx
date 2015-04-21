@@ -10,7 +10,9 @@ var Constants = require('../constants/AppConstants');
 var ComponentTypes = Constants.ComponentTypes;
 var mui = require('material-ui');
 var Toggle = mui.Toggle;
+var SwitchButton=require('./SwitchButton.jsx');
 var EditorActionCreator=require('../actions/EditorActionCreator.js');
+var GutterButton=require('./GutterButton.jsx');
 
 
 var Navbar = React.createClass({
@@ -26,10 +28,12 @@ var Navbar = React.createClass({
   componentDidMount: function () {
   },
  gutterChange(evt){
-   if(evt.target.checked){
-     EditorActionCreator.addGutter();
-   }
+     EditorActionCreator.addGutter(evt.target.checked);
+
  },
+  toggleGrid(evt){
+      EditorActionCreator.toggleGrid();
+  },
   render: function () {
     const functionButtons = {
       display: "inline-block",
@@ -59,21 +63,15 @@ var Navbar = React.createClass({
             <li>
               <div className="switch gutter-switch">
                 <label>
-                  <input type="checkbox" onChange={this.enableGrid}/>
+                  <input type="checkbox" onChange={this.toggleGrid}/>
                   <span className="lever"></span>
                 </label>
                 <span>Grid</span>
               </div>
             </li>
             <li>
-              <div className="switch gutter-switch">
-                <label>
-                  <input type="checkbox" onChange={this.gutterChange}/>
-                    <span className="lever"></span>
-                  </label>
-                <span>Gutter</span>
-                </div>
-              </li>
+              <GutterButton></GutterButton>
+            </li>
               <ExportButton></ExportButton>
             </ul>
           </div>

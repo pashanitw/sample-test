@@ -8,26 +8,30 @@ var update = React.addons.update;
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 
 // data storage
-var _currentPage = {};
-
+var _enableGrid=false;
+var state;
 // add private functions to modify data
 function addItem(title, completed = false) {
   _data.push({title, completed});
 }
-function updateComponentMarkup(index, html) {
-  _currentPage = _currentPage.updateComponentMarkup(index, html);
-  EditorStore.updateCurrentPage(_currentPage);
+function toggleGrid(){
+  var newState=update(state,{
+    enableGrid:{$set:!_enableGrid}
+  });
+  _enableGrid=newState.enableGrid;
 }
-
+function updateState(){
+  state = {
+    currentPage: EditorStore.getState().pageCollection.getCurrentPage(),
+    enableGrid: _enableGrid
+  }
+}
 // Facebook style store creation.
 var CanvasStore = assign({}, EventEmitter.prototype, {
-
   // public methods used by Controller-View to operate on data
   getState: function () {
-    _currentPage = EditorStore.getState().pageCollection.getCurrentPage();
-    return {
-      currentPage: _currentPage
-    };
+   updateState();
+    return state;
   },
 
 
@@ -70,7 +74,12 @@ var CanvasStore = assign({}, EventEmitter.prototype, {
       case Constants.ActionTypes.MOVE_SELECTION_DOWN:
       case  Constants.ActionTypes.ADD_COMPONENT:
       case Constants.ActionTypes.ADD_GUTTER:
+      case Constants.ActionTypes.HANDLE_GUTTER:
         AppDispatcher.waitFor([EditorStore.dispatcherIndex]);
+        CanvasStore.emitChange();
+        break;
+      case Constants.ActionTypes.TOGGLE_GRID:
+        toggleGrid();
         CanvasStore.emitChange();
         break;
 

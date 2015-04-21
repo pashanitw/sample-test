@@ -20,11 +20,18 @@ class PageModel {
       }) : [];
       this.index = model.index;
       this.selected = false;
+      this.hasGutter=model.hasGutter;
     }
   }
 
   select() {
     this.selected = true;
+  }
+  enableGutter(){
+    this.hasGutter=true;
+  }
+  disbleGutter(){
+    this.hasGutter=false;
   }
 
   unselect() {
@@ -74,17 +81,11 @@ class PageModel {
     return page;
   }
 
-  addGutter() {
+  handleGutter(value) {
     var self = this;
-    var gutter = update({}, {
-      styles: {$set: Constants.GUTTER_STYLE},
-      behaviour: {$set: 'fixed'}
-    });
-    var component = new Component(Constants.ComponentTypes.text, gutter);
-    var components = update(this.components, {$push: [component]});
     var page = update(self, {
-      components: {
-        $set: components
+      hasGutter: {
+        $set: value
       }
     });
     return page;

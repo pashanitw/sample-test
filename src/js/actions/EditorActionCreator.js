@@ -103,6 +103,17 @@ addPage(template){
       type:Constants.ActionTypes.ADD_GUTTER
     })
   },
+  toggleGrid(){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.TOGGLE_GRID
+    })
+  },
+  handleGutter(value){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.HANDLE_GUTTER,
+      value:value
+    })
+  },
   clearList: function() {
     console.warn('clearList action not yet implemented...');
   },

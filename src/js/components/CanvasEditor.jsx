@@ -9,10 +9,11 @@ var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var ComponentModel = require('../models/Component.js');
 var Component = require('./Component.jsx');
 var mui = require('material-ui');
-var Paper=mui.Paper;
-
-
+var Paper = mui.Paper;
 var reactDnd = require('react-dnd');
+var cx = React.addons.classSet;
+
+
 var CanvasEditor = React.createClass({
   mixins: [FluxibleMixin, PureRenderMixin],
   getInitialState: function () {
@@ -62,18 +63,26 @@ var CanvasEditor = React.createClass({
   render: function (component) {
     var that = this,
       selectedPage = this.state.currentPage,
-      components = [];
+      components = [],
+      classes = cx({
+        'gradient-pattern': this.state.enableGrid,
+        'editor-view ': true
+      });
+
     return (
       <div className="editor-container">
         <Paper zDepth={5}>
-          <div className="editor-view gradient-pattern">
+          <div className={classes}>
       {
         this._renderComponents(selectedPage)
-
         }
+          {
+            selectedPage && selectedPage.hasGutter ?
+              <div className="gutter"></div> :
+              null
+            }
           </div>
         </Paper>
-
       </div>
     )
   },

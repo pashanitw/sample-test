@@ -137,9 +137,9 @@ class PageCollection {
     });
     return pageCollection;
   }
-  addGutter(){
+  handleGutter(value){
     var self=this;
-    this.lastSelected=this.lastSelected.addGutter();
+    this.lastSelected=this.lastSelected.handleGutter(value);
     var pages = update(this.pages, {
       $splice: [[this.lastSelected.index, 1, this.lastSelected]]
     });

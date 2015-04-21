@@ -22,7 +22,9 @@ module.exports = {
     UPDATE_COMPONENT_POSITION:null,
     UPDATE_PAGES:null,
     ADD_GUTTER:null,
-    UPDATE_TABLE_CELL:null
+    UPDATE_TABLE_CELL:null,
+    TOGGLE_GRID:null,
+    HANDLE_GUTTER:null
   }),
   ItemType: "Component",
   ComponentTypes: {

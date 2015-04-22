@@ -18,6 +18,12 @@ var Column = React.createClass({
     var node = this.refs.data.getDOMNode();
     CKEDITOR.inline(node);
   },
+  addRow(){
+
+  },
+  deleteRow(){
+
+  },
   disableEditor(evt) {
     this._destroyCk();
     var html = $(evt.target).html();
@@ -59,17 +65,8 @@ var TableComponent = React.createClass({
   },
   render: function () {
     return (
-      <div className={"table-component"}>
+      <div>
         <table cellspacing='0'>
-          <tr className="head">
-            <th>day</th>
-            <th>topic</th>
-            <th>tasks</th>
-            <th>activities</th>
-            <th>more to do</th>
-            <th>teaching periods(s)</th>
-            <th>resources</th>
-          </tr>
       {
         this.getRows()
         }

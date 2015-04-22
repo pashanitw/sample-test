@@ -71,6 +71,11 @@ class PageModel {
           throw "Please set the source for the image";
         }
         break;
+      case ComponentTypes.TABLE:
+        var rows = data.rows;
+        var columns = data.columns;
+        component.configureTable(rows,columns);
+        break;
     }
     var components = update(this.components, {$push: [component]});
     var page = update(self, {

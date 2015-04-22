@@ -28,6 +28,11 @@ var AddComponentButton = React.createClass({
       case ComponentTypes.VIDEO:
         FileImportStore.openModal(ComponentTypes.VIDEO);
         break;
+      case ComponentTypes.TABLE:
+           if(this.props.openModal){
+             this.props.openModal();
+           }
+        break;
     }
   },
   render: function () {

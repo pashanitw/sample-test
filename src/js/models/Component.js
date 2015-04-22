@@ -19,7 +19,7 @@ constructor(type,model){
   this.src=model&&model.src?model.src:'';
   this.behaviour=model&&model.behaviour?model.behaviour:'';
   if(type==ComponentTypes.TABLE){
-    this.rows=model.rows;
+    this.rows=model.rows||[];
   }
 
 }
@@ -38,6 +38,26 @@ constructor(type,model){
   setType(type){
     this.type=type;
   }
+  configureTable(rows,columns){
+
+   if(!rows)
+   return;
+    var row=[];
+    pushColumns(row,columns);
+    this.rows.push(row);
+    this.configureTable(--rows,columns);
+  }
+
 }
 
 module.exports = Component;
+function pushColumns(row,columns){
+  if(!columns){
+    return;
+  }
+  var column={
+    markup:''
+  }
+  row.push(column);
+  pushColumns(row,--columns);
+}

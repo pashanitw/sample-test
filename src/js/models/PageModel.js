@@ -126,14 +126,17 @@ class PageModel {
 
   updateTableCell(index, rowIndex, columnIndex, html) {
     var self = this;
-    var newColumn = update(this.components[index].rows[rowIndex][columnIndex], {
+    var newColumn = update(this.components[index].rows[rowIndex]['data'][columnIndex], {
       $merge: {
         markup: html
       }
     });
     var newRow = update(this.components[index].rows[rowIndex], {
-      $splice: [[columnIndex, 1, newColumn]]
-    })
+      data:{
+        $splice: [[columnIndex, 1, newColumn]]
+      }
+
+    });
     var component = update(this.components[index], {
         rows: {
           $splice: [[rowIndex, 1, newRow]]

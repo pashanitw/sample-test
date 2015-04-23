@@ -9,7 +9,7 @@ var Column = React.createClass({
       <div ref="data"
         contentEditable="true"
         dangerouslySetInnerHTML={{__html: this.props.column.markup}}
-        onDoubleClick={this.enableEditor}
+        onFocus={this.enableEditor}
         onBlur={this.disableEditor}>
       </div>
     </td>)
@@ -50,13 +50,14 @@ var TableComponent = React.createClass({
   getRows() {
     var that=this;
     return this.props.rows.map(function (row, rowIndex) {
-      return <tr>
+      return <tr className={row.classes.join(' ')}>
      {
-       row.map(function (column, columnIndex) {
+       row.data.map(function (column, columnIndex) {
          return <Column column={column}
            rowIndex={rowIndex}
            columnIndex={columnIndex}
-           index={that.props.index}>
+           index={that.props.index}
+         >
          </Column>
        })
        }

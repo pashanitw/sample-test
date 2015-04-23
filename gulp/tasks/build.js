@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var config = require('../config');
 
-gulp.task('build', ['browserify', 'moveMaterializeFonts','styles','moveck','move-templates','move-config'], function() {
+gulp.task('build', ['browserify', 'moveMaterializeFonts','styles','template-styles','moveck','move-templates','move-config'], function() {
  // gulp.src(config.src).pipe(connect.reload());
 });
 

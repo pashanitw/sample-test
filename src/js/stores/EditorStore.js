@@ -7,7 +7,8 @@ var assign = require('object-assign');
 var PageModel = require('../models/PageModel.js');
 var PageCollection = require('../models/PageCollection.js');
 var ComponentModel = require('../models/Component.js');
-var $ = require('jquery');
+var utils = require('../utils/utils.js');
+var cacheRegistry=require('../service/cacheRegistry.js');
 
 // data storage
 var _data = [];
@@ -32,8 +33,20 @@ function addItem(title, completed = false) {
 function addPage(template) {
   _pageCollection = _pageCollection.addPage(template);
 }
+function loadCss(template){
+  if(template.registry.css){
+    var id=utils.getUniqueId();
+    $.get(template.registry.css).then(function(css){
+      var style = '<style type="text/css" id="'+id+'">' + css + "</style>";
+      $("head").append(style);
+      cacheRegistry.registerComponent(id,Constants.MimeTypes.CSS)
 
+    })
+  }
+}
 function changeTemplateSelection(template) {
+  cacheRegistry.clearCache();
+  loadCss(template);
   _pageCollection = new PageCollection(template);
 }
 function switchPage(page) {

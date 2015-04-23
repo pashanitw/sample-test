@@ -92,6 +92,9 @@ module.exports = {
     UP: 'up',
     DOWN: 'down'
   },
+  MimeTypes:{
+    CSS:'CSS'
+  },
   ActionSources: keyMirror({
     SERVER_ACTION: null,
     VIEW_ACTION: null

@@ -32,6 +32,71 @@
             "top": "10%"
           },
           "markup": "<h1>This is chapter Json</h1><ol style='font-size: 20px;'> <li> Mathematics </li><li> </li><li>Science </li><li></li></ol>"
+        },
+        {
+          "_id": "0",
+          "type": "table",
+          "styles": {
+            "width": 430,
+            "height": 200,
+            "left": "25%",
+            "top": "10%"
+          },
+          "classes":["table-component"],
+          "rows": [
+            {
+              "classes": ["head"],
+              "data": [
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                }
+              ]
+            },
+            {
+              "classes": [],
+              "data": [
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                },
+                {
+                  "markup": "<span>Sample Text</span>"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -54,6 +119,18 @@
           "_id": "0",
           "type": "text",
           "styles": {
+            "width": 500,
+            "height": 200,
+            "left": 10,
+            "top": 20
+          },
+          "className": "heading-component",
+          "markup": "<div class='heading-component'><div class='arrow-up'> <span>1</span></div><div class='rectangle'> <span>CHAPTER</span> </div></div>"
+        },
+        {
+          "_id": "0",
+          "type": "text",
+          "styles": {
             "width": 430,
             "height": 200,
             "left": 600,
@@ -70,7 +147,7 @@
             "left": 30,
             "top": 40
           },
-          "src":"http://placehold.it/430x200"
+          "src": "http://placehold.it/430x200"
         },
         {
           "_id": "0",

@@ -16,7 +16,6 @@ var assign = require('object-assign');
 var _ = require("lodash");
 
 
-
 var Component = React.createClass({
   mixins: [MousetrapMixin, PureRenderMixin],
   statics: {
@@ -95,7 +94,7 @@ var Component = React.createClass({
      [width, height] = this.preserveAspectRatio(width, height);
      }
      */
-    var that=this;
+    var that = this;
     var newState = update(that.state, {
       $merge: {
         width: width,
@@ -136,6 +135,8 @@ var Component = React.createClass({
     }
 
     var handleSize = [20, 20];
+    var classNames = this.props.classes.join(' ');
+    console.log("my class names",classNames);
     return (
       this.props.behaviour == 'fixed' ?
         <div style={this.props.styles}
@@ -156,7 +157,9 @@ var Component = React.createClass({
             onResizeStop={this.onResizeStop}
             onResizeStart={this.onResizeStart}
           >
-            <div style={styles} onDoubleClick={this.focusElement}>
+            <div style={styles}
+              onDoubleClick={this.focusElement}
+              className={classNames}>
           {componentRegistry(this.props, this.state.isEditable)}
             </div>
           </Resizable>

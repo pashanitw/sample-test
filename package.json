@@ -72,9 +72,8 @@
     ]
   },
   "browser": {
-    "jquery": "./bower_components/jquery/dist/jquery.js",
-    "multisortable": "./src/libs/jquery.multisortable.js",
-    "jquery-ui": "./bower_components/jquery-ui/jquery-ui.js",
+    "jquery": "./bower_components/jquery/dist/jquery.min.js",
+    "jquery-ui": "./bower_components/jquery-ui/jquery-ui.min.js",
     "jquery-ui-draggable": "./bower_components/jquery-ui/ui/draggable.js",
     "jquery-ui-droppable": "./bower_components/jquery-ui/ui/droppable.js",
     "jquery-ui-resizable": "./bower_components/jquery-ui/ui/resizable.js",
@@ -87,13 +86,6 @@
     },
     "zip": {
       "exports": "zip"
-    },
-    "multisortable": {
-      "depends": [
-        "jquery",
-        "jquery-ui"
-      ],
-      "multisortable": null
     },
     "jquery-ui": {
       "depends": "jquery",

@@ -10,7 +10,6 @@ var Navbar = require("./Navbar.jsx");
 var MaterialModal = require("./MaterialModal.jsx")
 var $ = require('jquery');
 require('jquery-ui');
-require('multisortable');
 require('jquery-ui-draggable');
 require('jquery-ui-droppable');
 require('jquery-ui-resizable');

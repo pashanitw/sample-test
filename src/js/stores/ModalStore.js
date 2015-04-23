@@ -17,18 +17,20 @@ function loadTemplates() {
   var deferred = $.Deferred();
   $.when($.getJSON("config.json")).done(function (data) {
     var promises = [];
-    data.templates.forEach(function (template) {
+    data.templates.forEach(function (registry) {
       var def = $.Deferred();
       promises.push(def.promise());
-      $.getJSON(template.config).then(function(config){
-        $.getJSON(template.template).then(function(template){
+      $.getJSON(registry.config).then(function(config){
+        $.getJSON(registry.template).then(function(template){
           template.config=config;
+          template.registry=registry;
+          console.log("registry is",registry);
           def.resolve(template);
         });
       });
     });
     $.when(...promises).done(function () {
-      var templates=[]
+      var templates=[];
       for(var i=0,length=arguments.length;i<length;i++){
         templates.push(arguments[i]);
       }

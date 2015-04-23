@@ -25,14 +25,17 @@ module.exports = {
     UPDATE_TABLE_CELL:null,
     TOGGLE_GRID:null,
     HANDLE_GUTTER:null,
-    ADD_NEW_ROW_TO_TABLE:null
+    ADD_NEW_ROW_TO_TABLE:null,
+    UPDATE_NESTED_COMPONENT_MARKUP:null
   }),
   ItemType: "Component",
   ComponentTypes: {
     IMAGE: "image",
     TEXT: "text",
     VIDEO: "video",
-    TABLE: "table"
+    TABLE: "table",
+    NO_TYPE:"no_type",
+    MULTIPLE:"multiple"
   },
   GUTTER_STYLE:{
     width:0,

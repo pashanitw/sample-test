@@ -125,6 +125,19 @@ class PageModel {
     });
     return page;
   }
+  updateNestedComponentMarkup(parentIndex,nestedIndex, html) {
+    var self = this;
+    var component = this.components[parentIndex].updateNestedComponentMarkup(nestedIndex,html);
+    var components = update(this.components, {
+      $splice: [[parentIndex, 1, component]]
+    });
+    var page = update(self, {
+      components: {
+        $set: components
+      }
+    });
+    return page;
+  }
 
   updateTableCell(index, rowIndex, columnIndex, html) {
     var self = this;

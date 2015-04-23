@@ -227,7 +227,19 @@ class PageCollection {
     });
     return pageCollection;
   }
-
+  updateNestedComponentMarkup(parentIndex,nestedIndex,html){
+    var self = this;
+    this.lastSelected = this.lastSelected.updateNestedComponentMarkup(parentIndex,nestedIndex, html);
+    var pages = update(this.pages, {
+      $splice: [[this.lastSelected.index, 1, this.lastSelected]]
+    });
+    var pageCollection = update(self, {
+      pages: {
+        $set: pages
+      }
+    });
+    return pageCollection;
+  }
   updateComponentMarkup(index, html) {
     var self = this;
     this.lastSelected = this.lastSelected.updateComponentMarkup(index, html);

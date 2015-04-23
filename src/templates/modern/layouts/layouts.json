@@ -37,36 +37,36 @@
           "_id": "0",
           "type": "table",
           "styles": {
-            "width": 430,
-            "height": 200,
-            "left": "25%",
-            "top": "10%"
+            "width": 900,
+            "height": 500,
+            "left": 20,
+            "overflow":"scroll"
           },
-          "classes":["table-component"],
+          "classes": ["table-component"],
           "rows": [
             {
               "classes": ["head"],
               "data": [
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<span>Day</span>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<span>Topic</span>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<span>Tasks</span>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<span>Activities</span>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<span>More To Do</span>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<span>Teaching Periods(s)</span>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<span>Resources</span>"
                 }
               ]
             },
@@ -74,25 +74,25 @@
               "classes": [],
               "data": [
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<p></p>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<p></p>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<p></p>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<p></p>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<p></p>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<p></p>"
                 },
                 {
-                  "markup": "<span>Sample Text</span>"
+                  "markup": "<p></p>"
                 }
               ]
             }
@@ -117,15 +117,32 @@
         },
         {
           "_id": "0",
-          "type": "text",
+          "type": "multiple",
           "styles": {
             "width": 500,
             "height": 200,
             "left": 10,
             "top": 20
           },
-          "className": "heading-component",
-          "markup": "<div class='heading-component'><div class='arrow-up'> <span>1</span></div><div class='rectangle'> <span>CHAPTER</span> </div></div>"
+          "components":[
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+              },
+              "classes":["arrow-up"],
+              "markup": "<p>1</p>"
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+              },
+              "classes":["rectangle"],
+              "markup": "<p>CHAPTER</p>"
+            }
+          ],
+          "classes": ["heading-component"]
         },
         {
           "_id": "0",

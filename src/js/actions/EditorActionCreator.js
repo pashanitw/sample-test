@@ -133,6 +133,16 @@ addPage(template){
       columnLength:columnLength
     })
   },
+  updateNestedComponentMarkup(parentIndex,nestedIndex,html){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.UPDATE_NESTED_COMPONENT_MARKUP,
+      data:{
+        parentIndex:parentIndex,
+        nestedIndex:nestedIndex,
+        html:html
+      }
+    })
+  },
   completeTask: function(task) {
     console.warn('completeTask action not yet implemented...');
   }

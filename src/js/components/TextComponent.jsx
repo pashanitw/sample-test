@@ -13,6 +13,11 @@ var update = React.addons.update;
 var TextComponent = React.createClass({
 
   mixins: [PureRenderMixin],
+  getInitialState(){
+    return {
+      isEditable:false
+    }
+  },
   render() {
     const styles = {
       position: 'absolute',
@@ -22,16 +27,14 @@ var TextComponent = React.createClass({
     var props = this.props;
     var that = this;
     return (
-      <div style={this.props.childStyle}>
+      <div style={this.props.childStyle} onDoubleClick={this.onDoubleClick}>
         {
-          this.props.isEditable ?
+          this.state.isEditable ?
 
-            <div ref="editable" contentEditable="true" dangerouslySetInnerHTML={{__html: props.markup}}
-              onBlur={this.updateComponentMarkup}>
+            <div ref="editable" contentEditable="true" dangerouslySetInnerHTML={{__html: props.markup}}>
             </div>
             :
-            <div ref="uneditable" dangerouslySetInnerHTML={{__html: props.markup}}
-            >
+            <div ref="uneditable" dangerouslySetInnerHTML={{__html: props.markup}}>
             </div>
 
           }
@@ -39,6 +42,11 @@ var TextComponent = React.createClass({
 
 
     )
+  },
+  onDoubleClick(){
+    this.setState({
+      isEditable:true
+    })
   },
   enableEditable(evt) {
     evt.preventDefault();
@@ -58,25 +66,34 @@ var TextComponent = React.createClass({
   mousedown() {
   },
   componentDidMount() {
-    if (this.props.isEditable) {
+   /* if (this.props.isEditable) {
       var element = this.refs.editable.getDOMNode();
       CKEDITOR.inline(element);
       $(element).focus();
-    }
+    }*/
   },
   componentDidUpdate() {
-    if (this.props.isEditable) {
+    if (this.state.isEditable) {
       var element = this.refs.editable.getDOMNode();
 
-      CKEDITOR.inline(element, {
+     var editor= CKEDITOR.inline(element, {
         allowedContent: true
       });
+     $(element).focus();
+      var that=this;
+      editor.on('blur', function(event) {
+        // Do something, Example: disable toolbar:
 
-      $(element).focus();
+        editor.focusManager.blur();
+        that._destroyCk();
+        that.makeUneditable();
+      });
     }
   },
-  componentWillUpdate() {
-    this._destroyCk();
+  makeUneditable() {
+    this.setState({
+      isEditable: false
+    })
   },
   _destroyCk() {
     for (var name in CKEDITOR.instances) {
@@ -84,9 +101,13 @@ var TextComponent = React.createClass({
     }
   },
   updateComponentMarkup(evt) {
-
     var html = $(evt.target).html();
-    EditorActionCreator.updateComponentMarkup(this.props.index, html)
+    if(this.props.isNested){
+      EditorActionCreator.updateNestedComponentMarkup(this.props.parentProps.index,this.props.index,html);
+    }else{
+      EditorActionCreator.updateComponentMarkup(this.props.index, html)
+
+    }
 
   }
 

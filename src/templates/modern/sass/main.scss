@@ -9,7 +9,9 @@
     vertical-align: baseline;
     background: transparent;
   }
-
+table{
+  overflow: hidden;
+}
   body {
     line-height: 1;
   }
@@ -167,7 +169,12 @@
     -webkit-border-bottom-left-radius: 3px;
     border-bottom-left-radius: 3px;
   }
-
+  td{
+    max-width: 150px;
+    &:first-child{
+      max-width: 80px;
+    }
+  }
   table tr:last-child td:last-child {
     -moz-border-radius-bottomright: 3px;
     -webkit-border-bottom-right-radius: 3px;
@@ -181,7 +188,6 @@
   }
   table {
     border-radius: 26px 26px 0 0;
-    overflow: hidden;
     .head {
       td{
         background: #B42C47;

@@ -4,6 +4,8 @@
 var utils = require('../utils/utils.js');
 var EditorActionCreator = require('../actions/EditorActionCreator.js');
 var ComponentTypes = require('../constants/AppConstants.js').ComponentTypes;
+var React = require('react/addons');
+var update = React.addons.update;
 
 class Component {
   constructor(type, model) {
@@ -23,6 +25,14 @@ class Component {
       console.log('class for tables',model.classes);
     }
     this.classes = model && model.classes? model.classes: [];
+    if(type==ComponentTypes.MULTIPLE){
+      this.components=[];
+      var _this=this;
+      model.components.forEach(function(item,index){
+        var cmp=new Component(item.type,item);
+        _this.components.push(item);
+      });
+    }
   }
 
   updateStyles(styles) {
@@ -66,6 +76,24 @@ class Component {
     }
     row.data.push(column);
     this.pushColumns(row, --columns);
+  }
+  updateNestedComponentMarkup(index, html) {
+    var self = this;
+    var component = update(this.components[index], {
+        $merge: {
+          markup: html
+        }
+      }
+    );
+    var components = update(this.components, {
+      $splice: [[index, 1, component]]
+    });
+    var newComponent = update(self, {
+      components: {
+        $set: components
+      }
+    });
+    return newComponent;
   }
 
 }

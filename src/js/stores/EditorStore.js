@@ -90,6 +90,9 @@ function updateComponentPosition(id, position) {
 function updateComponentMarkup(index, html) {
   _pageCollection = _pageCollection.updateComponentMarkup(index, html);
 }
+function updateNestedComponentMarkup(parentIndex,nestedIndex,html) {
+  _pageCollection = _pageCollection.updateNestedComponentMarkup(parentIndex,nestedIndex, html);
+}
 
 function updatePages(pages) {
   _pageCollection = _pageCollection.updatePages(pages);
@@ -236,7 +239,10 @@ var EditorStore = assign({}, EventEmitter.prototype, {
         addNewRowToTable(action.index,action.columnLength);
         EditorStore.emitChange();
         break;
-
+      case Constants.ActionTypes.UPDATE_NESTED_COMPONENT_MARKUP:
+        var data = action.data;
+        updateNestedComponentMarkup(data.parentIndex,data.nestedIndex,data.html);
+        break;
     }
   })
 

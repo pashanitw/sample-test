@@ -14,6 +14,8 @@
     font-size: 100%;
     vertical-align: baseline;
     background: transparent; }
+  .table-component table {
+    overflow: hidden; }
   .table-component body {
     line-height: 1; }
   .table-component ol, .table-component ul {
@@ -109,6 +111,10 @@
     -moz-border-radius-bottomleft: 3px;
     -webkit-border-bottom-left-radius: 3px;
     border-bottom-left-radius: 3px; }
+  .table-component td {
+    max-width: 150px; }
+    .table-component td:first-child {
+      max-width: 80px; }
   .table-component table tr:last-child td:last-child {
     -moz-border-radius-bottomright: 3px;
     -webkit-border-bottom-right-radius: 3px;
@@ -118,8 +124,7 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
     background: -moz-linear-gradient(top, #f2f2f2, #f0f0f0); }
   .table-component table {
-    border-radius: 26px;
-    overflow: hidden; }
+    border-radius: 26px 26px 0 0; }
     .table-component table .head td {
       background: #B42C47;
       color: #fff; }

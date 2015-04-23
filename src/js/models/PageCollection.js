@@ -255,7 +255,19 @@ class PageCollection {
     });
     return pageCollection;
   }
-
+  addNewRowToTable(index,columnLength){
+    var self = this;
+    this.lastSelected = this.lastSelected.addNewRowToTable(index,columnLength);
+    var pages = update(this.pages, {
+      $splice: [[this.lastSelected.index, 1, this.lastSelected]]
+    });
+    var pageCollection = update(self, {
+      pages: {
+        $set: pages
+      }
+    });
+    return pageCollection;
+  }
   updatePages(pages) {
     var self = this;
     var pageCollection = update(self, {

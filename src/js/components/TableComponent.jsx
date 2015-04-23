@@ -1,5 +1,6 @@
 var React = require('react');
 var EditorActionCreator=require('../actions/EditorActionCreator.js');
+var FloatButton=require('../components/FloatButton.jsx');
 var Column = React.createClass({
   componentWillMount() {
 
@@ -64,7 +65,11 @@ var TableComponent = React.createClass({
       </tr>
     });
   },
+  addRow(){
+    EditorActionCreator.addNewRowToTable(this.props.index,this.props.rows[0].data.length);
+  },
   render: function () {
+    var classes='mdi-content-add';
     return (
       <div>
         <table cellspacing='0'>
@@ -73,6 +78,7 @@ var TableComponent = React.createClass({
         }
 
         </table>
+        <FloatButton classes={classes} action={this.addRow}></FloatButton>
       </div>
 
     );

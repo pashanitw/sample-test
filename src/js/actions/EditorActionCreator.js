@@ -126,7 +126,13 @@ addPage(template){
       html:html
     })
   },
-
+  addNewRowToTable(index,columnLength){
+    AppDispatcher.handleViewAction({
+      type:Constants.ActionTypes.ADD_NEW_ROW_TO_TABLE,
+      index:index,
+      columnLength:columnLength
+    })
+  },
   completeTask: function(task) {
     console.warn('completeTask action not yet implemented...');
   }

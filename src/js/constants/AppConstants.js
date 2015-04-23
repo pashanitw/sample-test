@@ -24,7 +24,8 @@ module.exports = {
     ADD_GUTTER:null,
     UPDATE_TABLE_CELL:null,
     TOGGLE_GRID:null,
-    HANDLE_GUTTER:null
+    HANDLE_GUTTER:null,
+    ADD_NEW_ROW_TO_TABLE:null
   }),
   ItemType: "Component",
   ComponentTypes: {

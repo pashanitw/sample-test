@@ -49,22 +49,26 @@ class Component {
 
     if (!rows)
       return;
-    var row = [];
-    pushColumns(row, columns);
+    var row = {
+      classes: [],
+      data: []
+    };
+    this.pushColumns(row, columns);
     this.rows.push(row);
     this.configureTable(--rows, columns);
+  }
+  pushColumns(row, columns) {
+    if (!columns) {
+      return;
+    }
+    var column = {
+      markup: ''
+    }
+    row.data.push(column);
+    this.pushColumns(row, --columns);
   }
 
 }
 
 module.exports = Component;
-function pushColumns(row, columns) {
-  if (!columns) {
-    return;
-  }
-  var column = {
-    markup: ''
-  }
-  row.push(column);
-  pushColumns(row, --columns);
-}
+

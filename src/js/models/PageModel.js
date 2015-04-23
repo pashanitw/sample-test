@@ -20,18 +20,20 @@ class PageModel {
       }) : [];
       this.index = model.index;
       this.selected = false;
-      this.hasGutter=model.hasGutter;
+      this.hasGutter = model.hasGutter;
     }
   }
 
   select() {
     this.selected = true;
   }
-  enableGutter(){
-    this.hasGutter=true;
+
+  enableGutter() {
+    this.hasGutter = true;
   }
-  disbleGutter(){
-    this.hasGutter=false;
+
+  disbleGutter() {
+    this.hasGutter = false;
   }
 
   unselect() {
@@ -74,7 +76,7 @@ class PageModel {
       case ComponentTypes.TABLE:
         var rows = data.rows;
         var columns = data.columns;
-        component.configureTable(rows,columns);
+        component.configureTable(rows, columns);
         break;
     }
     var components = update(this.components, {$push: [component]});
@@ -132,7 +134,7 @@ class PageModel {
       }
     });
     var newRow = update(this.components[index].rows[rowIndex], {
-      data:{
+      data: {
         $splice: [[columnIndex, 1, newColumn]]
       }
 
@@ -143,6 +145,29 @@ class PageModel {
         }
       }
     );
+    var components = update(this.components, {
+      $splice: [[index, 1, component]]
+    });
+    var page = update(self, {
+      components: {
+        $set: components
+      }
+    });
+    return page;
+  }
+
+  addNewRowToTable(index, columnLength) {
+    var self=this;
+    var row = {
+      classes: [],
+      data: []
+    };
+    this.components[index].pushColumns(row, columnLength);
+   var component=update(this.components[index],{
+     rows:{
+       $push:[row]
+     }
+   });
     var components = update(this.components, {
       $splice: [[index, 1, component]]
     });

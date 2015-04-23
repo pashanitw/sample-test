@@ -76,6 +76,7 @@ var CanvasStore = assign({}, EventEmitter.prototype, {
       case Constants.ActionTypes.ADD_GUTTER:
       case Constants.ActionTypes.HANDLE_GUTTER:
       case  Constants.ActionTypes.TEMPLATE_SELECTED:
+      case Constants.ActionTypes.ADD_NEW_ROW_TO_TABLE:
         AppDispatcher.waitFor([EditorStore.dispatcherIndex]);
         CanvasStore.emitChange();
         break;

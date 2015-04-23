@@ -102,7 +102,9 @@ function updateTableCell(props){
   _pageCollection=_pageCollection.updateTableCell(props);
 }
 
-
+function addNewRowToTable(index,columnLength){
+  _pageCollection=_pageCollection.addNewRowToTable(index,columnLength);
+}
 function updateState(){
   state={
     pageCollection: _pageCollection
@@ -111,6 +113,7 @@ function updateState(){
 function handleGutter(value){
   _pageCollection=_pageCollection.handleGutter(value);
 }
+
 var state;
 // Facebook style store creation.
 var EditorStore = assign({}, EventEmitter.prototype, {
@@ -227,6 +230,10 @@ var EditorStore = assign({}, EventEmitter.prototype, {
         break;
       case Constants.ActionTypes.HANDLE_GUTTER:
         handleGutter(action.value);
+        EditorStore.emitChange();
+        break;
+      case Constants.ActionTypes.ADD_NEW_ROW_TO_TABLE:
+        addNewRowToTable(action.index,action.columnLength);
         EditorStore.emitChange();
         break;
 

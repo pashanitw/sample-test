@@ -10,14 +10,25 @@ var Column = React.createClass({
       <div ref="data"
         contentEditable="true"
         dangerouslySetInnerHTML={{__html: this.props.column.markup}}
-        onFocus={this.enableEditor}
-        onBlur={this.disableEditor}>
+        onDoubleClick={this.enableEditor}>
       </div>
     </td>)
   },
   enableEditor() {
-    var node = this.refs.data.getDOMNode();
-    CKEDITOR.inline(node);
+    var element = this.refs.data.getDOMNode();
+
+    var editor= CKEDITOR.inline(element, {
+      allowedContent: true
+    });
+    $(element).focus();
+    var that=this;
+    editor.on('blur', function(event) {
+      // Do something, Example: disable toolbar:
+
+      editor.focusManager.blur();
+      that._destroyCk();
+      that.disableEditor(editor.getData());
+    });
   },
   addRow(){
 
@@ -25,9 +36,7 @@ var Column = React.createClass({
   deleteRow(){
 
   },
-  disableEditor(evt) {
-    this._destroyCk();
-    var html = $(evt.target).html();
+  disableEditor(html) {
     const {index,rowIndex,columnIndex}=this.props;
     EditorActionCreator.updateTableCell(index,rowIndex,columnIndex, html);
   },

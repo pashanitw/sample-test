@@ -85,6 +85,7 @@ var TextComponent = React.createClass({
         // Do something, Example: disable toolbar:
 
         editor.focusManager.blur();
+        that.updateComponentMarkup(editor.getData());
         that._destroyCk();
         that.makeUneditable();
       });
@@ -100,8 +101,7 @@ var TextComponent = React.createClass({
       CKEDITOR.instances[name].destroy()
     }
   },
-  updateComponentMarkup(evt) {
-    var html = $(evt.target).html();
+  updateComponentMarkup(html) {
     if(this.props.isNested){
       EditorActionCreator.updateNestedComponentMarkup(this.props.parentProps.index,this.props.index,html);
     }else{

@@ -1,4 +1,5 @@
 @import "base/variables";
+@import "base/_mixins";
 .table-component {
   color: #000;
   table, caption, tbody, tfoot, thead, tr, th, td {
@@ -48,7 +49,6 @@ table{
 
   /*This is not important*/
   body {
-    background: url(background.jpg);
     margin: 0 auto;
     width: 520px;
   }
@@ -204,8 +204,6 @@ table{
 }
 
 
- $template_path:"templates/modern/";
-$bannerImage:$template_path+"images/banner.jpeg";
 .heading-component{
   background-image: url($bannerImage);
 
@@ -216,7 +214,68 @@ $bannerImage:$template_path+"images/banner.jpeg";
   }
 }
 .chapter-name{
-   color: $chapter_name_color;
-  letter-spacing: $chapter_name_letter_spacing;
-  font-size: $chapter_name_size;
+  h1{
+    color: $chapter_name_color;
+    letter-spacing: $chapter_name_letter_spacing;
+    font-size: $chapter_name_size;
+    margin:0;
+    padding:0;
+    font-weight:$chapter_name_font_weight;
+  }
+}
+.suggested-plan{
+  background-image: url($suggested_plan_background);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  h3{
+    margin: 0;
+    padding: 0;
+    font-size: 35px;
+    line-height: 58px;
+    padding-left: 58px;
+    font-size: 31px;
+    color: #fff;
+  }
+  }
+
+.activity-outcome{
+ @include activityList("activity-outcome");
+}
+.resources-required{
+  @include activityList("resources-required");
+}
+.suggested-duration{
+  @include activityList("suggested-duration");
+}
+.skills-concepts{
+  @include activityList("skills-concepts");
+}
+.main-activity{
+  @include activityList("main-activity");
+}
+.activity-section{
+  ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+  }
+
+  li {
+    padding-left: 1em;
+    text-indent: -.7em;
+  }
+
+  li:before {
+    content: "• ";
+    color: $celery;
+    font-size: 24px;
+    line-height: 24px;
+  }
+  hr{
+    background: $celery;
+    height: 4px;
+    margin-top: -10px;
+    margin-bottom: 6px;
+  }
 }

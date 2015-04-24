@@ -82,6 +82,7 @@
     <html xmlns="http://www.w3.org/1999/xhtml" style="height:100%;">
   <head>
     <meta content="width=956, height=630" name="viewport" />
+    <link rel="stylesheet" href="../css/main.css"/>
     <title></title>
   </head>
   <body style="height:100%;">
@@ -89,14 +90,27 @@
   {{#each components}}
 
   {{#ifcond type desired="text" type=type}}
-  <div style="{{renderStyles}}">
+  <div style="{{renderStyles}}" {{renderClasses}}>
     {{{markup}}}
   </div>
   {{/ifcond}}
   {{#ifcond type desired="image" type=type}}
-  <img src="{{src}}" style="{{renderStyles}}"/>
+  <img src="{{src}}" style="{{renderStyles}}" {{renderClasses}}/>
   {{/ifcond}}
+  {{#ifcond type desired="table" type=type}}
+  <div {{renderClasses}}>
+    <table>
+      {{#each rows}}
+      <tr {{renderClasses}}>
+        {{#each data}}
+        <td {{renderClasses}}>{{markup}}</td>
+        {{/each}}
+      </tr>
+      {{/each}}
+    </table>
+  </div>
 
+  {{/ifcond}}
   {{/each}}
   </body>
   </html>

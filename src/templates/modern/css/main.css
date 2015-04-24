@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .table-component {
   color: #000;
   /* IMPORTANT, I REMOVED border-collapse: collapse; FROM THIS LINE IN ORDER TO MAKE THE OUTER BORDER RADIUS WORK */
@@ -32,7 +33,6 @@
   .table-component table {
     border-spacing: 0; }
   .table-component body {
-    background: url(background.jpg);
     margin: 0 auto;
     width: 520px; }
   .table-component a:link {
@@ -138,8 +138,71 @@
     color: #fff;
     text-align: right; }
 
-.chapter-name {
+.chapter-name h1 {
   color: #B42C47;
   letter-spacing: 10px;
   font-size: 50px;
-}
+  margin: 0;
+  padding: 0;
+  font-weight: 600; }
+
+.suggested-plan {
+  background-image: url("templates/modern/images/suggested-plan.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
+  .suggested-plan h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 35px;
+    line-height: 58px;
+    padding-left: 58px;
+    font-size: 31px;
+    color: #fff; }
+
+.activity-outcome {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("templates/modern/images/activity-outcome-logo.jpg"); }
+
+.resources-required {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("templates/modern/images/resources-required-logo.jpg"); }
+
+.suggested-duration {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("templates/modern/images/suggested-duration-logo.jpg"); }
+
+.skills-concepts {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("templates/modern/images/activity-outcome-logo.jpg"); }
+
+.main-activity {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("templates/modern/images/main-activity-logo.jpg"); }
+
+.activity-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+.activity-section li {
+  padding-left: 1em;
+  text-indent: -.7em; }
+.activity-section li:before {
+  content: "• ";
+  color: #9BCB4F;
+  font-size: 24px;
+  line-height: 24px; }
+.activity-section hr {
+  background: #9BCB4F;
+  height: 4px;
+  margin-top: -10px;
+  margin-bottom: 6px; }

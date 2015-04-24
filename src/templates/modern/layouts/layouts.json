@@ -3,35 +3,78 @@
   "pages": [
     {
       "name": "page-0",
-      "type": "cover",
+      "type": "chapter",
       "components": [
         {
           "_id": "0",
           "type": "text",
           "styles": {
-            "width": "100%",
-            "height": "100%",
-            "backgroundImage": "url(http://images.veerle.duoh.com/uploads/design-article-images/adaptive-web-bookcover-final-design.jpg)"
+            "width": 497,
+            "height": 100,
+            "left": 20,
+            "top": 0
           },
-          "markup": "<div><h1>THIS IS COVER PAGE</h1></div>",
-          "coverUrl": "http://images.veerle.duoh.com/uploads/design-article-images/adaptive-web-bookcover-final-design.jpg"
+          "markup": "<h1>Neha,My sister</h1>",
+          "classes":["chapter-name"]
+        },
+        {
+          "_id": "0",
+          "type": "text",
+          "styles": {
+            "width": 900,
+            "height": 200,
+            "left": 20,
+            "top": 200
+          },
+          "markup": "<p><em>Dear Teacher </em></p><p><em>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</em></p>",
+          "classes":["chapter-name"]
+        },
+        {
+          "_id": "0",
+          "type": "multiple",
+          "styles": {
+            "width":"100%",
+            "height":100,
+            "top":100
+          },
+          "components":[
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+              },
+              "classes":["chapter-number"],
+              "markup": "<p>1</p>"
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+              },
+              "classes":["chapter"],
+              "markup": "<p>CHAPTER</p>"
+            }
+          ],
+          "classes": ["heading-component"]
         }
       ]
     },
     {
       "name": "page-1",
-      "type": "toc",
+      "type": "page",
       "components": [
+
         {
           "_id": "0",
           "type": "text",
           "styles": {
-            "width": 430,
-            "height": 200,
-            "left": "25%",
-            "top": "10%"
+            "width": 407,
+            "height": 72,
+            "left": 10,
+            "top": 0
           },
-          "markup": "<h1>This is chapter Json</h1><ol style='font-size: 20px;'> <li> Mathematics </li><li> </li><li>Science </li><li></li></ol>"
+          "markup": "<h3>suggested teaching plan</h3>",
+          "classes":["suggested-plan"]
         },
         {
           "_id": "0",
@@ -40,6 +83,7 @@
             "width": 900,
             "height": 500,
             "left": 20,
+             "top":100,
             "overflow":"scroll"
           },
           "classes": ["table-component"],
@@ -106,14 +150,111 @@
       "components": [
         {
           "_id": "0",
+          "type": "multiple",
+          "styles": {
+            "width":900,
+            "height":200,
+             "top":20,
+            "left":20
+          },
+          "classes": ["activity-section"],
+          "components":[
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width": 407,
+                "height": 72,
+                "position":"relative"
+              },
+              "markup": "<h3>My Hobbies and Interests</h3>",
+              "classes":["suggested-plan"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Learning Outcome(s) :</strong> The Child will be able to</p><ul><li>Talk about his/her hobbies and interests</li></ul>",
+              "classes": ["activity-outcome"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Resource(s) required:</strong> None</p>",
+              "classes": ["resources-required"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Suggested duration:</strong> 15 minutes</p>",
+              "classes": ["suggested-duration"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Skills/Concepts:</strong> Pre-reading</p>",
+              "classes": ["skills-concepts"]
+            },            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Activity</strong></p><hr><ul><li>Divide the class into small groudps</li><li>Divide the class into small groups</li><li>Divide the class into small groups</li></ul>",
+              "classes": ["main-activity"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "type": "chapter",
+      "components": [
+        {
+          "_id": "0",
           "type": "text",
           "styles": {
-            "width": "auto",
+            "width": 497,
+            "height": 100,
+            "left": 20,
+            "top": 0
+          },
+          "markup": "<h1>Neha,My sister</h1>",
+          "classes":["chapter-name"]
+        },
+        {
+          "_id": "0",
+          "type": "text",
+          "styles": {
+            "width": 900,
             "height": 200,
             "left": 20,
-            "top": 20
+            "top": 200
           },
-          "markup": "<h1>Neha,My sizter</h1>",
+          "markup": "<p><em>Dear Teacher </em></p><p><em>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</em></p>",
           "classes":["chapter-name"]
         },
         {
@@ -143,155 +284,173 @@
             }
           ],
           "classes": ["heading-component"]
-        }      ]
-    },
-    {
-      "name": "page-3",
-      "type": "page",
-      "components": [
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 0,
-            "top": 285
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 0,
-            "top": 88
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 600,
-            "top": 285
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 600,
-            "top": 88
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
         }
       ]
-    }
-  ],
-  "templates": [
+    },
+    {
+      "type": "page",
+      "components": [
+
+        {
+          "_id": "0",
+          "type": "text",
+          "styles": {
+            "width": 407,
+            "height": 72,
+            "left": 10,
+            "top": 0
+          },
+          "markup": "<h3>suggested teaching plan</h3>",
+          "classes":["suggested-plan"]
+        },
+        {
+          "_id": "0",
+          "type": "table",
+          "styles": {
+            "width": 900,
+            "height": 500,
+            "left": 20,
+            "top":100,
+            "overflow":"scroll"
+          },
+          "classes": ["table-component"],
+          "rows": [
+            {
+              "classes": ["head"],
+              "data": [
+                {
+                  "markup": "<span>Day</span>"
+                },
+                {
+                  "markup": "<span>Topic</span>"
+                },
+                {
+                  "markup": "<span>Tasks</span>"
+                },
+                {
+                  "markup": "<span>Activities</span>"
+                },
+                {
+                  "markup": "<span>More To Do</span>"
+                },
+                {
+                  "markup": "<span>Teaching Periods(s)</span>"
+                },
+                {
+                  "markup": "<span>Resources</span>"
+                }
+              ]
+            },
+            {
+              "classes": [],
+              "data": [
+                {
+                  "markup": "<p></p>"
+                },
+                {
+                  "markup": "<p></p>"
+                },
+                {
+                  "markup": "<p></p>"
+                },
+                {
+                  "markup": "<p></p>"
+                },
+                {
+                  "markup": "<p></p>"
+                },
+                {
+                  "markup": "<p></p>"
+                },
+                {
+                  "markup": "<p></p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     {
       "type": "chapter",
       "components": [
         {
           "_id": "0",
-          "type": "text",
+          "type": "multiple",
           "styles": {
-            "width": 500,
-            "height": 200,
-            "left": 10,
-            "top": 20
+            "width":900,
+            "height":200,
+            "top":20,
+            "left":20
           },
-          "markup": "<h1>Chapter 1</h1>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 600,
-            "top": 285
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 600,
-            "top": 88
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 500,
-            "height": 200,
-            "left": 10,
-            "top": 200
-          },
-          "markup": "<h1>This is chapter Json</h1>"
-        }
-      ]
-    },
-    {
-      "type": "page",
-      "components": [
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 0,
-            "top": 285
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 0,
-            "top": 88
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 600,
-            "top": 285
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
-        },
-        {
-          "_id": "0",
-          "type": "text",
-          "styles": {
-            "width": 430,
-            "height": 200,
-            "left": 600,
-            "top": 88
-          },
-          "markup": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
+          "classes": ["activity-section"],
+          "components":[
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width": 407,
+                "height": 72,
+                "position":"relative"
+              },
+              "markup": "<h3>My Hobbies and Interests</h3>",
+              "classes":["suggested-plan"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Learning Outcome(s) :</strong> The Child will be able to</p><ul><li>Talk about his/her hobbies and interests</li></ul>",
+              "classes": ["activity-outcome"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Resource(s) required:</strong> None</p>",
+              "classes": ["resources-required"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Suggested duration:</strong> 15 minutes</p>",
+              "classes": ["suggested-duration"]
+            },
+            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Skills/Concepts:</strong> Pre-reading</p>",
+              "classes": ["skills-concepts"]
+            },            {
+              "_id": "0",
+              "type": "text",
+              "styles": {
+                "width":"100%",
+                "height":"auto",
+                "position":"relative"
+              },
+              "markup":"<p><strong>Activity</strong></p><hr><ul><li>Divide the class into small groudps</li><li>Divide the class into small groups</li><li>Divide the class into small groups</li></ul>",
+              "classes": ["main-activity"]
+            }
+          ]
         }
       ]
     }

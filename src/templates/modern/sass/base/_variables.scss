@@ -10,9 +10,23 @@ $wisp_pink:#FDECEC;
 $white:#fff;
 $black:#000;
 
+$template_path:"templates/modern/";
+
+$bannerImage:$template_path+"images/banner.jpeg";
+$suggested_plan_background:$template_path+"images/suggested-plan.jpg";
+$activity_outcome_logo:$template_path+"images/activity-outcome-logo.jpg";
+$resources_required_logo:$template_path+"images/resources-required-logo.jpg";
+$suggested_duration_logo:$template_path+"images/suggested-duration-logo.jpg";
+$skills_concepts_logo:$template_path+"images/activity-outcome-logo.jpg";
+$main_activity_logo:$template_path+"images/main-activity-logo.jpg";
+
+$suggested_plan_width:223px;
+$suggested_plan_height:39px;
+
 $chapter_name_size:50px;
 $chapter_name_letter_spacing:10px;
 $chapter_name_color:$brick_red;
+$chapter_name_font_weight:600;
 
 $chapter_main_header_size:20px;
 $chapter_main_header_letter_spacing:10px;
@@ -36,6 +50,7 @@ $table_heading-font-color:$white;
 
 $table_row_odd_strip_color:$cinderella;
 $table_row_even_strip_color:$caper;
+
 
 
 

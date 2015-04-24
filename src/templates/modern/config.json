@@ -19,6 +19,43 @@
   "contributorUrl":"http://google.com",
   "renditionType":"reflowable",
   "spread":"none",
+  "path":"templates/modern/",
+  "images":[
+    {
+      "url":"images/activity-outcome-logo.jpg",
+      "type":"image/jpeg"
+    },
+    {
+      "url":"images/banner.jpeg",
+      "type":"image/jpeg"
+    },
+    {
+      "url":"images/main-activity-logo.jpg",
+      "type":"image/jpeg"
+    },
+    {
+      "url":"images/resources-required-logo.jpg",
+      "type":"image/jpeg"
+    },
+    {
+      "url":"images/suggested-duration-logo.jpg",
+      "type":"image/jpeg"
+    },
+    {
+      "url":"images/suggested-plan.jpg",
+      "type":"image/jpeg"
+    },
+    {
+      "url":"images/thumb.jpg",
+      "type":"image/jpeg"
+    }
+  ],
+  "stylesheets":[
+    {
+      "url":"css/main.css",
+      "type":""
+    }
+  ],
   "contents": [
 
   ]

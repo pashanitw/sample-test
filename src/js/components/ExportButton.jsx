@@ -18,6 +18,15 @@ Handlebars.registerHelper('spine', function (items, options) {
   return out + "</spine>";
 
 });
+Handlebars.registerHelper('table', function (rows, options) {
+  var out = "<table>\n";
+
+  for (var i = 0, l = items.length; i < l; i++) {
+    out = out + "<itemref idref=\"page-" + i + "\" " + options.fn(items[i].spine) + "/>\n";
+  }
+  return out + "</spine>";
+
+});
 Handlebars.registerHelper('renderStyles', function () {
   function getStyles(style, name) {
     if (style) {
@@ -34,6 +43,12 @@ var position="position:absolute;";
     getStyles(this.styles.left, 'left')+
     position+
     (this.styles.backgroundImage?(";background-image:"+this.styles.backgroundImage+";"):'');
+});
+Handlebars.registerHelper('renderClasses', function () {
+if(this.classes){
+  return "class = "+"'"+this.classes.join(' ')+"'";
+}
+  return '';
 });
 
 Handlebars.registerHelper("ifcond", function(conditional, options) {
@@ -81,6 +96,7 @@ var AddPageButton = React.createClass({
     source = $("#toc-template").html();
     var tocTemplate = Handlebars.compile(source);
     pageCollection.config.contents = this.updateConfig(pageCollection.config, pageCollection.pages);
+
     pageCollection.pages.forEach(function (item) {
       var ob = {
         name: item.name,
@@ -157,6 +173,7 @@ var AddPageButton = React.createClass({
   helper(writer, pages, callback, index) {
     var that = this;
     var page = pages[index];
+    new zip.HttpReader("templates/classic/css/main.css");
     writer.add(page.path + page.name + page.ext, new zip.TextReader(pages[index].data), function () {
       index++;
       if (index == pages.length) {

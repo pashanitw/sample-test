@@ -1,3 +1,4 @@
+@import "base/variables";
 .table-component {
   color: #000;
   table, caption, tbody, tfoot, thead, tr, th, td {
@@ -200,4 +201,22 @@ table{
     }
   }
 
+}
+
+
+ $template_path:"templates/modern/";
+$bannerImage:$template_path+"images/banner.jpeg";
+.heading-component{
+  background-image: url($bannerImage);
+
+  p{
+    font-size: 47px;
+    color: $white;
+    text-align: right;
+  }
+}
+.chapter-name{
+   color: $chapter_name_color;
+  letter-spacing: $chapter_name_letter_spacing;
+  font-size: $chapter_name_size;
 }

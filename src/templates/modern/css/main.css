@@ -130,3 +130,16 @@
       color: #fff; }
     .table-component table .head th {
       border: 1px solid #fff; }
+
+.heading-component {
+  background-image: url("templates/modern/images/banner.jpeg"); }
+  .heading-component p {
+    font-size: 47px;
+    color: #fff;
+    text-align: right; }
+
+.chapter-name {
+  color: #B42C47;
+  letter-spacing: 10px;
+  font-size: 50px;
+}

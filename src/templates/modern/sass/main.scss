@@ -213,6 +213,15 @@ table{
     text-align: right;
   }
 }
+
+.chapter,.chapter-number{
+ p{
+   line-height: 0;
+   padding-right: 20px;
+   font-size: 33px;
+ }
+
+}
 .chapter-name{
   h1{
     color: $chapter_name_color;

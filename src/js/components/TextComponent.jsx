@@ -77,7 +77,8 @@ var TextComponent = React.createClass({
       var element = this.refs.editable.getDOMNode();
 
      var editor= CKEDITOR.inline(element, {
-        allowedContent: true
+        allowedContent: true,
+        extraPlugins :'htmlwriter'
       });
      $(element).focus();
       var that=this;

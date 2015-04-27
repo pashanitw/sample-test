@@ -33,6 +33,11 @@ class Component {
         _this.components.push(item);
       });
     }
+    if(this.styles){
+      if(!this.styles.position){
+        this.styles.position="absolute";
+      }
+    }
   }
 
   updateStyles(styles) {

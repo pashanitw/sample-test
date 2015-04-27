@@ -53,7 +53,7 @@
   "stylesheets":[
     {
       "url":"css/main.css",
-      "type":""
+      "type":"text/css"
     }
   ],
   "contents": [

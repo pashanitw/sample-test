@@ -23,6 +23,7 @@
   <script src="libs/WebContent/pako/codecs.js"></script>
   <script src="js/index.js"></script>
   <script src="libs/materialize.js"></script>
+  <script src="zip-ext.js"></script>
   <script id="package-template" type="text/x-handlebars-template">
     <?xml version="1.0" encoding="UTF-8"?>
     <package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="en" unique-identifier="uid"
@@ -50,10 +51,10 @@
       <manifest>
         <item href="toc.xhtml" id="toc" media-type="application/xhtml+xml" properties="nav"/>
         {{#each fonts}}
-        <item id="font-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="font-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if type}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each images}}
-        <item id="image-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="image-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if type}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each videos}}
         <item id="video-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
@@ -62,7 +63,7 @@
         <item id="audio-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each stylesheets}}
-        <item id="css-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
+        <item id="css-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if type}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
         {{/each}}
         {{#each js}}
         <item id="js-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
@@ -90,20 +91,20 @@
   {{#each components}}
 
   {{#ifcond type desired="text" type=type}}
-  <div style="{{renderStyles}}" {{renderClasses}}>
+  <div style="{{renderStyles}}" {{{renderClasses}}}>
     {{{markup}}}
   </div>
   {{/ifcond}}
   {{#ifcond type desired="image" type=type}}
-  <img src="{{src}}" style="{{renderStyles}}" {{renderClasses}}/>
+  <img src="{{src}}" style="{{renderStyles}}" {{{renderClasses}}}/>
   {{/ifcond}}
   {{#ifcond type desired="table" type=type}}
-  <div {{renderClasses}}>
+  <div  style="{{renderStyles}}" {{{renderClasses}}}>
     <table>
       {{#each rows}}
-      <tr {{renderClasses}}>
+      <tr {{{renderClasses}}}>
         {{#each data}}
-        <td {{renderClasses}}>{{markup}}</td>
+        <td {{{renderClasses}}}>{{{markup}}}</td>
         {{/each}}
       </tr>
       {{/each}}
@@ -111,9 +112,40 @@
   </div>
 
   {{/ifcond}}
+  {{#ifcond type desired="multiple" type=type}}
+  <div  style="{{renderStyles}}" {{{renderClasses}}}>
+    {{{renderMultipleComponent}}}
+  </div>
+
+  {{/ifcond}}
+
   {{/each}}
   </body>
   </html>
+  </script>
+  <script id="component-template" type="text/x-handlebars-template">
+  {{#ifcond type desired="text" type=type}}
+  <div style="{{renderStyles}}" {{{renderClasses}}}>
+    {{{markup}}}
+  </div>
+  {{/ifcond}}
+  {{#ifcond type desired="image" type=type}}
+  <img src="{{src}}" style="{{renderStyles}}" {{{renderClasses}}}/>
+  {{/ifcond}}
+  {{#ifcond type desired="table" type=type}}
+  <div {{{renderClasses}}}>
+    <table>
+      {{#each rows}}
+      <tr {{{renderClasses}}}>
+        {{#each data}}
+        <td {{{renderClasses}}}>{{{markup}}}</td>
+        {{/each}}
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+
+  {{/ifcond}}
   </script>
 <!--container template-->
   <script id="container-template" type="text/x-handlebars-template">

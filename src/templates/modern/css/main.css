@@ -132,11 +132,16 @@
       border: 1px solid #fff; }
 
 .heading-component {
-  background-image: url("templates/modern/images/banner.jpeg"); }
+  background-image: url("../images/banner.jpeg"); }
   .heading-component p {
     font-size: 47px;
     color: #fff;
     text-align: right; }
+
+.chapter p, .chapter-number p {
+  line-height: 0;
+  padding-right: 20px;
+  font-size: 33px; }
 
 .chapter-name h1 {
   color: #B42C47;
@@ -147,7 +152,7 @@
   font-weight: 600; }
 
 .suggested-plan {
-  background-image: url("templates/modern/images/suggested-plan.jpg");
+  background-image: url("../images/suggested-plan.jpg");
   background-size: cover;
   background-repeat: no-repeat; }
   .suggested-plan h3 {
@@ -163,31 +168,31 @@
   background-repeat: no-repeat;
   padding-left: 50px;
   background-position: 0 5px;
-  background-image: url("templates/modern/images/activity-outcome-logo.jpg"); }
+  background-image: url("../images/activity-outcome-logo.jpg"); }
 
 .resources-required {
   background-repeat: no-repeat;
   padding-left: 50px;
   background-position: 0 5px;
-  background-image: url("templates/modern/images/resources-required-logo.jpg"); }
+  background-image: url("../images/resources-required-logo.jpg"); }
 
 .suggested-duration {
   background-repeat: no-repeat;
   padding-left: 50px;
   background-position: 0 5px;
-  background-image: url("templates/modern/images/suggested-duration-logo.jpg"); }
+  background-image: url("../images/suggested-duration-logo.jpg"); }
 
 .skills-concepts {
   background-repeat: no-repeat;
   padding-left: 50px;
   background-position: 0 5px;
-  background-image: url("templates/modern/images/activity-outcome-logo.jpg"); }
+  background-image: url("../images/activity-outcome-logo.jpg"); }
 
 .main-activity {
   background-repeat: no-repeat;
   padding-left: 50px;
   background-position: 0 5px;
-  background-image: url("templates/modern/images/main-activity-logo.jpg"); }
+  background-image: url("../images/main-activity-logo.jpg"); }
 
 .activity-section ul {
   list-style: none;

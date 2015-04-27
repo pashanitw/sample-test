@@ -14,7 +14,8 @@ var cacheRegistry = function () {
   return {
     clearCache:function(){
     _registry.css.forEach(function(id){
-      document.getElementById(id).remove();
+      $("#"+id).prop('disabled', true);
+      $("#"+id).remove();
     });
       _registry.css=[];
     },

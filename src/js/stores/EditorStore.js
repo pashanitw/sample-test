@@ -34,14 +34,14 @@ function addPage(template) {
   _pageCollection = _pageCollection.addPage(template);
 }
 function loadCss(template){
+  var tempUrl='<link rel="stylesheet" id="TEMPLATE-ID" href="TEMPLATE-URL" type="text/css" />';
   if(template.registry.css){
     var id=utils.getUniqueId();
-    $.get(template.registry.css).then(function(css){
-      var style = '<style type="text/css" id="'+id+'">' + css + "</style>";
-      $("head").append(style);
-      cacheRegistry.registerComponent(id,Constants.MimeTypes.CSS)
-
-    })
+    var linkCss=tempUrl.replace(/^(.*?)(TEMPLATE-ID)(.*?)(TEMPLATE-URL)(.*)$/,function(all,$1,$2,$3,$4,$5){
+      return $1+id+$3+template.registry.css+$5;
+    });
+    $('head').append(linkCss);
+    cacheRegistry.registerComponent(id,Constants.MimeTypes.CSS);
   }
 }
 function changeTemplateSelection(template) {

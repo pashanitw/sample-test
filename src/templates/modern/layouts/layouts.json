@@ -42,6 +42,7 @@
               "_id": "0",
               "type": "text",
               "styles": {
+                "position":"relative"
               },
               "classes":["chapter-number"],
               "markup": "<p>1</p>"
@@ -50,6 +51,7 @@
               "_id": "0",
               "type": "text",
               "styles": {
+                "position":"relative"
               },
               "classes":["chapter"],
               "markup": "<p>CHAPTER</p>"
@@ -221,7 +223,7 @@
                 "height":"auto",
                 "position":"relative"
               },
-              "markup":"<p><strong>Activity</strong></p><hr><ul><li>Divide the class into small groudps</li><li>Divide the class into small groups</li><li>Divide the class into small groups</li></ul>",
+              "markup":"<p><strong>Activity</strong></p><hr/><ul><li>Divide the class into small groudps</li><li>Divide the class into small groups</li><li>Divide the class into small groups</li></ul>",
               "classes": ["main-activity"]
             }
           ]
@@ -447,7 +449,7 @@
                 "height":"auto",
                 "position":"relative"
               },
-              "markup":"<p><strong>Activity</strong></p><hr><ul><li>Divide the class into small groudps</li><li>Divide the class into small groups</li><li>Divide the class into small groups</li></ul>",
+              "markup":"<p><strong>Activity</strong></p><hr/><ul><li>Divide the class into small groudps</li><li>Divide the class into small groups</li><li>Divide the class into small groups</li></ul>",
               "classes": ["main-activity"]
             }
           ]

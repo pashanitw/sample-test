@@ -65,18 +65,21 @@ module.exports = {
     PACKAGE: {
       name: "package",
       path: 'EPUB/',
-      ext: '.opf'
+      ext: '.opf',
+      type:"text"
     },
     CONTAINER: {
       name: "container",
       path: 'META-INF/',
-      ext: '.xml'
+      ext: '.xml',
+      type:"text"
     },
     MIME: {
       name: "mimetype",
       path: '',
       ext: '',
-      data: 'application/epub+zip'
+      data: 'application/epub+zip',
+      type:"text"
     }
   },
   CONTENT: {

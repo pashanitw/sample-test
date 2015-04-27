@@ -9,6 +9,10 @@ var EPUB = require('../constants/AppConstants.js').EPUB;
 var ContentModel = require('../constants/AppConstants.js').CONTENT;
 var Handlebars = require('Handlebars');
 var assign = require('object-assign');
+
+
+
+
 Handlebars.registerHelper('spine', function (items, options) {
   var out = "<spine>\n";
 
@@ -33,10 +37,10 @@ Handlebars.registerHelper('renderStyles', function () {
       style+='';
       return name + ":" + (style.match(/(.*?)%$/) ? style : style + "px") + ";";
     }
-    return name+ ":0;";
+return '';
 
   }
-var position="position:absolute;";
+var position=this.styles.position?("position:"+this.styles.position+";"):'';
   return getStyles(this.styles.width, 'width') +
     getStyles(this.styles.height, 'height') +
     getStyles(this.styles.top, 'top') +
@@ -46,13 +50,27 @@ var position="position:absolute;";
 });
 Handlebars.registerHelper('renderClasses', function () {
 if(this.classes){
-  return "class = "+"'"+this.classes.join(' ')+"'";
+  return "class = "+"\""+this.classes.join(' ')+"\"";
 }
   return '';
+});
+Handlebars.registerHelper('renderMultipleComponent', function () {
+  var source = $("#component-template").html();
+  var componentTemplate = Handlebars.compile(source);
+  var result='';
+  if(this.components){
+  this.components.forEach(function(item,index){
+    result+=componentTemplate(item);
+  })
+}
+  return result;
 });
 
 Handlebars.registerHelper("ifcond", function(conditional, options) {
   if (options.hash.desired === options.hash.type) {
+    if(options.hash.type=="table"){
+      debugger;0
+    }
     return options.fn(this);
   }
   return '';
@@ -101,8 +119,9 @@ var AddPageButton = React.createClass({
       var ob = {
         name: item.name,
         path: 'EPUB/xhtml/',
-        ext: '.xhtml',
-        data: pageTemplate(item).trim()
+        ext: '.html',
+        data: pageTemplate(item).trim(),
+        type:"text"
       }
       pages.push(ob);
     });
@@ -113,7 +132,8 @@ var AddPageButton = React.createClass({
       name: "toc",
       path: 'EPUB/',
       ext: '.xhtml',
-      data: toc
+      data: toc,
+      type:"text"
     }
     pages.push(ob);
     EPUB.CONTAINER.data = containerTemplate().trim();
@@ -121,13 +141,36 @@ var AddPageButton = React.createClass({
 
     pages.push(EPUB.CONTAINER);
     pages.push(EPUB.MIME);
+   // images here
+    pageCollection.config.images.forEach(function (item) {
+      var ob = {
+        path: "EPUB/" + item.url,
+        ext: '.jpg',
+        url: pageCollection.config.path + item.url,
+        type:"file"
+      }
+      pages.push(ob);
+    });
+    pageCollection.config.stylesheets.forEach(function (item) {
+      var ob = {
+        path:"EPUB/"+item.url,
+        ext: '.css',
+        url: pageCollection.config.path + item.url,
+        type:"file"
+      }
+      pages.push(ob);
+    });
+
+
+
     this.packageEpub(pages);
   },
   updateConfig(config, pages) {
     return pages.map((item, index)=> {
       var model = assign({}, ContentModel);
-      model.name = item.name + ".xhtml";
+      model.name = item.name + ".html";
       model.url += model.name;
+      model.type="text/html";
       return model;
     })
   },
@@ -173,8 +216,15 @@ var AddPageButton = React.createClass({
   helper(writer, pages, callback, index) {
     var that = this;
     var page = pages[index];
-    new zip.HttpReader("templates/classic/css/main.css");
-    writer.add(page.path + page.name + page.ext, new zip.TextReader(pages[index].data), function () {
+    var name,reader;
+    if(page.type=="text"){
+      name=page.path + page.name + page.ext;
+      reader=new zip.TextReader(pages[index].data)
+    }else if(page.type=="file"){
+      name=page.path;
+      reader=new zip.HttpReader(page.url)
+    }
+    writer.add(name, reader, function () {
       index++;
       if (index == pages.length) {
         callback();

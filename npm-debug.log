@@ -1,0 +1,59 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'material-ui@0.8.0-beta' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 warn package.json nextbook@0.1.0 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'material-ui@0.8.0-beta', null ]
+7 verbose cache add name=undefined spec="material-ui@0.8.0-beta" args=["material-ui@0.8.0-beta",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'material-ui@0.8.0-beta',
+8 verbose parsed url   path: 'material-ui@0.8.0-beta',
+8 verbose parsed url   href: 'material-ui@0.8.0-beta' }
+9 verbose cache add name="material-ui" spec="0.8.0-beta" args=["material-ui","0.8.0-beta"]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: '0.8.0-beta',
+10 verbose parsed url   path: '0.8.0-beta',
+10 verbose parsed url   href: '0.8.0-beta' }
+11 verbose addNamed [ 'material-ui', '0.8.0-beta' ]
+12 verbose addNamed [ '0.8.0-beta', '0.8.0-beta' ]
+13 silly lockFile 309f67f2-material-ui-0-8-0-beta material-ui@0.8.0-beta
+14 verbose lock material-ui@0.8.0-beta /Users/space/.npm/309f67f2-material-ui-0-8-0-beta.lock
+15 verbose registry.get https://registry.npmjs.org/material-ui not expired, no request
+16 silly lockFile 309f67f2-material-ui-0-8-0-beta material-ui@0.8.0-beta
+17 silly lockFile 309f67f2-material-ui-0-8-0-beta material-ui@0.8.0-beta
+18 error Error: version not found: material-ui@0.8.0-beta
+18 error     at /usr/local/lib/node_modules/npm/lib/cache/add-named.js:125:12
+18 error     at RegClient.get_ (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:130:14)
+18 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:49:12)
+18 error     at evalmachine.<anonymous>:272:14
+18 error     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:102:5
+18 error     at Object.oncomplete (evalmachine.<anonymous>:108:15)
+19 error If you need help, you may report this *entire* log,
+19 error including the npm and node versions, at:
+19 error     <http://github.com/npm/npm/issues>
+20 error System Darwin 14.1.0
+21 error command "node" "/usr/local/bin/npm" "install" "material-ui@0.8.0-beta"
+22 error cwd /Users/space/Desktop/git/gkindia
+23 error node -v v0.10.35
+24 error npm -v 1.4.28
+25 verbose exit [ 1, true ]

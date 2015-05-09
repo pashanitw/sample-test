@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var config = require('../config');
 
-gulp.task('build', ['browserify', 'moveMaterializeFonts','styles','template-styles','moveck','move-templates','move-config'], function() {
+gulp.task('build', ['browserify','styles','moveMaterialize','html'], function() {
  // gulp.src(config.src).pipe(connect.reload());
 });
 
@@ -95,7 +95,11 @@ gulp.task('move-templates', function(){
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('moveMaterializeFonts', function(){
+gulp.task('moveMaterialize', function(){
+  gulp.src('./bower_components/materialize/dist/css/materialize.css')
+    .pipe(gulp.dest('dist/styles'));
+  gulp.src('./bower_components/materialize/dist/js/materialize.js')
+    .pipe(gulp.dest('dist/libs'));
   gulp.src('./bower_components/materialize/font/**/*.*')
     .pipe(gulp.dest('dist/font'));
 });

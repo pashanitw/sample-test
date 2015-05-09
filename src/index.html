@@ -2,13 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="styles/sample.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/materialize.css">
-  <link rel="stylesheet" href="styles/snapshot.css">
-  <link rel="stylesheet" href="styles/override.css"/>
-  <link rel="stylesheet" href="styles/component.css"/>
-  <link rel="stylesheet" href="libs/jqueryui/jquery-ui.css"/>
 
   <title>Document</title>
 
@@ -17,168 +12,9 @@
   <div id="main">
     <!-- Flux goes here -->
   </div>
+  <div id="spinner"></div>
   <script src="libs/jquery.js"></script>
-  <script src="libs/ckeditor/ckeditor.js"></script>
-  <script src="libs/WebContent/zip.js"></script>
-  <script src="libs/WebContent/pako/codecs.js"></script>
   <script src="js/index.js"></script>
   <script src="libs/materialize.js"></script>
-  <script src="zip-ext.js"></script>
-  <script id="package-template" type="text/x-handlebars-template">
-    <?xml version="1.0" encoding="UTF-8"?>
-    <package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="en" unique-identifier="uid"
-             prefix="rendition: http://www.idpf.org/vocab/rendition/#">
-      <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
-        <dc:title id="title">{{title}}</dc:title>
-        {{#each authors}}
-        <dc:creator>{{this}}</dc:creator>
-        {{/each}}
-        <dc:identifier id="uid">{{identifier}}</dc:identifier>
-        <dc:language>{{language}}</dc:language>
-        <meta property="dcterms:modified">{{date}}</meta>
-        <dc:publisher>{{publisher}}</dc:publisher>
-        {{#each contributors}}
-        <dc:contributor>{{this}}</dc:contributor>
-        {{/each}}
-        <dc:description>{{description}}</dc:description>
-        <dc:rights>{{rights}}</dc:rights>
-        <link rel="cc:license" href='{{licenceUrl}}'/>
-        <meta property="cc:attributionURL">{{contributorUrl}}</meta>
-        <meta property="rendition:layout">{{renditionType}}</meta>
-        <meta property="rendition:orientation">{{orientation}}</meta>
-        <meta property="rendition:spread">{{spread}}</meta>
-      </metadata>
-      <manifest>
-        <item href="toc.xhtml" id="toc" media-type="application/xhtml+xml" properties="nav"/>
-        {{#each fonts}}
-        <item id="font-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if type}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
-        {{/each}}
-        {{#each images}}
-        <item id="image-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if type}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
-        {{/each}}
-        {{#each videos}}
-        <item id="video-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
-        {{/each}}
-        {{#each audios}}
-        <item id="audio-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
-        {{/each}}
-        {{#each stylesheets}}
-        <item id="css-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if type}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
-        {{/each}}
-        {{#each js}}
-        <item id="js-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
-        {{/each}}
-        {{#each contents}}
-        <item id="page-{{@index}}" {{#if url}} href="{{url}}" {{/if}} {{#if properties}} media-type='{{type}}'{{/if}} {{#if properties}} properties='{{properties}}' {{/if}}/>
-        {{/each}}
-      </manifest>
-      {{#spine contents}} properties="rendition:{{properties.layout}} rendition:{{properties.spread}}" {{/spine}}
-    </package>
-
-  </script>
-
-  <!-- page Template-->
-  <script id="page-template" type="text/x-handlebars-template">
-    <?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml" style="height:100%;">
-  <head>
-    <meta content="width=956, height=630" name="viewport" />
-    <link rel="stylesheet" href="../css/main.css"/>
-    <title></title>
-  </head>
-  <body style="height:100%;">
-  <p>&#160;</p>
-  {{#each components}}
-
-  {{#ifcond type desired="text" type=type}}
-  <div style="{{renderStyles}}" {{{renderClasses}}}>
-    {{{markup}}}
-  </div>
-  {{/ifcond}}
-  {{#ifcond type desired="image" type=type}}
-  <img src="{{src}}" style="{{renderStyles}}" {{{renderClasses}}}/>
-  {{/ifcond}}
-  {{#ifcond type desired="table" type=type}}
-  <div  style="{{renderStyles}}" {{{renderClasses}}}>
-    <table>
-      {{#each rows}}
-      <tr {{{renderClasses}}}>
-        {{#each data}}
-        <td {{{renderClasses}}}>{{{markup}}}</td>
-        {{/each}}
-      </tr>
-      {{/each}}
-    </table>
-  </div>
-
-  {{/ifcond}}
-  {{#ifcond type desired="multiple" type=type}}
-  <div  style="{{renderStyles}}" {{{renderClasses}}}>
-    {{{renderMultipleComponent}}}
-  </div>
-
-  {{/ifcond}}
-
-  {{/each}}
-  </body>
-  </html>
-  </script>
-  <script id="component-template" type="text/x-handlebars-template">
-  {{#ifcond type desired="text" type=type}}
-  <div style="{{renderStyles}}" {{{renderClasses}}}>
-    {{{markup}}}
-  </div>
-  {{/ifcond}}
-  {{#ifcond type desired="image" type=type}}
-  <img src="{{src}}" style="{{renderStyles}}" {{{renderClasses}}}/>
-  {{/ifcond}}
-  {{#ifcond type desired="table" type=type}}
-  <div {{{renderClasses}}}>
-    <table>
-      {{#each rows}}
-      <tr {{{renderClasses}}}>
-        {{#each data}}
-        <td {{{renderClasses}}}>{{{markup}}}</td>
-        {{/each}}
-      </tr>
-      {{/each}}
-    </table>
-  </div>
-
-  {{/ifcond}}
-  </script>
-<!--container template-->
-  <script id="container-template" type="text/x-handlebars-template">
-    <?xml version="1.0" encoding="UTF-8"?>
-    <container xmlns="urn:oasis:names:tc:opendocument:xmlns:container" version="1.0">
-      <rootfiles>
-        <rootfile full-path="EPUB/package.opf" media-type="application/oebps-package+xml"/>
-      </rootfiles>
-    </container>
-
-  </script>
-  <!--table of contents template-->
-  <script id="toc-template" type="text/x-handlebars-template">
-    <?xml version="1.0" encoding="utf-8"?>
-    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
-    <head>
-      <title></title>
-    </head>
-    <body>
-    <section>
-      <header>
-        <h1>Table of Contents</h1>
-      </header>
-      <nav epub:type="toc" id="toc">
-        <ol>
-          {{#each contents}}
-          <li><a href="{{url}}">{{name}}</a></li>
-          {{/each}}
-        </ol>
-      </nav>
-    </section>
-    </body>
-    </html>
-  </script>
 </body>
 </html>

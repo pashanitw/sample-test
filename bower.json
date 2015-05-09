@@ -4,16 +4,12 @@
   "dependencies": {},
   "devDependencies": {
     "jquery": "~2.1.3",
-    "jquery-multisortable": "~0.1.3",
-    "jquery-ui": "~1.11.3",
-    "materialize": "~0.95.3",
-    "ckeditor": "~4.4.7",
     "sass-meyer-reset": "*",
     "susy": "~2.2.2",
     "bootstrap-sass-official": "~3.3.4",
     "breakpoint-sass": "~2.5.0",
-    "zip.js": "*",
     "processing": "~1.4.13",
-    "imgLiquid": "~0.9.944"
+    "imgLiquid": "~0.9.944",
+    "materialize": "~0.96.1"
   }
 }

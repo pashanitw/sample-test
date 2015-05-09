@@ -1,138 +1,78 @@
 var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
-var AddComponentButton = require('./AddComponentButton.jsx');
-var AddPageButton = require('./AddPageButton.jsx');
-var AddWidgetButton = require('./AddWidgetButton.jsx');
-var ExportButton = require('./ExportButton.jsx');
-var LogoMenu = require('./LogoMenu.jsx');
-var TemplateButton = require('./TemplateButton.jsx');
-var Constants = require('../constants/AppConstants');
-var ComponentTypes = Constants.ComponentTypes;
-var mui = require('material-ui');
-var Toggle = mui.Toggle;
-var SwitchButton = require('./SwitchButton.jsx');
-var EditorActionCreator = require('../actions/EditorActionCreator.js');
-var GutterButton = require('./GutterButton.jsx');
-var GeneralModal = require('./GeneralModal.jsx');
-var update = React.addons.update;
-var LinkedStateMixin=React.addons.LinkedStateMixin;
-
-
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+var mui=require("material-ui");
+var AppLeftNav=require('./LeftNav.jsx');
+var NavigationMenu=mui.Icons.NavigationMenu;
+var header = <div className="logo">Gk India!</div>;
+var { AppBar, AppCanvas, Menu, IconButton,DropDownMenu,LeftNav,MenuItem,Toolbar,ToolbarGroup } = mui;
+var   menuItems = [
+  {  route: 'home', text: 'Home' },
+  {  route: 'login', text: 'Login' },
+  {  route: 'feedback', text: 'FeedBack' },
+  { type: MenuItem.Types.SUBHEADER, text: 'Categories' },
+  {  route: 'category',params:{type:"geography"}, text: 'Geography' },
+  {  route: 'category',params:{type:"general_science"}, text: 'GeneralScience' },
+  {  route: 'category',params:{type:"economy"}, text: 'Economy' },
+  {  route: 'category',params:{type:"history"}, text: 'History' },
+  {  route: 'category',params:{type:"politics"}, text: 'Politics' },
+  {  route: 'category',params:{type:"sports"}, text: 'Sports' },
+];
+var filterOptions = [
+  { payload: '1', text: 'Geography' },
+  { payload: '2', text: 'Sports' },
+  { payload: '3', text: 'Economy' },
+  { payload: '4', text: 'History' },
+  { payload: '5', text: 'Politics' },
+  { payload: '6', text: 'Active Voice' },
+  { payload: '7', text: 'Active Text' },
+];
+var iconMenuItems = [
+  { payload: '1', text: 'Download' },
+  { payload: '2', text: 'More Info' }
+];
+var navigationMenuStyle={
+  marginLeft:10
+};
+var title="gkindia";
 var Navbar = React.createClass({
-  mixins: [PureRenderMixin,LinkedStateMixin],
-  getInitialState: function () {
-    return {
-      tableModelOpen: false,
-      rows:10,
-      columns:10
-    };
+  getInitialState: function() {
+    return {};
   },
-  getDefaultProps() {
-    return {
-      pages: []
-    }
+  contextTypes: {
+    router: React.PropTypes.func
   },
-  componentDidMount: function () {
+  componentDidMount: function() {
   },
-  openTableModal() {
-    var state = update(this.state, {
-      tableModelOpen: {$set: true}
-    });
-    this.updateState(state);
+  _onLeftIconButtonTouchTap() {
+    this.refs.leftNav.toggle();
   },
-  closeTableModal() {
-    var state = update(this.state, {
-      tableModelOpen: {$set: false}
-    });
-    this.updateState(state);
-  },
-  updateState(state) {
-    this.setState(state);
-  },
-  gutterChange(evt) {
-    EditorActionCreator.addGutter(evt.target.checked);
-
-  },
-  toggleGrid(evt) {
-    EditorActionCreator.toggleGrid();
-  },
-  render: function () {
-    const functionButtons = {
-      display: "inline-block",
-      marginLeft: 10
-    };
-    const componentTypes = {
-      display: 'inline-block',
-      marginLeft: 10
-    };
+  render: function() {
     return (
-      <nav className="toolbar">
-        <div className="nav-wrapper">
-
-          <LogoMenu></LogoMenu>
-
-          <div style={functionButtons}>
-            <AddPageButton></AddPageButton>
-            <TemplateButton></TemplateButton>
+      <div className="navbar-fixed">
+        <nav>
+          <div className="nav-wrapper">
+            <a href="#" className="brand-logo center">GK India !</a>
+            <a><i style={navigationMenuStyle} className="left mdi-navigation-menu" onTouchTap={this._onLeftIconButtonTouchTap}></i></a>
           </div>
-          <div style={componentTypes}>
-            <AddComponentButton
-              type={ComponentTypes.TEXT}>
-            </AddComponentButton>
-            <AddComponentButton
-              type={ComponentTypes.IMAGE}>
-            </AddComponentButton>
-            <AddComponentButton
-              type={ComponentTypes.VIDEO}>
-            </AddComponentButton>
-            <AddComponentButton
-              type={ComponentTypes.TABLE}
-              openModal={this.openTableModal}>
-            </AddComponentButton>
-          </div>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
-              <div className="switch gutter-switch">
-                <label>
-                  <input type="checkbox" onChange={this.toggleGrid}/>
-                  <span className="lever"></span>
-                </label>
-                <span>Grid</span>
-              </div>
-            </li>
-            <li>
-              <GutterButton></GutterButton>
-            </li>
-            <ExportButton></ExportButton>
-          </ul>
-        </div>
-        <GeneralModal
-          isOpen={this.state.tableModelOpen}
-          openModal={this.openTableModal}
-          closeModal={this.closeTableModal}
-          onOk={this.importTable}
-          okText={"Import Table"}>
-          <form action="#">
-          <p className="range-field">
-          <label>Number Of Rows</label>
-            <input type="range"  min="0" max="20" valueLink={this.linkState('rows')} />
-          </p>
-          <p className="range-field">
-            <label>Number Of Columns</label>
-            <input type="range"  min="0" max="20" valueLink={this.linkState('columns')}/>
-          </p>
-           </form>
-        </GeneralModal>
+        </nav>
+        <LeftNav ref="leftNav"
+          menuItems={menuItems}
+          docked={false}
+          isInitiallyOpen={false}
+          header={header}
+          onChange={this._onLeftNavChange}
+        />
+      </div>
 
-      </nav>
+
     );
   },
-  importTable:function(){
-    var data={
-      rows:this.state.rows,
-      columns:this.state.columns
-    }
-    EditorActionCreator.addComponent(ComponentTypes.TABLE, data);
+  _openSideNavMenu(){
+    this.refs.leftNav.toggle();
+  },
+  _onLeftNavChange(e, key, payload) {
+    this.context.router.transitionTo(payload.route,payload.params);
   }
 });
 

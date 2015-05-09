@@ -1,0 +1,14 @@
+{
+  "templates": [
+    {
+      "template": "templates/modern/layouts/layouts.json",
+      "config":"templates/modern/config.json",
+      "css":"templates/modern/css/main.css"
+    },
+    {
+      "template": "templates/classic/layouts/layouts.json",
+      "config":"templates/classic/config.json",
+      "css":"templates/classic/css/main.css"
+    }
+  ]
+}

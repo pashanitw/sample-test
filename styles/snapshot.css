@@ -1,0 +1,25 @@
+.snap-shot {
+  width: 120px;
+  height: 100%;
+  margin: 0 auto; }
+
+.child .snap-shot {
+  margin-left: 31px; }
+
+.chapter-frame:hover {
+  background: rgba(0, 0, 0, 0.05); }
+
+.chapter-frame {
+  margin: 10px 0;
+  padding: 0 8px;
+  width: 100%;
+  height: 88px;
+  overflow: hidden;
+  position: relative; }
+  .chapter-frame .card-panel {
+    padding: 0; }
+  .chapter-frame.selected {
+    border: 2px solid #5BB75B; }
+
+.child-of-child .snap-shot {
+  margin-left: 62px; }

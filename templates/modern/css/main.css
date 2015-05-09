@@ -1,0 +1,213 @@
+@charset "UTF-8";
+.table-component {
+  color: #000;
+  /* IMPORTANT, I REMOVED border-collapse: collapse; FROM THIS LINE IN ORDER TO MAKE THE OUTER BORDER RADIUS WORK */
+  /*------------------------------------------------------------------ */
+  /*This is not important*/
+  /*
+  Table Style - This is what you want
+  ------------------------------------------------------------------ */ }
+  .table-component table, .table-component caption, .table-component tbody, .table-component tfoot, .table-component thead, .table-component tr, .table-component th, .table-component td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent; }
+  .table-component table {
+    overflow: hidden; }
+  .table-component body {
+    line-height: 1; }
+  .table-component ol, .table-component ul {
+    list-style: disc; }
+  .table-component blockquote, .table-component q {
+    quotes: none; }
+  .table-component blockquote:before, .table-component blockquote:after, .table-component q:before, .table-component q:after {
+    content: '';
+    content: none; }
+  .table-component :focus {
+    outline: 0; }
+  .table-component del {
+    text-decoration: line-through; }
+  .table-component table {
+    border-spacing: 0; }
+  .table-component body {
+    margin: 0 auto;
+    width: 520px; }
+  .table-component a:link {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none; }
+  .table-component a:visited {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none; }
+  .table-component a:active, .table-component a:hover {
+    color: #bd5a35;
+    text-decoration: underline; }
+  .table-component table a:link {
+    color: #666;
+    font-weight: bold;
+    text-decoration: none; }
+  .table-component table a:visited {
+    color: #999999;
+    font-weight: bold;
+    text-decoration: none; }
+  .table-component table a:active, .table-component table a:hover {
+    color: #bd5a35;
+    text-decoration: underline; }
+  .table-component table {
+    color: #666;
+    font-size: 12px;
+    text-shadow: 1px 1px 0px #fff;
+    background: #eaebec;
+    border: #ccc 1px solid;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0 1px 2px #d1d1d1;
+    -webkit-box-shadow: 0 1px 2px #d1d1d1;
+    box-shadow: 0 1px 2px #d1d1d1; }
+  .table-component table th {
+    padding: 21px 25px 22px 25px;
+    border-top: 1px solid #fafafa;
+    border-bottom: 1px solid #e0e0e0; }
+  .table-component table th:first-child {
+    text-align: left;
+    padding-left: 20px; }
+  .table-component table tr:first-child th:first-child {
+    -moz-border-radius-topleft: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px; }
+  .table-component table tr:first-child th:last-child {
+    -moz-border-radius-topright: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px; }
+  .table-component table tr {
+    text-align: center;
+    padding-left: 20px;
+    font-size: 16px;
+    text-transform: capitalize; }
+  .table-component table tr td:first-child {
+    text-align: left;
+    padding-left: 20px;
+    border-left: 0; }
+  .table-component table tr td {
+    padding: 18px;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+    background: #fafafa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+    background: -moz-linear-gradient(top, #fbfbfb, #fafafa); }
+  .table-component table tr.even td {
+    background: #f6f6f6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+    background: -moz-linear-gradient(top, #f8f8f8, #f6f6f6); }
+  .table-component table tr:last-child td {
+    border-bottom: 0; }
+  .table-component table tr:last-child td:first-child {
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px; }
+  .table-component td {
+    max-width: 150px; }
+    .table-component td:first-child {
+      max-width: 80px; }
+  .table-component table tr:last-child td:last-child {
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px; }
+  .table-component table tr:hover td {
+    background: #f2f2f2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+    background: -moz-linear-gradient(top, #f2f2f2, #f0f0f0); }
+  .table-component table {
+    border-radius: 26px 26px 0 0; }
+    .table-component table .head td {
+      background: #B42C47;
+      color: #fff; }
+    .table-component table .head th {
+      border: 1px solid #fff; }
+
+.heading-component {
+  background-image: url("../images/banner.jpeg"); }
+  .heading-component p {
+    font-size: 47px;
+    color: #fff;
+    text-align: right; }
+
+.chapter p, .chapter-number p {
+  line-height: 0;
+  padding-right: 20px;
+  font-size: 33px; }
+
+.chapter-name h1 {
+  color: #B42C47;
+  letter-spacing: 10px;
+  font-size: 50px;
+  margin: 0;
+  padding: 0;
+  font-weight: 600; }
+
+.suggested-plan {
+  background-image: url("../images/suggested-plan.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
+  .suggested-plan h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 35px;
+    line-height: 58px;
+    padding-left: 58px;
+    font-size: 31px;
+    color: #fff; }
+
+.activity-outcome {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("../images/activity-outcome-logo.jpg"); }
+
+.resources-required {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("../images/resources-required-logo.jpg"); }
+
+.suggested-duration {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("../images/suggested-duration-logo.jpg"); }
+
+.skills-concepts {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("../images/activity-outcome-logo.jpg"); }
+
+.main-activity {
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 5px;
+  background-image: url("../images/main-activity-logo.jpg"); }
+
+.activity-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+.activity-section li {
+  padding-left: 1em;
+  text-indent: -.7em; }
+.activity-section li:before {
+  content: "• ";
+  color: #9BCB4F;
+  font-size: 24px;
+  line-height: 24px; }
+.activity-section hr {
+  background: #9BCB4F;
+  height: 4px;
+  margin-top: -10px;
+  margin-bottom: 6px; }

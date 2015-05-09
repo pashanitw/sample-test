@@ -1,0 +1,124 @@
+body, html {
+  padding: 0;
+  height: 100%; }
+
+body {
+  padding: 0 10px; }
+  body #main {
+    height: 100%; }
+    body #main .app-container {
+      height: 100%;
+      border: 1px solid #eee; }
+      body #main .app-container nav.tool-bar {
+        height: 10%; }
+      body #main .app-container .editor-area {
+        height: 90%; }
+        body #main .app-container .editor-area .tree-view {
+          height: 100%;
+          width: 184px;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          padding-bottom: 4px;
+          padding-top: 4px;
+          margin: 0; }
+        body #main .app-container .editor-area .editor-view {
+          position: relative;
+          width: 956px;
+          height: 630px;
+          /*          height: 100%;
+                    width:75% !important;*/
+          margin: 0 auto;
+          overflow: hidden; }
+  body .modal-content .chapter-frame {
+    display: inline-block;
+    width: auto; }
+  body .toolbar {
+    padding: 0 14px; }
+
+.editor-view {
+  position: relative;
+  height: 600px;
+  width: 1000px;
+  /*          height: 100%;
+            width:75% !important;*/
+  overflow: hidden; }
+
+.add-templates {
+  position: absolute;
+  padding: 0;
+  background: lightslategrey;
+  padding-bottom: 8px;
+  top: 64px;
+  display: block;
+  left: 83px;
+  z-index: 1000; }
+
+.app-container .toolbar {
+  overflow: visible; }
+
+.mui-svg-icon {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.mui-drop-down-menu {
+  height: auto !important; }
+  .mui-drop-down-menu .mui-menu-control-bg, .mui-drop-down-menu .mui-menu-label, .mui-drop-down-menu .mui-menu-control-underline {
+    display: none; }
+
+.gutter-switch {
+  line-height: 31px;
+  text-align: center; }
+  .gutter-switch label {
+    display: block; }
+
+.gradient-pattern {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: none;
+  color: white;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  /* background: -webkit-linear-gradient(90deg, #FFFFFF 2px, rgba(0,0,0,0) 2px), -webkit-linear-gradient(0deg, #FFFFFF 2px, rgba(0,0,0,0) 2px), -webkit-linear-gradient(90deg, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px), -webkit-linear-gradient(0deg, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px), rgb(34, 102, 153);
+   background: -moz-linear-gradient(0deg, #FFFFFF 2px, rgba(0,0,0,0) 2px), -moz-linear-gradient(90deg, #FFFFFF 2px, rgba(0,0,0,0) 2px), -moz-linear-gradient(0deg, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px), -moz-linear-gradient(90deg, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px), rgb(34, 102, 153);
+  */
+  background: linear-gradient(0deg, #DDD 2px, transparent 2px), linear-gradient(90deg, #DDD 2px, transparent 2px), linear-gradient(0deg, #DDD 1px, transparent 1px), linear-gradient(90deg, #DDD 1px, transparent 1px), transparent;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; }
+
+table {
+  border: #ccc 1px solid; }
+  table th, table td {
+    border: #ccc 1px solid; }
+  table ul, table li {
+    list-style: disc; }
+
+@font-face {
+  font-family: 'Myriad Pro Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Myriad Pro Regular'), url('../font/myriad/MYRIADPRO-REGULAR.woff') format('woff'); }
+
+.editor-container {
+  font-family: 'Myriad Pro Regular'; }
+  .editor-container .gutter {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    border: 2px solid #000;
+    left: 50%;
+    top: 0; }
+
+strong {
+  font-weight: bold !important; }

@@ -3,6 +3,7 @@ var mui = require('material-ui');
 var {PropTypes}=React;
 var {RadioButtonGroup,RadioButton}=mui;
 var RadioGroup = require('./RadioGroup.jsx');
+var _=require('lodash');
 
 
 var QuestionCard = React.createClass({
@@ -31,7 +32,13 @@ var QuestionCard = React.createClass({
 
         </div>
         <div className="card-content">
-          <p>{question.question}</p>
+        {
+          _.isArray(question.question)?
+            question.question.map(function(item){
+              return <p>{item}</p>
+            }):
+            <p>{question.question}</p>
+          }
           <div>
             <RadioGroup
               id={question._id}

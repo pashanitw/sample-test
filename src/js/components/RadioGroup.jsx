@@ -15,6 +15,7 @@ var RadioGroup = React.createClass({
       isAnswer: false,
       isSelected:false
     };
+    console.log("fron get intial state");
   },
    _answerId : '',
 
@@ -39,6 +40,7 @@ var RadioGroup = React.createClass({
       onClick={this.onSelect}
       selectedId={this.state.selectedId}
       id={_id}
+      key={_id}
     >
     </RadioButton>
 

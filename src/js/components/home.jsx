@@ -18,7 +18,6 @@ var home = React.createClass({
     storeListeners: [BaseStore]
   },
   componentDidMount: function () {
-    DataActionCreator.getAllCategories();
   },
 
   render: function () {
@@ -28,9 +27,9 @@ var home = React.createClass({
           <ul>
 
           {
-            this.state.categories ?
-              this.state.categories.map(function (category) {
-                return <li className="collection-item list-collection">
+            this.state.data ?
+              this.state.data.map(function (category,index) {
+                return <li key={index} className="collection-item list-collection">
                   <Link  className="collection-item" to="category" params={{type: category.route}}>
                     <span>{category.name}</span>
                     <i className="mdi-content-send right"></i>

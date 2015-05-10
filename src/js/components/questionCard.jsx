@@ -43,7 +43,9 @@ var QuestionCard = React.createClass({
             <RadioGroup
               id={question._id}
               data={question.choice}
-              name={this.props.name}>
+              name={this.props.name}
+              key={question.id}
+            >
             </RadioGroup>
           </div>
         </div>

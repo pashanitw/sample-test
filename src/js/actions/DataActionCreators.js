@@ -11,26 +11,17 @@ module.exports = {
   completeTask: function(task) {
     console.warn('completeTask action not yet implemented...');
   },
-  getAllCategories(){
-    var url="categories";
-    $.get(Constants.BASE_API_URL+url).then(function(categories){
-      utils.stopProgress();
-      AppDispatcher.handleViewAction({
-        type:Constants.ActionTypes.GET_ALL_CATEGORIES,
-        categories:categories
-      })
-    })
+  transition(Handler,params){
+var url=Constants.BASE_API_URL+params.path;
 
-  },
-  fetchCategoryByName(type){
-    var _prefix="categories/";
-    $.get(Constants.BASE_API_URL+_prefix+type).then(function(response){
-      utils.stopProgress();
+    $.get(url).then(function(response){
       AppDispatcher.handleViewAction({
-        type:Constants.ActionTypes.FETCH_CATEGORY_BY_NAME,
+        type:Constants.ActionTypes.TRANSITION,
         response:response
       })
+      utils.stopProgress();
     })
   }
+
 
 };

@@ -8,9 +8,11 @@ var BaseStore = require('../stores/BaseStore.js');
 var QuestionCard = require('./questionCard.jsx');
 
 var category = React.createClass({
-  mixins: [FluxibleMixin, PureRenderMixin],
+  mixins: [FluxibleMixin,PureRenderMixin],
   getInitialState: function () {
-    return {};
+    return {
+      type:this.context.router.getCurrentParams().type
+    };
   },
 
   statics: {
@@ -21,23 +23,15 @@ var category = React.createClass({
   },
 
   componentDidMount: function () {
-    this.sendActionForData();
+
   },
-  sendActionForData() {
-    var type = this.context.router.getCurrentParams().type;
-    if (type && type != this.route) {
-      DataActionCreator.fetchCategoryByName(type);
-      this.route = type;
-    }
-  },
-  route: '',
   render: function () {
     return <div>
    {
      this.state.data ?
        this.state.data.map(function (item, index) {
          var name = "name-" + index;
-         return <QuestionCard question={item} name={name}></QuestionCard>
+         return <QuestionCard key={item._id} question={item} name={name}></QuestionCard>
        })
        :
        null
@@ -47,13 +41,12 @@ var category = React.createClass({
 
   },
   componentWillUpdate() {
-    this.sendActionForData();
   },
   onChange() {
     this.setState(BaseStore.getState());
   },
   componentWillUnmount() {
-    alert("unmounted");
+    //alert("unmounted");
   }
 
 });

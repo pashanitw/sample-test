@@ -7,7 +7,6 @@ var {update}=React.addons;
 
 // Facebook style store creation.
 var state = {
-  categories: '',
   data: ''
 };
 function updateCategories(categories) {
@@ -39,19 +38,13 @@ var BaseStore = assign({}, EventEmitter.prototype, {
     var action = payload.action;
 
     switch (action.type) {
-      case Constants.ActionTypes.GET_ALL_CATEGORIES:
-        var categories = action.categories;
-        updateCategories(categories);
-        BaseStore.emitChange();
-        break;
-      case Constants.ActionTypes.FETCH_CATEGORY_BY_NAME:
-        var response = action.response;
+      case Constants.ActionTypes.TRANSITION:
+            var response=action.response;
         state=update(state,{
           data:{$set:response}
         });
         BaseStore.emitChange();
-        break;
-      // add more cases for other actionTypes...
+         break;
     }
   })
 

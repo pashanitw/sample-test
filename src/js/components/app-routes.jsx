@@ -12,8 +12,8 @@ var App=require('./app.jsx');
 
 var AppRoutes=(
   <Route name="root" path="/" handler={App}>
-    <Route name="home" path="home" handler={Home}></Route>
-    <Route name="category" path="category/:type"  handler={Category}/>
+    <Route name="home" path="categories" handler={Home}></Route>
+    <Route name="category" path="categories/:type"  handler={Category}/>
     <DefaultRoute handler={Home}></DefaultRoute>
   </Route>
 );

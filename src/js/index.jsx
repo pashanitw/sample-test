@@ -3,6 +3,7 @@ var Router = require('react-router');
 var AppRoutes = require('./components/app-routes.jsx');
 var injectTapEventPlugin = require("react-tap-event-plugin");
 var utils=require('./utils/utils.js');
+var DataActionCreator=require('./actions/DataActionCreators.js');
 
 injectTapEventPlugin();
 /**/
@@ -16,8 +17,8 @@ Router
     routes: AppRoutes,
     scrollBehaviour: Router.ScrollToTopBehavior
   })
-  .run(function (Handler) {
+  .run(function (Handler,params) {
     React.render(<Handler/>, $('#main')[0]);
-
+    DataActionCreator.transition(Handler,params);
   });
 
